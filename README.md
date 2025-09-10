@@ -11,7 +11,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 - [x] Proper use of Markdown
 - [x] A concise and compelling elevator pitch
 - [x] Description of key features
-- [ ] Description of how you will use each technology
+- [x] Description of how you will use each technology
 - [x] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
 
 ### Elevator pitch
@@ -28,9 +28,10 @@ This mockup shows the main interface that users will engage with when using the 
 
 - Users will be able to log in to an account securely.
 - Accounts will be connected to a username and a history of all the user's posts.
+- Users can create and submit posts to the Zinger feed.
 - Posts will be able to be viewed in an infinite-scroll format.
 - Users will be able to vote on other users' posted "zingers" (jokes).
-- All userdata will be saved to a database upon closing the app.
+- User data will be saved to a database upon closing the app.
 - Administrators will be able to remove jokes deemed inappropriate.
 
 ### Technologies
@@ -41,7 +42,7 @@ I am going to use the required technologies in the following ways.
 - **CSS** - CSS will be utilized to ensure the content is centered and styled consistently across a number of devices and displays, as well as assisting with the engagement experience of the app.
 - **React** - React will be utilized for the dynamic components of the app, such as loading user content, allowing user logins, and allowing voting.
 - **Service** - The Service represents endpoints for logins, votes, updating account profiles, submitting "zingers", submitting votes, retrieving account profiles, retrieving "zingers", and retrieving votes.
-- **DB/Login** - The Database will store credentials and account info, in addition to all the "zingers" and their respective votes on the platform.
+- **DB/Login** - The Database will store credentials and account info, in addition to all the "zingers" and their respective votes on the platform. Users must be logged in to participate in the Zinger platform.
 - **WebSocket** - The WebSocket will facilitate the transmission of data relevant to the app, to synchronize data with the server and all clients.
 
 ## 🚀 AWS deliverable

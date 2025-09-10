@@ -20,15 +20,15 @@ Zinger is an app for
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] Proper use of Markdown
-- [ ] A concise and compelling elevator pitch
+- [x] Proper use of Markdown
+- [x] A concise and compelling elevator pitch
 - [ ] Description of key features
 - [ ] Description of how you will use each technology
 - [ ] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
 
 ### Elevator pitch
 
-Have you ever whipped up a total zinger of a joke, only to have no one around you to hear it? Maybe it was about someone you saw on the street, perhaps it was about something that went terribly wrong with your dinner, or maybe, in a flash of inspiration, you came up with over a dozen mustard-based quips. Now, instead of wilting in silence, you can post them on Zinger! Zinger lets you share jokes, one-liners, rap bars, and anything else to get the crowd roaring that comes in at 500 characters or less. Other Zinger users will vote on the app, +1 points per like and -2 points per dislike, to crown the day's best and worst zingers.
+Have you ever whipped up a total zinger of a joke, only to have no one around you to hear it? Now, instead of wilting in silence, you can post them on Zinger! Zinger lets you share jokes, one-liners, rap bars, and anything else to get the crowd roaring that comes in at 500 characters or less. Other Zinger users will vote on the app, +1 points per like and -2 points per dislike, to crown the day's best and worst zingers.
 
 ### Design
 

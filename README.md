@@ -40,7 +40,7 @@ I am going to use the required technologies in the following ways.
 
 - **HTML** - HTML will be utilized for four main interfaces. A login page, a settings page, a page for viewing your "zingers", and the main interface, where zingers can be browsed and voted on.
 - **CSS** - CSS will be utilized to ensure the content is centered and styled consistently across a number of devices and displays, as well as assisting with the engagement experience of the app.
-- **React** - React will be utilized for the dynamic components of the app, such as loading user content, allowing user logins, and allowing voting.
+- **React** - React will be utilized for the dynamic components of the app, such as loading user content, allowing user logins, allowing user creation and submission of "zingers", and allowing voting.
 - **Service** - The Service represents endpoints for logins, votes, updating account profiles, submitting "zingers", submitting votes, retrieving account profiles, retrieving "zingers", and retrieving votes.
 - **DB/Login** - The Database will store credentials and account info, in addition to all the "zingers" and their respective votes on the platform. Users must be logged in to participate in the Zinger platform.
 - **WebSocket** - The WebSocket will facilitate the transmission of data relevant to the app, to synchronize data with the server and all clients.

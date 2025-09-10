@@ -1,4 +1,4 @@
-# Your startup name here
+# Zinger
 
 [My Notes](notes.md)
 

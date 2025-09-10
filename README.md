@@ -22,13 +22,13 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 - [x] Proper use of Markdown
 - [x] A concise and compelling elevator pitch
-- [ ] Description of key features
+- [x] Description of key features
 - [ ] Description of how you will use each technology
 - [ ] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
 
 ### Elevator pitch
 
-Have you ever whipped up a total zinger of a joke, only to have no one around you to hear it? Now, instead of wilting in silence, you can post them on Zinger! Zinger lets you share jokes, one-liners, rap bars, and anything else to get the crowd roaring that comes in at 500 characters or less. Other Zinger users will vote on the app, +1 points per like and -2 points per dislike, to crown the day's best and worst zingers.
+Have you ever whipped up an absolute knee-slapper of a joke, only to have no one around you to hear it? Now, instead of wilting in silence, you can post them on Zinger! Zinger lets you share jokes, one-liners, rap bars, and anything else to get the crowd roaring that comes in at 500 characters or less. Other Zinger users will vote on the app, +1 points per like and -2 points per dislike, to crown the day's best and worst zingers.
 
 ### Design
 
@@ -45,9 +45,9 @@ sequenceDiagram
 
 ### Key features
 
-- Describe your key feature
-- Describe your key feature
-- Describe your key feature
+- User sharing of jokes, one-liners, and more.
+- User voting on user-posted items.
+- Showcase for the highest scoring jokes each day, week, and month.
 
 ### Technologies
 

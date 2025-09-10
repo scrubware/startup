@@ -6,9 +6,6 @@ Zinger is an app for sharing, voting on, and celebrating good quips, jokes, and 
 
 ## 🚀 Specification Deliverable
 
-> [!NOTE]
->  Fill in this sections as the submission artifact for this deliverable. You can refer to this [example](https://github.com/webprogramming260/startup-example/blob/main/README.md) for inspiration.
-
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
 - [x] Proper use of Markdown
@@ -33,7 +30,6 @@ This mockup shows the main interface that users will engage with when using the 
 - Accounts will be connected to a username and a history of all the user's posts.
 - Posts will be able to be viewed in an infinite-scroll format.
 - Users will be able to vote on other users' posted "zingers" (jokes).
-- Users will also be able to view a showcase of the highest-scoring jokes each day, week, and month.
 - All userdata will be saved to a database upon closing the app.
 - Administrators will be able to remove jokes deemed inappropriate.
 

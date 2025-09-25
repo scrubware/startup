@@ -55,15 +55,15 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [x] **HTML pages** - I did complete this part of the deliverable.
-- [x] **Proper HTML element usage** - I did complete this part of the deliverable.
-- [x] **Links** - I did complete this part of the deliverable.
-- [x] **Text** - I did complete this part of the deliverable.
-- [x] **3rd party API placeholder** - I did complete this part of the deliverable.
-- [x] **Images** - I did complete this part of the deliverable.
-- [x] **Login placeholder** - I did complete this part of the deliverable.
-- [x] **DB data placeholder** - I did complete this part of the deliverable.
-- [x] **WebSocket placeholder** - I did complete this part of the deliverable.
+- [x] **HTML pages** - Four pages for Login, Account Management, Feed, and Creating Posts were created (index.html, account.html, feed.html, post.html).
+- [x] **Proper HTML element usage** - Header/Footer/Main/Body tags were used to sort content, proper tags were used for content types.
+- [x] **Links** - Each page includes a navigation to all of the other pages, and the placeholder advertisement includes a link to its advertised product.
+- [x] **Text** - Text is present in posts and most content locations.
+- [x] **3rd party API placeholder** - There is a placeholder advertisement representing where a 3rd-party API would supply adverts for the platform.
+- [x] **Images** - Images exist in the profile icon for each post, the advertisement placeholder, and in the account page.
+- [x] **Login placeholder** - There is a login placeholder on the Login page (index.html).
+- [x] **DB data placeholder** - The Feed represents the database placeholder as it will be supplied with user-generated content stored in the database (feed.html).
+- [x] **WebSocket placeholder** - In the Account page and the Post page (account.html and post.html) there are buttons the user will be able to press to send data over the websocket.
 
 ## 🚀 CSS deliverable
 

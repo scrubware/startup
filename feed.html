@@ -1,36 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <script src="https://cdn.tailwindcss.com"></script>
     <meta charset="UTF-8" />
-    <!-- Tell browsers not to scale the viewport automatically -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>zinger</title>
     <link rel="icon" href="favicon.ico" />
   </head>
-  <body>
-    <!-- Use header, main, and footer elements to give semantic structure -->
+  <body class="flex flex-col ml-[28%] mr-[28%] pt-[15px] pb-[15px] h-screen">
+
+
     <header>
-      <h1>Zinger</h1>
-
-      <!-- Navigation elements -->
-      <nav>
-        <!-- Menu is a semantic alternative to <ul> that represents an interaction -->
-        <menu>
-          <li><a href="index.html">Login</a></li>
-          <li><a href="feed.html">Feed</a></li>
-          <li><a href="account.html">Account</a></li>
-          <li><a href="post.html">Post</a></li>
-        </menu>
-      </nav>
-
-      <!-- Since we don't have the ability to style we use old style HTML to give some visual formatting -->
-      <hr />
+      <div class="flex justify-between w-full">
+        <a href="feed.html" class="lg:text-5xl italic">zinger</a>
+        <div>
+          <button class="rounded w-[16mm] h-[16mm]"><img src="post.svg"></button>
+          <button class="rounded w-[16mm] h-[16mm]"><img src="account.svg"></button>
+        </div>
+      </div>
     </header>
 
-    <main>
-        <h1>Feed</h1>
+    <main class="grow">
 
-        <div style="border: 1px solid black;width:50%;">
+        <div class="border-2 p-2">
             <img style="width:18px;height:18px;display:inline-block" src="account_icon.png" alt="account icon">
             <p style="display:inline-block;padding:0;margin:0">josh lee @ 10:45pm</p>
             <p style="padding:0;margin:0">What's a lion's favorite street? MANE street!</p>
@@ -38,7 +30,7 @@
 
         <br>
 
-        <div style="border: 1px solid black;width:50%;">
+        <div class="border-2 p-2">
             <img style="width:18px;height:18px;display:inline-block" src="account_icon.png" alt="account icon">
             <p style="display:inline-block;padding:0;margin:0">mr. mark swelterly @ 3:21pm</p>
             <p style="padding:0;margin:0">It was the bestchershire of times, and it was the worstchershire of times.</p>
@@ -51,7 +43,7 @@
 
         <br>
 
-        <div style="border: 1px solid black;width:50%;">
+        <div class="border-2 p-2">
             <img style="width:18px;height:18px;display:inline-block" src="account_icon.png" alt="account icon">
             <p style="display:inline-block;padding:0;margin:0">mista fantastik @ 11:32am <a href="account.html">(you)</a></p>
             <p style="padding:0;margin:0">my barber said 50% off like it was a deal. spun me around to the mirror and i look like Paul Giamatti.</p>
@@ -61,11 +53,14 @@
     </main>
 
     <footer>
-      <hr />
       <span class="text-reset">Created by Tom Baker</span>
-      <br />
       <a href="https://github.com/scrubware/startup">GitHub</a>
     </footer>
 
     </body>
 </html>
+
+
+
+    
+    

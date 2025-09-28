@@ -3,16 +3,16 @@
   <head>
     <script src="https://cdn.tailwindcss.com"></script>
     <meta charset="UTF-8" />
-    <!-- Tell browsers not to scale the viewport automatically -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>zinger</title>
     <link rel="icon" href="favicon.ico" />
   </head>
-  <body class="flex flex-col ml-[28%] mr-[28%] mt-[15px] mb-[15px] border-4 h-screen">
-    <!-- Use header, main, and footer elements to give semantic structure -->
+  <body class="flex flex-col ml-[28%] mr-[28%] pt-[15px] pb-[15px] h-screen">
+
+
     <header>
       <div class="flex justify-between w-full">
-        <h1 class="lg:text-5xl italic">zinger</h1>
+        <a href="feed.html" class="lg:text-5xl italic">zinger</a>
         <div>
           <button class="rounded w-[16mm] h-[16mm]"><img src="post.svg"></button>
           <button class="rounded w-[16mm] h-[16mm]"><img src="account.svg"></button>
@@ -20,8 +20,10 @@
       </div>
     </header>
 
-    <main class="grow">
-      <h1>Please Login</h1>
+
+    <main class="grow flex items-center justify-center">
+      <div>
+      <h1>Login</h1>
       <form method="get" action="feed.html">
         <div>
           <span>@</span>
@@ -31,14 +33,18 @@
           <span>🔒</span>
           <input type="password" placeholder="password" />
         </div>
-        <button type="submit">Login</button>
-        <button type="submit">Create</button>
+        <button type="submit" class="rounded-full">Login</button>
+        <button type="submit" class="rounded-full">Create</button>
       </form>
+      </div>
     </main>
 
-    <footer class="border-4">
+
+    <footer>
       <span class="text-reset">Created by Tom Baker</span>
       <a href="https://github.com/scrubware/startup">GitHub</a>
     </footer>
+
+
   </body>
 </html>

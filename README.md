@@ -57,7 +57,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 - [x] **HTML pages** - Four pages for Login, Account Management, Feed, and Creating Posts were created (index.html, account.html, feed.html, post.html).
 - [x] **Proper HTML element usage** - Header/Footer/Main/Body tags were used to sort content, proper tags were used for content types.
-- [x] **Links** - Each page includes a navigation to all of the other pages, and the placeholder advertisement includes a link to its advertised product.
+- [x] **Links** - Each page includes a navigation to all of the other pages, the placeholder advertisement includes a link to its advertised product, and there is a link to the user's Account page from the user's post on the feed (the third post).
 - [x] **Text** - Text is present in posts and most content locations.
 - [x] **3rd party API placeholder** - There is a placeholder advertisement representing where a 3rd-party API would supply adverts for the platform.
 - [x] **Images** - Images exist in the profile icon for each post, the advertisement placeholder, and in the account page.

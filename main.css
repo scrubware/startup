@@ -1,1 +1,7 @@
 @import "tailwindcss";
+
+@theme {
+    --color-zinger: #ffcb2e;
+    --color-mint-500: oklch(0.72 0.11 178);
+}
+

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en" class="dark no-scrollbar">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -10,8 +10,8 @@
   <body class="dark:bg-gray-900 flex flex-col ml-[5mm] mr-[5mm] md:ml-[28%] md:mr-[28%] pt-[15px] pb-[15px] h-screen">
 
 
-    <header>
-      <div class="flex justify-between w-full">
+    <header class="pt-[2mm] pb-[2mm] fixed top-0 w-[calc(100%-10mm)] md:w-[44%] bg-gray-900">
+      <div class="flex justify-between">
         <a href="feed.html" class="dark:text-zinger dark:hover:text-zinger-alt text-4xl sm:text-5xl italic">zinger</a>
         <div>
           <button class="rounded w-[12mm] h-[12mm] sm:w-[16mm] sm:h-[16mm] stroke-zinger hover:stroke-zinger-alt" onclick="location.href='post.html'">
@@ -26,8 +26,7 @@
       </div>
     </header>
 
-
-    <main class="grow flex items-center justify-center dark:text-zinger">
+    <main class="grow mt-14 sm:mt-18 flex items-center justify-center dark:text-zinger">
       <div class="flex flex-col justify-center p-2">
         <div class="flex justify-center">
           <h1 class="text-3xl dark:text-zinger italic">welcome</h1>
@@ -50,7 +49,7 @@
 
 
     <footer class="flex justify-between dark:text-zinger">
-      <p>created by tom baker</p>
+      <p>&copy; tom baker</p>
       <div class="flex">
         <a href="https://github.com/scrubware/startup">github</a>
 

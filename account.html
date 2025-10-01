@@ -7,7 +7,7 @@
     <link rel="icon" href="favicon.ico" />
     <link href="main.css" rel="stylesheet">
   </head>
-  <body class="dark:bg-gray-900 flex flex-col ml-[28%] mr-[28%] pt-[15px] pb-[15px] h-screen">
+  <body class="dark:bg-gray-900 flex flex-col sm:ml-[28%] sm:mr-[28%] pt-[15px] pb-[15px] h-screen">
 
     
     <header>
@@ -26,14 +26,26 @@
       </div>
     </header>
 
-    <main>
-       <h1>Account </h1>
+    <main class="grow text-zinger border-2">
+
+        <div class="flex flex-col items-center border-2">
+          <h1 class="text-3xl italic">account name</h1>
+          
+          <div class="border-2 w-full">
+            <p>@mista-fantastik</p>
+            <div class="flex">
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+            <img class="w-[200px] h-[200px]" src="giamatti.jpg">
+            </div>
+          </div>
+        </div>
 
         <p> mista fantastik <span style="color:darkslategray">@mista-fantastik</span></p>
+        
         <button>Change Username</button>
 
         <h4>Profile Picture:</h4>
-        <img style="width:200px;height:200px" src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fi.huffpost.com%2Fgen%2F963574%2Fimages%2Fo-PAUL-GIAMATTI-AMAZING-SPIDER-MAN-facebook.jpg&f=1&nofb=1&ipt=495a9689de514fd6d49eeff4b5a089e06daf1c6abe850aad5b138042055c0d47">
+        
         <br>
         <button>Change Profile Picture</button>
 
@@ -56,12 +68,23 @@
         <br>
     </main>
 
-    <footer>
-      <hr />
-      <span class="text-reset">Created by Tom Baker</span>
-      <br />
-      <a href="https://github.com/scrubware/startup">GitHub</a>
+    <footer class="flex justify-between dark:text-zinger">
+      <p>created by tom baker</p>
+      <div class="flex">
+        <a href="https://github.com/scrubware/startup">github</a>
+
+        <a href="index.html" class="dark:text-zinger-alt pl-3">logout</a>
+
+        <div class="dark:text-gray-700 pl-3 pt-1.5 text-xs">
+        <a href="index.html" class="hover:text-gray-500">login.html</a>
+        <a href="feed.html" class="hover:text-gray-500">feed.html</a>
+        <a href="post.html" class="hover:text-gray-500">post.html</a>
+        <a href="account.html" class="hover:text-gray-500">account.html</a>
+        </div>
+        
+      </div>
     </footer>
 
-    </body>
+
+  </body>
 </html>

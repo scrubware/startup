@@ -6,8 +6,6 @@ Zinger is an app for sharing, voting on, and celebrating good quips, jokes, and 
 
 ## 🚀 Specification Deliverable
 
-For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
-
 - [x] Proper use of Markdown
 - [x] A concise and compelling elevator pitch
 - [x] Description of key features
@@ -47,7 +45,7 @@ I am going to use the required technologies in the following ways.
 
 ## 🚀 AWS deliverable
 
-- [x] **Server deployed and accessible with custom domain name** - [My server link](https://yourdomainnamehere.click).
+- [x] **Server deployed and accessible with custom domain name** - [zinger](https://startup.scrubware.dev).
 
 ## 🚀 HTML deliverable
 

@@ -7,10 +7,10 @@
     <link rel="icon" href="favicon.ico" />
     <link href="main.css" rel="stylesheet">
   </head>
-  <body class="dark:bg-gray-900 flex flex-col ml-[5mm] mr-[5mm] md:ml-[28%] md:mr-[28%] pt-[15px] pb-[15px] h-screen">
+  <body class="dark:bg-gray-900 flex flex-col ml-[5mm] mr-[5mm] md:mx-[calc((100%-45rem)/2)] pt-[15px] pb-[15px] h-screen">
 
-
-    <header class="pt-[2mm] pb-[2mm] fixed top-0 w-[calc(100%-10mm)] md:w-[44%] bg-gray-900">
+    
+    <header class="pt-[2mm] pb-[2mm] fixed top-0 w-[calc(100%-10mm)] md:w-[calc(100%-(100%-45rem))] bg-gray-900">
       <div class="flex justify-between">
         <a href="feed.html" class="dark:text-zinger dark:hover:text-zinger-alt text-4xl sm:text-5xl italic">zinger</a>
         <div>
@@ -26,47 +26,53 @@
       </div>
     </header>
 
+
     <main class="grow mt-14 sm:mt-18 text-zinger">
 
-        <div class="flex flex-col items-center border-2">
-          <h1 class="text-3xl italic">account name</h1>
-          
-          <div class="border-2 w-full">
-            <p>@mista-fantastik</p>
-            <div class="flex">
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-            <img class="w-[200px] h-[200px]" src="giamatti.jpg">
+        <div class="flex flex-col items-center">
+          <div class="w-full">
+            <div class="flex flex-col items-center sm:items-start sm:flex-row">
+              <div class="sm:w-2/3 pb-6 sm:pb-0 sm:pr-7">
+                <div class="flex items-center">
+                  <h1 class="text-3xl italic pb-2 pr-6">mista fantastik</h1>
+                  <button class="text-xs text-zinger-alt border-2 hover:bg-zinger-alt hover:border-zinger-alt hover:text-black rounded-full w-auto h-1/2 m-1 pl-2 pr-2 p-0 pb-0.5">change username</button>
+                </div>
+                
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
+              </div>
+              <div class="flex flex-col w-3/5 sm:w-1/3">
+                <img class="aspect-square rounded-2xl" src="giamatti.jpg">
+                <div class="flex flex-col items-center">
+                  <p class="w-fit text-gray-500">@mista-fantastik</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
-        <p> mista fantastik <span style="color:darkslategray">@mista-fantastik</span></p>
-        
-        <button>Change Username</button>
+        <div>
 
-        <h4>Profile Picture:</h4>
-        
-        <br>
-        <button>Change Profile Picture</button>
+          <h4 class="text-3xl italic mb-2 mt-10">posts:</h4>
 
-        <h4>Posts:</h4>
+          <div class="flex border-1 rounded-lg p-2">
+              <div>
+              <img style="display:inline-block" class="rounded-full w-[6mm] h-[6mm] mr-1" src="giamatti.jpg" alt="account icon">
+              <p style="display:inline-block;padding:0;margin:0">mista fantastik <a class="dark:text-zinger-alt dark:hover:text-white" href="account.html">(you)</a> <span class="dark:text-gray-600">@ 11:32am</span></p>
+              <p style="padding:0;margin:0">my barber said 50% off like it was a deal. spun me around to the mirror and i look like Paul Giamatti.</p>
+              </div>
+              <div class="flex flex-col w-1/5 justify-center ml-2 mr-2">
+                <button class="text-xs text-zinger-alt border-2 hover:bg-zinger-alt hover:border-zinger-alt hover:text-black rounded-full w-full h-[6mm] m-0.5 pl-2 pr-2 p-0 pb-0.5">delete</button>
+                <button class="text-xs border-2 hover:bg-zinger hover:border-zinger hover:text-black rounded-full w-full h-[6mm] m-0.5 pl-2 pr-2 p-0 pb-0.5">private</button>
+              </div>
+          </div>
 
-        <br>
+          <div class="flex justify-center mt-3">
+            <p class="italic text-gray-600 text-xl">[end of posts]</p>
+          </div>
 
-        <div style="border: 1px solid black;width:50%;">
-            <img style="width:18px;height:18px;display:inline-block" src="account_icon.png" alt="account icon">
-            <p style="display:inline-block;padding:0;margin:0">mista fantastik @ 11:32am</p>
-            <p style="padding:0;margin:0">my barber said 50% off like it was a deal. spun me around to the mirror and i look like Paul Giamatti.</p>
         </div>
-        <button>Delete Post</button>
-        <button>Private Post</button>
-
-        <br>
-
-        <p>[end of posts]</p>
-
-        <br>
     </main>
+
 
     <footer class="flex justify-between dark:text-zinger">
       <p>&copy; tom baker</p>

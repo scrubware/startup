@@ -47,13 +47,9 @@ I am going to use the required technologies in the following ways.
 
 ## 🚀 AWS deliverable
 
-For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
-
 - [x] **Server deployed and accessible with custom domain name** - [My server link](https://yourdomainnamehere.click).
 
 ## 🚀 HTML deliverable
-
-For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
 - [x] **HTML pages** - Four pages for Login, Account Management, Feed, and Creating Posts were created (index.html, account.html, feed.html, post.html).
 - [x] **Proper HTML element usage** - Header/Footer/Main/Body tags were used to sort content, proper tags were used for content types.
@@ -67,14 +63,12 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 ## 🚀 CSS deliverable
 
-For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
-
-- [ ] **Header, footer, and main content body** - I did not complete this part of the deliverable.
-- [ ] **Navigation elements** - I did not complete this part of the deliverable.
-- [ ] **Responsive to window resizing** - I did not complete this part of the deliverable.
-- [ ] **Application elements** - I did not complete this part of the deliverable.
-- [ ] **Application text content** - I did not complete this part of the deliverable.
-- [ ] **Application images** - I did not complete this part of the deliverable.
+- [x] **Header, footer, and main content body** - I implemented a header that stays fixed to the top of the screen when scrolling through the main content body, a footer that is always at the bottom of the screen unless browsing the feed, and a main content body that lays out content in a flexible way where needed.
+- [x] **Navigation elements** - I styled the navigation elements to fit those of a more traditional app. The feed (feed.html) can be accessed through the "zinger" button in the top left, the post and account pages (post.html & account.html) can be accessed with button icons in the top right, and the login page (login.html) can be accessed through the "logout" button in the footer.
+- [x] **Responsive to window resizing** - Certain content on the account and feed pages adjusts its layout to accommodate smaller views, while the app as a whole dynamically resizes the gutters on the left and right to keep the app experience in portrait mode.
+- [x] **Application elements** - Various application elements, including buttons, post elements, and general content layouts, are styled to be visually appealing.
+- [x] **Application text content** - Various text elements, including times, button texts, and headers, are styled to be visually appealing.
+- [x] **Application images** - Various image elements, including profile icons, profile pictures, button images, and advertisement images, are styled to be visually appealing.
 
 ## 🚀 React part 1: Routing deliverable
 

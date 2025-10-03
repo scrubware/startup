@@ -26,15 +26,27 @@
       </div>
     </header>
 
-
-    <main class="flex flex-col items-center grow mt-14 sm:mt-18 text-zinger">
-        <textarea placeholder="What's on your mind?" class="w-full outline-1 rounded-lg p-2" data-gramm="false"></textarea>
-        <div class="flex w-2/3 pt-2">
-          <button class="border-2 hover:bg-zinger hover:border-zinger hover:text-black rounded-full grow m-1 p-0.3 pb-1">Post</button>
-          <button class="border-2 hover:bg-zinger hover:border-zinger hover:text-black rounded-full grow m-1 p-0.3 pb-1">Save Draft</button>
-          <button class="text-zinger-alt border-2 hover:bg-zinger-alt hover:border-zinger-alt hover:text-black rounded-full grow m-1 p-0.3 pb-1">Discard</button>
+    <main class="grow mt-14 sm:mt-18 flex items-center justify-center dark:text-zinger">
+      <div class="flex flex-col justify-center p-2">
+        <div class="flex justify-center">
+          <h1 class="text-3xl dark:text-zinger italic">welcome</h1>
         </div>
-      </main>
+        <form method="get" action="feed.html" class="flex flex-col justify-center items-center">
+          <div class="border-2 rounded-full p-2 m-2 mb-1">
+            <span>@</span>
+            <input type="text" class="text-zinger2" placeholder="username" />
+          </div>
+          <div class="border-2 rounded-full p-2 m-2 mt-1">
+            <span>🔒</span>
+            <input type="password" placeholder="password" />
+          </div>
+
+          <button type="submit" class="border-2 hover:bg-zinger hover:border-zinger hover:text-black rounded-full w-3/5 m-1 p-0.3 pb-1">login</button>
+          <button type="submit" class="border-2 hover:bg-zinger-alt hover:border-zinger-alt dark:text-zinger-alt hover:text-black rounded-full w-3/5 m-1 p-0.3 pb-1">create account</button>
+        </form>
+      </div>
+    </main>
+
 
     <footer class="flex justify-between dark:text-zinger">
       <p>&copy; tom baker</p>

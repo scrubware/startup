@@ -1,6 +1,8 @@
 import React from 'react';
 import '../main.css';
 
+import { NavLink } from 'react-router-dom';
+
 export function LoginPage() {
   return (
     <div className="flex flex-col justify-center p-2">
@@ -17,8 +19,8 @@ export function LoginPage() {
         <input type="password" placeholder="password" />
         </div>
 
-        <button type="submit" className="border-2 hover:bg-zinger hover:border-zinger hover:text-black rounded-full w-3/5 m-1 p-0.3 pb-1">login</button>
-        <button type="submit" className="border-2 hover:bg-zinger-alt hover:border-zinger-alt dark:text-zinger-alt hover:text-black rounded-full w-3/5 m-1 p-0.3 pb-1">create account</button>
+        <NavLink to="/feed" className="border-2 hover:bg-zinger hover:border-zinger hover:text-black rounded-full w-3/5 m-1 p-0.3 pb-1 text-center">login</NavLink>
+        <NavLink to="/account" className="border-2 hover:bg-zinger-alt hover:border-zinger-alt dark:text-zinger-alt hover:text-black rounded-full w-3/5 m-1 p-0.3 pb-1 text-center">create account</NavLink>
     </form>
     </div>
   );

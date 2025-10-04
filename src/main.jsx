@@ -32,7 +32,7 @@ export default function App() {
         </div>
       </header>
 
-{/* className="grow mt-14 sm:mt-18 flex items-center justify-center dark:text-zinger" */}
+      
       <main className="grow mt-14 sm:mt-18 dark:text-zinger flex justify-center items-center">
         <Routes>
           <Route path='/' element={<LoginPage />} />

@@ -1,6 +1,8 @@
 import React from 'react';
 import '../main.css';
 
+import { NavLink } from 'react-router-dom';
+
 export function Post() {
   return (
     <div className="flex border-1 rounded-lg p-2">
@@ -25,7 +27,7 @@ export function OwnedPost() {
         <div>
         <div className="flex">
             <img className="rounded-full w-[6mm] h-[6mm] mr-1" src="giamatti.jpg" alt="account icon"/>
-            <p>mista fantastik <a className="dark:text-zinger-alt dark:hover:text-white" href="account.html">(you)</a> <span className="dark:text-gray-600">@ 11:32am</span></p>
+            <p>mista fantastik <NavLink to="/account" className="dark:text-zinger-alt dark:hover:text-white">(you)</NavLink> <span className="dark:text-gray-600">@ 11:32am</span></p>
         </div>
         <p>my barber said 50% off like it was a deal. spun me around to the mirror and i look like Paul Giamatti.</p>
         </div>

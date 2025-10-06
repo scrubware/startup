@@ -70,11 +70,9 @@ I am going to use the required technologies in the following ways.
 
 ## 🚀 React part 1: Routing deliverable
 
-For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
-
-- [ ] **Bundled using Vite** - I did not complete this part of the deliverable.
-- [ ] **Components** - I did not complete this part of the deliverable.
-- [ ] **Router** - I did not complete this part of the deliverable.
+- [x] **Bundled using Vite** - Used Vite to import critical components including React, React Router, and Tailwind CSS.
+- [x] **Components** - Decomposed each main pagd into a React component, and additionally decomposed posts and advertisements into their own components as well.
+- [x] **Router** - Used the React Router to dynamically load main page content into a single index.html file.
 
 ## 🚀 React part 2: Reactivity deliverable
 

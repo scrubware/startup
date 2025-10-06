@@ -71,7 +71,7 @@ I am going to use the required technologies in the following ways.
 ## 🚀 React part 1: Routing deliverable
 
 - [x] **Bundled using Vite** - Used Vite to import critical components including React, React Router, and Tailwind CSS.
-- [x] **Components** - Decomposed each main pagd into a React component, and additionally decomposed posts and advertisements into their own components as well.
+- [x] **Components** - Decomposed each main page into a React component, and additionally decomposed posts and advertisements into their own components as well.
 - [x] **Router** - Used the React Router to dynamically load main page content into a single index.html file.
 
 ## 🚀 React part 2: Reactivity deliverable

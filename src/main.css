@@ -1,9 +1,24 @@
 @import "tailwindcss";
 
 @theme {
-    --color-zinger: #ffcb2e;
-    --color-zinger-alt: #EF5D60;
-    --color-mint-500: oklch(0.72 0.11 178);
+    --color-yellow-95: #fffbe5;
+    --color-yellow-80: #ffee99;
+    --color-yellow-60: #ffcc33;
+    --color-yellow-45: #cb7f1a;
+
+    --color-lime-95: #f5ffe5;
+    --color-lime-80: #e2ff99;
+    --color-lime-60: #a3ff33;
+    --color-lime-45: #40be27;
+
+    --color-pink-95: #fff0e5;
+    --color-pink-80: #ffb199;
+    --color-pink-60: #ed4548;
+    --color-pink-45: #cd184b;
+
+    --color-dark-20: #2c2a3c;
+    --color-dark-10: #16151e;
+    --color-dark-5: #0b0b0e;
 }
 
 @layer utilities {

@@ -12,7 +12,7 @@ export function AccountPage() {
               <div className="sm:w-2/3 pb-6 sm:pb-0 sm:pr-7">
                 <div className="flex items-center">
                   <h1 className="text-3xl italic pb-2 pr-6">mista fantastik</h1>
-                  <button className="text-xs text-zinger-alt border-2 hover:bg-zinger-alt hover:border-zinger-alt hover:text-black rounded-full w-auto h-1/2 m-1 pl-2 pr-2 p-0 pb-0.5">change username</button>
+                  <button className="text-xs text-lime-60 bg-lime-45/30 hover:bg-lime-60 hover:text-black rounded-full w-auto h-1/2 pl-4 pr-4 p-1.5 pb-1.5">change username</button>
                 </div>
                 
                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>

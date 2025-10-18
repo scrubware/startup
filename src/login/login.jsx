@@ -1,27 +1,50 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../main.css';
 
 import { NavLink } from 'react-router-dom';
 
 export function LoginPage() {
+
+  const [username, changeUsername] = useState('')
+  const [password, changePassword] = useState('')
+
+  function Login() {
+    console.log(username)
+    console.log(password)
+  }
+
+  function Register() {
+    console.log('register attempted')
+  }
+
+  const ChangeUsername = (event) => {
+    changeUsername(event.target.value)
+  }
+
+  const ChangePassword = (event) => {
+    changePassword(event.target.value)
+  }
+
   return (
     <div className="flex flex-col justify-center p-2">
     <div className="flex justify-center">
-        <h1 className="text-3xl dark:text-zinger italic">welcome</h1>
+        <h1 className="text-3xl dark:text-yellow-60 italic">welcome</h1>
     </div>
-    <form method="get" action="feed.html" className="flex flex-col justify-center items-center">
-        <div className="border-2 rounded-full p-2 m-2 mb-1">
-        <span>@</span>
-        <input type="text" className="text-zinger2" placeholder="username" />
-        </div>
-        <div className="border-2 rounded-full p-2 m-2 mt-1">
-        <span>🔒</span>
-        <input type="password" placeholder="password" />
-        </div>
+    <div className="flex flex-col justify-center items-center">
+        <input type="text" value={username} onChange={ChangeUsername} placeholder="username" className="pl-4 pb-3 rounded-full border-2 m-1 p-2 text-yellow-60 border-yellow-60"/>
+        <input type="password" value={password} onChange={ChangePassword} placeholder="password" className="pl-4 pb-3 rounded-full border-2 m-1 p-2 text-yellow-60 border-yellow-60" />
 
-        <NavLink to="/feed" className="border-2 hover:bg-zinger hover:border-zinger hover:text-black rounded-full w-3/5 m-1 p-0.3 pb-1 text-center">login</NavLink>
-        <NavLink to="/account" className="border-2 hover:bg-zinger-alt hover:border-zinger-alt dark:text-zinger-alt hover:text-black rounded-full w-3/5 m-1 p-0.3 pb-1 text-center">create account</NavLink>
-    </form>
+        <button onClick={Login} className="border-2 hover:bg-yellow-60 hover:border-yellow-60 hover:text-black rounded-full w-3/5 m-1 p-0.3 pb-1 text-center">login</button>
+        <button onClick={Register} className="border-2 hover:bg-lime-60 hover:border-lime-60 dark:text-lime-60 hover:text-black rounded-full w-3/5 m-1 p-0.3 pb-1 text-center">create account</button>
+
+        {/* <div className="flex mt-4 items-center">
+          <div className="bg-lime-60 border-2 border-lime-60 rounded-full p-2.5"></div>
+          <div className="border-1 border-lime-60 h-0 w-10"></div>
+          <div className="border-2 border-lime-60 rounded-full p-2.5"></div>
+          <div className="border-1 border-lime-45 h-0 w-10"></div>
+          <div className="border-2 border-lime-45 rounded-full p-2.5"></div>
+        </div> */}
+    </div>
     </div>
   );
 }

@@ -49,9 +49,12 @@ export function Subtext({color, text}) {
     </>)
 }
 
-export function LabelledBox({children}) {
+export function LabelledBox({children, onChange}) {
     return (<div className="flex items-center">
-        <input type="checkbox" className="form-checkbox rounded-md h-8 w-8 bg-lime-45/50 border-lime-60/50 border-2 text-lime-60"/>
+        <input 
+            type="checkbox"
+            onChange={(e) => onChange?.(e.target.checked, e)}
+            className="form-checkbox rounded-md h-8 w-8 bg-lime-45/50 border-lime-60/50 border-2 text-lime-60"/>
         <p className="ml-5">{children}</p>
     </div>)
 }

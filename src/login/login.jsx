@@ -93,7 +93,9 @@ export function LoginPage() {
     }
   }
 
-  const agreement_one = useRef(null);
+  const [agreementOne,changeAgreeementOne] = useState(false)
+  const [agreementTwo,changeAgreeementTwo] = useState(false)
+  const [agreementThree,changeAgreeementThree] = useState(true)
   
 
   return (
@@ -122,10 +124,22 @@ export function LoginPage() {
           {registrationProgress == 2 && <>
             <p>before we wrap up your account...</p>
 
-            <LabelledBox>i understand that zinger is an unforgiving pit of despair that will only cause me pain</LabelledBox>
-            <LabelledBox>entering this site makes you incredibly gassy!!!</LabelledBox>
+            <LabelledBox onChange={() => {changeAgreeementOne(!agreementOne)}}>i understand that zinger is an unforgiving pit of despair that will only cause me pain</LabelledBox>
+            <LabelledBox onChange={() => {changeAgreeementTwo(!agreementTwo)}}>entering this site makes you incredibly gassy!!!</LabelledBox>
 
-            <Button color={buttonColor.lime} onClick={() => {changeRegistrationProgress(2)}} disabled={true}>continue</Button>
+            <Button 
+              color={buttonColor.lime} 
+              onClick={() => {changeRegistrationProgress(3)}}
+              disabled={!(agreementOne && agreementTwo && agreementThree)}
+            >continue</Button>
+          </>}
+
+          {registrationProgress == 3 && <>
+            <h1 className="text-3xl dark:text-yellow-60 italic">welcome to zinger</h1>
+            <p>check out the feed by pressing 'zinger' title in the top left</p>
+            <p>create a post by pressing the plus icon in the top right</p>
+            <p>or view your profile by pressing the account icon in the top right</p>
+            <p>if you ever feel like logging out, you can do so using the button on the profile page</p>
           </>}
 
           <RegistrationProgress progress={registrationProgress}/>

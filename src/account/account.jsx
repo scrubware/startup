@@ -1,7 +1,7 @@
 import React from 'react';
 import '../main.css';
 
-import { OwnedPost } from "../components/post"
+import { OwnedPost, Draft } from "../components/post"
 
 export function AccountPage() {
   return (
@@ -39,10 +39,10 @@ export function AccountPage() {
 
           <h4 className="text-3xl italic mb-2 mt-10">drafts:</h4>
 
-          <OwnedPost/>
+          <Draft/>
 
           <div className="flex justify-center mt-3">
-            <p className="italic text-gray-600 text-xl">end of posts</p>
+            <p className="italic text-gray-600 text-xl">end of drafts</p>
           </div>
 
         </div>

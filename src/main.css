@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/forms";
+
 
 @theme {
     --color-yellow-95: #fffbe5;

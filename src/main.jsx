@@ -8,15 +8,23 @@ import { AccountPage } from './account/account';
 import { PostPage } from './post/post';
 import { FeedPage } from './feed/feed';
 
+import { AuthState } from './login/auth' 
+
 export default function App() {
+
+  const [authState, setAuthState] = React.useState(false);
+
   return (
     <BrowserRouter>
     
       <header className="pt-[2mm] pb-[2mm] fixed top-0 w-[calc(100%-10mm)] md:w-[calc(100%-(100%-45rem)+1px)] bg-gray-900">
         <div className="flex justify-between">
-          <NavLink to="/feed">
-            <p className="dark:text-yellow-60 dark:hover:text-lime-60 text-4xl sm:text-5xl italic">zinger</p>
-          </NavLink>
+          { authState === AuthState.AUTHORIZED ? 
+            <NavLink to="/feed">
+              <p className="dark:text-yellow-60 dark:hover:text-lime-60 text-4xl sm:text-5xl italic">zinger</p>
+            </NavLink> :
+            <p className="dark:text-yellow-60 text-4xl sm:text-5xl italic">zinger</p>
+          }
           <div className="flex">
             <NavLink to="/post" className="stroke-yellow-60 hover:stroke-lime-60">
               <svg viewBox="0 0 24 24" fill="none" className="rounded w-[12mm] h-[12mm] sm:w-[16mm] sm:h-[16mm] pointer-events-none">

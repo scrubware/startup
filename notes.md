@@ -1,99 +1,184 @@
 # CS 260 Notes
 
-[My startup - Simon](https://simon.cs260.click)
+## Exam
 
-## Helpful links
+The <link> tag defines the relationship between the current document and an external resource.
+The <link> tag is most often used to link to external style sheets or to add a favicon to your website.
+The <link> element is an empty element, it contains attributes only.
 
-- [Course instruction](https://github.com/webprogramming260)
-- [Canvas](https://byu.instructure.com)
-- [MDN](https://developer.mozilla.org)
+The <div> tag allows you to create divisions or sections within your web page.
+#hashtags reference IDs while .dots reference classes in css declarations.
+Padding is inside the element while margin is outside the element.
 
-## AWS
+flex-direction: direction of the flex (row/col)
+'display: flex' actually makes something flex
+justify-content aligns horizontally
+align-items aligns vertically
 
-My IP address is: 54.81.96.130
-Launching my AMI I initially put it on a private subnet. Even though it had a public IP address and the security group was right, I wasn't able to connect to it.
+1) The HTML <link> element
 
-## Caddy
+    Declares a relationship to an external resource (commonly stylesheets and icons).
 
-No problems worked just like it said in the [instruction](https://github.com/webprogramming260/.github/blob/main/profile/webServers/https/https.md).
+    Placed in <head>, requires rel and href attributes.
 
-## HTML
+    Example: <link rel="stylesheet" href="styles.css">.
 
-This was easy. I was careful to use the correct structural elements such as header, footer, main, nav, and form. The links between the three views work great using the `a` element.
+    ​
 
-The part I didn't like was the duplication of the header and footer code. This is messy, but it will get cleaned up when I get to React.
+2) <div> and <span>
 
-## CSS
+    <div>: Generic block-level container, used for layout, starts on a new line.
 
-This took a couple hours to get it how I wanted. It was important to make it responsive and Bootstrap helped with that. It looks great on all kinds of screen sizes.
+    <span>: Generic inline container for phrasing content, default display is inline.
 
-Bootstrap seems a bit like magic. It styles things nicely, but is very opinionated. You either do, or you do not. There doesn't seem to be much in between.
+    ​
 
-I did like the navbar it made it super easy to build a responsive header.
+3) CSS selectors: #title vs .grid
 
-```html
-      <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-          <a class="navbar-brand">
-            <img src="logo.svg" width="30" height="30" class="d-inline-block align-top" alt="" />
-            Calmer
-          </a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" href="play.html">Play</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="about.html">About</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="index.html">Logout</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-    </header>
-```
+    #title targets the element with id="title" (unique per page).
 
-I also used SVG to make the icon and logo for the app. This turned out to be a piece of cake.
+    .grid targets elements with class="grid" (reusable).
 
-```html
-<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg">
-  <rect width="100" height="100" fill="#0066aa" rx="10" ry="10" />
-  <text x="50%" y="50%" dominant-baseline="central" text-anchor="middle" font-size="72" font-family="Arial" fill="white">C</text>
-</svg>
-```
+    ID selectors have higher specificity than class selectors.
 
-## React Part 1: Routing
+4) Padding vs margin
 
-Setting up Vite and React was pretty simple. I had a bit of trouble because of conflicting CSS. This isn't as straight forward as you would find with Svelte or Vue, but I made it work in the end. If there was a ton of CSS it would be a real problem. It sure was nice to have the code structured in a more usable way.
+    Padding: Space between content and border, background color applies, cannot be negative.
 
-## React Part 2: Reactivity
+    Margin: Space outside the border, separates elements, background does not apply, can be negative.
 
-This was a lot of fun to see it all come together. I had to keep remembering to use React state instead of just manipulating the DOM directly.
+    ​
 
-Handling the toggling of the checkboxes was particularly interesting.
+5) Flex image layout
 
-```jsx
-<div className="input-group sound-button-container">
-  {calmSoundTypes.map((sound, index) => (
-    <div key={index} className="form-check form-switch">
-      <input
-        className="form-check-input"
-        type="checkbox"
-        value={sound}
-        id={sound}
-        onChange={() => togglePlay(sound)}
-        checked={selectedSounds.includes(sound)}
-      ></input>
-      <label className="form-check-label" htmlFor={sound}>
-        {sound}
-      </label>
-    </div>
-  ))}
-</div>
-```
+    display: flex arranges children along the main axis.
+
+    Use justify-content, align-items, flex-wrap, and gap for layout and spacing.
+
+6) Example padding rule
+
+    padding: 10px 20px 5px 0; sets top, right, bottom, left padding in order.
+
+7) Arrow function basics
+
+    Example: const fn = (x) => x * 2; returns x*2.
+
+    With braces, use return; without braces, single expression is returned implicitly.
+
+8) Array .map() output
+
+    .map() returns a new array with each element transformed by the callback.
+
+9) getElementById + addEventListener
+
+    document.getElementById('btn').addEventListener('click', () => { ... }); attaches a click handler to the element with id="btn".
+
+10) Querying with a # selector
+
+    document.querySelector('#title') selects the element with id="title".
+
+11) DOM truths
+
+    The DOM is a live programming interface representing the document as a tree of nodes.
+
+    CSS selectors can query nodes; event listeners can be attached.
+
+12) Default display of <span>
+
+    Default is inline.
+
+    ​
+
+13) Make all divs red with CSS
+
+    div { background: red; }
+
+14) Image with hyperlink
+
+    <a href="/path"><img src="/img.png" alt="..."></a>
+
+15) CSS box model order
+
+    From inside out: content → padding → border → margin.
+
+16) Target only the word "trouble" in "double trouble"
+
+    Use: <span>double</span> <span class="trouble">trouble</span> and .trouble { color: green; }.
+
+17) For loop + console.log output
+
+    Standard for loop iterates indices; console.log prints each iteration’s value or index.
+
+18) Select by id and set text color to green
+
+    document.getElementById('byu').style.color = 'green';
+
+19) Opening tags
+
+    Paragraph: <p>, Ordered list: <ol>, Unordered list: <ul>, h2: <h2>, h1: <h1>, h3: <h3>.
+
+20) Declare HTML5 doctype
+
+    <!DOCTYPE html>
+
+21) JS control flow syntax
+
+    if (cond) { ... } else { ... }
+
+    for (let i=0; i<N; i++) { ... }
+
+    while (cond) { ... }
+
+    switch (x) { case 'a': ...; break; default: ... }
+
+22) Creating a JS object
+
+    const obj = { key: 'value', count: 3 };
+
+23) Adding new properties to objects
+
+    Objects are dynamic: obj.newKey = 42; or obj['newKey'] = 42;
+
+24) Include JavaScript on a page
+
+    <script src="app.js"></script> (external) or <script> /* code */ </script> (inline).
+
+25) Change only the text "animal" to "crow"
+
+    Use: <span id="animal">animal</span> fish, then document.getElementById('animal').textContent = 'crow';
+
+26) JSON description
+
+    JSON is a text data format using JS object syntax: objects {}, arrays [], strings, numbers, booleans, null. Keys must be double-quoted strings.
+
+27) CLI command purposes
+
+    chmod: change file permissions; pwd: print working directory; cd: change directory; ls: list files; vim/nano: text editors; mkdir: make directory; mv: move/rename; rm: remove; man: show manual; ssh: secure shell remote login; ps: process status; wget: download; sudo: run as superuser.
+
+28) Command creating a remote shell session
+
+    ssh user@host establishes a secure remote shell session.
+
+29) ls -la behavior
+
+    -l: long listing with permissions/owner/size/time; -a: include dotfiles.
+
+30) Domain parts in banana.fruit.bozo.click
+
+    TLD: click; Root domain: bozo.click; Subdomains: fruit.bozo.click, banana.fruit.bozo.click.
+
+31) HTTPS and certificates
+
+    A valid server certificate is required for browsers to establish a trusted HTTPS connection.
+
+32) DNS A records
+
+    An A record maps a hostname to an IPv4 address; cannot point to another A record. Use CNAME to alias one name to another.
+
+33) Well-known ports
+
+    443: HTTPS; 80: HTTP; 22: SSH.
+
+34) Promises output (concept)
+
+    Promise executor runs immediately; .then/.catch run after the current call stack; setTimeout callbacks run later. Chained thens receive prior return value; returning a Promise flattens the chain; thrown errors skip to catch.

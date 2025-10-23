@@ -37,13 +37,13 @@ export function AccountPage() {
             <p className="italic text-gray-600 text-xl">end of posts</p>
           </div>
 
-          <h4 className="text-3xl italic mb-2 mt-10">drafts:</h4>
+          {/* <h4 className="text-3xl italic mb-2 mt-10">drafts:</h4>
 
           <Draft/>
 
           <div className="flex justify-center mt-3">
             <p className="italic text-gray-600 text-xl">end of drafts</p>
-          </div>
+          </div> */}
 
         </div>
     </div>

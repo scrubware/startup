@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import '../main.css';
 
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { RegistrationProgress } from './registrationProgress';
 import { Input, InputSecure, Button, Subtext, textColor, buttonColor, inputColor, LabelledBox } from './input'
 
-export function LoginPage() {
+import { AuthState } from './auth'
+
+
+export function LoginPage({authStateFunction}) {
 
   // We use 'useState' so that components are automatically re-rendered on change.
   // Otherwise, components would stay static.
@@ -19,6 +22,8 @@ export function LoginPage() {
   const [passwordErrorMessage, changePasswordErrorMessage] = useState('')
 
   const [displayName, changeDisplayName] = useState('');
+  const [displayNameInputColor, changeDisplayNameInputColor] = useState(inputColor.yellow)
+  const [displayNameSubtext, changeDisplayNameSubtext] = useState('you can change this at any time')
 
   const [registrationProgress, changeRegistrationProgress] = useState(0)
 
@@ -40,7 +45,11 @@ export function LoginPage() {
 
     if (quit_early) return
 
-    console.log('successfully logged in!')
+    authStateFunction(AuthState.AUTHORIZED)
+
+    const navigate = useNavigate();
+
+    navigate("/feed")
   }
 
   function Register() {
@@ -94,7 +103,7 @@ export function LoginPage() {
   }
 
   const [agreementOne,changeAgreeementOne] = useState(false)
-  const [agreementTwo,changeAgreeementTwo] = useState(false)
+  const [agreementTwo,changeAgreeementTwo] = useState(true)
   const [agreementThree,changeAgreeementThree] = useState(true)
   
 
@@ -116,16 +125,27 @@ export function LoginPage() {
           </>}
 
           {registrationProgress == 1 && <>
-            <Input value={displayName} onChange={(event) => {changeDisplayName(event.target.value)}} placeholder={"display name"}/>
-            <Subtext color={textColor.yellow} text={'you can change this at any time'}/>
-            <Button color={buttonColor.lime} onClick={() => {changeRegistrationProgress(2)}}>continue</Button>
+            <Input value={displayName} onChange={(event) => {
+              changeDisplayName(event.target.value)
+              changeDisplayNameInputColor(inputColor.yellow)
+              changeDisplayNameSubtext('you can change this at any time')
+            }} placeholder={"display name"} color={displayNameInputColor}/>
+            <Subtext color={textColor.yellow} text={displayNameSubtext}/>
+            <Button color={buttonColor.lime} onClick={() => {
+              if (!displayName) {
+                changeDisplayNameInputColor(inputColor.pink)
+                changeDisplayNameSubtext(<span className="text-pink-60">alright well it can't be blank</span>)
+              } else {
+                changeRegistrationProgress(2)
+              }
+            }}>continue</Button>
           </>}
 
           {registrationProgress == 2 && <>
             <p>before we wrap up your account...</p>
 
             <LabelledBox onChange={() => {changeAgreeementOne(!agreementOne)}}>i understand that zinger is an unforgiving pit of despair that will only cause me pain</LabelledBox>
-            <LabelledBox onChange={() => {changeAgreeementTwo(!agreementTwo)}}>entering this site makes you incredibly gassy!!!</LabelledBox>
+            {/* <LabelledBox onChange={() => {changeAgreeementTwo(!agreementTwo)}}>entering this site makes you incredibly gassy!!!</LabelledBox> */}
 
             <Button 
               color={buttonColor.lime} 
@@ -142,7 +162,7 @@ export function LoginPage() {
             <p>if you ever feel like logging out, you can do so using the button on the profile page</p>
           </>}
 
-          <RegistrationProgress progress={registrationProgress}/>
+          {registrationProgress >= 1 && <RegistrationProgress progress={registrationProgress}/>}
       </div>
     </div>
   );

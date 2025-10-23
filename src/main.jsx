@@ -12,7 +12,7 @@ import { AuthState } from './login/auth'
 
 export default function App() {
 
-  const [authState, setAuthState] = React.useState(false);
+  const [authState, changeAuthState] = React.useState(false);
 
   const blurbs = [
     ["the worst app since twitter"],
@@ -26,7 +26,7 @@ export default function App() {
       <header className="pt-[2mm] pb-[2mm] fixed top-0 w-[calc(100%-10mm)] md:w-[calc(100%-(100%-45rem)+1px)] bg-gray-900">
         <div className="flex justify-between">
           <div className="flex items-center">
-          { authState === AuthState.AUTHORIZED || true ? 
+          { authState === AuthState.AUTHORIZED ? 
             <NavLink to="/feed">
               <p className="dark:text-yellow-60 dark:hover:text-lime-60 text-4xl sm:text-5xl italic">zinger</p>
             </NavLink> :
@@ -52,7 +52,7 @@ export default function App() {
       
       <main className="grow mt-14 sm:mt-18 dark:text-yellow-60 flex justify-center items-center">
         <Routes>
-          <Route path='/' element={<LoginPage />} />
+          <Route path='/' element={<LoginPage authStateFunction={changeAuthState} />} />
           <Route path='/account' element={<AccountPage />} />
           <Route path='/post' element={<PostPage />} />
           <Route path='/feed' element={<FeedPage />} />
@@ -66,7 +66,7 @@ export default function App() {
         <div className="flex">
           <a href="https://github.com/scrubware/startup" className="hover:text-white">github</a>
 
-          <NavLink to="/"><p className="dark:text-lime-60 hover:text-white ml-3">logout</p></NavLink>
+          <NavLink to="/" className="dark:text-lime-60 hover:text-white ml-3" onClick={() => {changeAuthState(AuthState.UNAUTHORIZED)}}>logout</NavLink>
         </div>
       </footer>
 

@@ -1,9 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../main.css';
 
 import { NavLink } from 'react-router-dom';
 
+export const VoteOption = {
+  NONE : "none",
+  DOWN : "down",
+  UP : "up"
+}
+
 export function Post() {
+
+  const defaultScore = 70;
+
+  const [voteOption, changeVoteOption] = useState(VoteOption.NONE)
+  const [voteScore, changeVoteScore] = useState(defaultScore)
+
+  const buttonCommon = "text-xs hover:text-black rounded-full w-full h-[6mm] m-0.5 pl-2 pr-2 p-0 pb-0.5"
+
   return (
     <div className="flex border-2 border-gray-800 rounded-xl p-2 items-center">
         <div>
@@ -13,10 +27,32 @@ export function Post() {
         </div>
         <p>my barber said 50% off like it was a deal. spun me around to the mirror and i look like Paul Giamatti.</p>
         </div>
-        <p className="text-yellow-95 m-3 text-2xl">70</p>
+        <p className="text-yellow-95 m-3 text-2xl">{voteScore}</p>
         <div className="flex flex-col justify-center mr-2">
-            <button className="text-xs bg-yellow-45/30 hover:bg-yellow-60 hover:border-zinger hover:text-black rounded-full w-full h-[6mm] m-0.5 pl-2 pr-2 p-0 pb-0.5">^</button>
-            <button className="text-xs bg-lime-45/30 hover:bg-lime-60 text-lime-60 hover:bg-zinger-alt hover:border-zinger-alt hover:text-black rounded-full w-full h-[6mm] m-0.5 pl-2 pr-2 p-0 pb-0.5">v</button>
+            <button 
+              onClick={() => {
+                if (voteOption == VoteOption.UP) {
+                  changeVoteOption(VoteOption.NONE)
+                  changeVoteScore(defaultScore)
+                } else {
+                  changeVoteOption(VoteOption.UP)
+                  changeVoteScore(defaultScore + 1)
+                }
+              }} 
+              className={buttonCommon + (voteOption == VoteOption.UP ? " bg-yellow-60 text-black" : " bg-yellow-45/30 hover:bg-yellow-60 text-yellow-60")}
+            >^</button>
+            <button 
+              onClick={() => {
+                if (voteOption == VoteOption.DOWN) {
+                  changeVoteOption(VoteOption.NONE)
+                  changeVoteScore(defaultScore)
+                } else {
+                  changeVoteOption(VoteOption.DOWN)
+                  changeVoteScore(defaultScore - 2)
+                }
+              }} 
+              className={buttonCommon + (voteOption == VoteOption.DOWN ? " bg-lime-60 text-black" : " bg-lime-45/30 hover:bg-lime-60 text-lime-60")}
+            >v</button>
         </div>
     </div>
   );

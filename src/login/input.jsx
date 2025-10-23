@@ -30,7 +30,7 @@ export const buttonColor = {
 
 export function Button({onClick, children, color=buttonColor.yellow, disabled=false}) {
     
-    const buttonCommon = `border-2 hover:text-black rounded-full w-3/5 m-1 p-0.3 pb-1 text-center`
+    const buttonCommon = `border-2 hover:text-black rounded-full w-[40%] m-1 p-0.3 pb-1 text-center`
 
     return (
         <button onClick={disabled ? () => {} : onClick} className={buttonCommon + ' ' + color[disabled ? 1 : 0]}>{children}</button>

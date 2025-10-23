@@ -9,7 +9,7 @@ class Draft {
     }
 }
 
-class Post extends Draft {
+export class Post extends Draft {
   date: Date;
   constructor(text: string, user: User) {
     super(text,user)
@@ -25,7 +25,7 @@ class Ad extends Draft {
     }
 }
 
-class User {
+export class User {
     username: string;
 
     constructor(username: string) {

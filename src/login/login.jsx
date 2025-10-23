@@ -8,12 +8,11 @@ import { Input, InputSecure, Button, Subtext, textColor, buttonColor, inputColor
 import { AuthState } from './auth'
 
 
-export function LoginPage({authStateFunction}) {
+export function LoginPage({registrationProgress, changeRegistrationProgress, username, changeUsername, displayName, changeDisplayName,authStateFunction}) {
 
   // We use 'useState' so that components are automatically re-rendered on change.
   // Otherwise, components would stay static.
 
-  const [username, changeUsername] = useState('')
   const [usernameInputColor, changeUsernameInputColor] = useState(inputColor.yellow)
   const [usernameErrorMessage, changeUsernameErrorMessage] = useState('')
 
@@ -21,11 +20,10 @@ export function LoginPage({authStateFunction}) {
   const [passwordInputColor, changePasswordInputColor] = useState(inputColor.yellow)
   const [passwordErrorMessage, changePasswordErrorMessage] = useState('')
 
-  const [displayName, changeDisplayName] = useState('');
+  const [loginErrorMessage, changeLoginErrorMessage] = useState('')
+
   const [displayNameInputColor, changeDisplayNameInputColor] = useState(inputColor.yellow)
   const [displayNameSubtext, changeDisplayNameSubtext] = useState('you can change this at any time')
-
-  const [registrationProgress, changeRegistrationProgress] = useState(0)
 
   const validUsernameRegex = /^[a-zA-Z0-9-]+$/;
   const validPasswordLength = 8;
@@ -45,11 +43,19 @@ export function LoginPage({authStateFunction}) {
 
     if (quit_early) return
 
-    authStateFunction(AuthState.AUTHORIZED)
+    if (true) {
+      changeUsernameInputColor(inputColor.pink)
+      changeLoginErrorMessage('user not registerd!')
+      quit_early = true
+    }
 
-    const navigate = useNavigate();
+    // authStateFunction(AuthState.AUTHORIZED)
 
-    navigate("/feed")
+
+
+    // const navigate = useNavigate();
+
+    // navigate("/feed")
   }
 
   function Register() {
@@ -88,6 +94,7 @@ export function LoginPage({authStateFunction}) {
     } else {
       changeUsernameInputColor(inputColor.yellow)
       changeUsernameErrorMessage('')
+      changeLoginErrorMessage('')
     }
     
   }
@@ -122,6 +129,11 @@ export function LoginPage({authStateFunction}) {
 
             <Button onClick={Login} color={buttonColor.yellow}>login</Button>
             <Button onClick={Register} color={buttonColor.lime}>create account</Button>
+
+            <Subtext color={textColor.pink} text={loginErrorMessage}/>
+
+            <p className="w-1/3 text-gray-600 italic text-center mt-10">note: react p2 implementation uses global state instead of localstorage for the time being</p>
+            <p className="w-1/3 text-gray-600 italic text-center mt-10">this means state will reset upon refresh</p>
           </>}
 
           {registrationProgress == 1 && <>
@@ -149,7 +161,7 @@ export function LoginPage({authStateFunction}) {
 
             <Button 
               color={buttonColor.lime} 
-              onClick={() => {changeRegistrationProgress(3)}}
+              onClick={() => {changeRegistrationProgress(3); authStateFunction(AuthState.AUTHORIZED)}}
               disabled={!(agreementOne && agreementTwo && agreementThree)}
             >continue</Button>
           </>}

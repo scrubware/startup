@@ -1,6 +1,5 @@
 
 export interface DAO {
-    register(): void;
+    createUser(): void;
     login(): void;
-    
 }

@@ -1,23 +1,55 @@
 
 
 Register
+POST
+username
+password
 
+full
+email
+phone number
+
+returns auth token
 
 Login
+POST (since it creates an auth token)
+username
+password
 
+returns auth token
 
 Logout
+DELETE
+auth token
+username
 
+returns nothing
 
 GetProfile
+GET
+auth token
+username (of profile)
 
+returns profile, including posts
 
 GetFeed
+GET
+auth token
 
+full
+we can associate auth token to get the user
 
 SubmitPost
+POST
+auth token
+text
+we can associate auth token to get the user
 
+returns post id and client moves to feed
 
 DeletePost
+DELETE
+auth token
+post id
 
-
+returns nothing and re-fetches feed or profile

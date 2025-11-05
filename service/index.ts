@@ -19,4 +19,4 @@ app.listen(port, () => {
 let api = express.Router();
 app.use(`/api`, api);
 
-api
+api.post('/auth/create')

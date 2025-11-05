@@ -1,4 +1,32 @@
 
+// Anything that can exist as a member of the feed is modelled as a FeedItem
+// Anything that can exist as a visible user of the plaform is modelled as a Profile
+// Account info INCLUDING sensitive info is modelled as a User
+// Profile objects are a subset of their corresponding user.
+
+class UserDataCommon {
+    username: string;
+    profileName: string;
+    dateJoined: Date;
+
+}
+
+export class User extends UserDataCommon {
+    password: string;
+    phoneNumber: string;
+    email: string;
+
+    constructor(username: string) {
+        super();
+        this.username = username;
+    }
+}
+
+export class Profile extends UserDataCommon {
+    
+}
+
+
 export class FeedItem {
     text: string;
     user: User;
@@ -25,13 +53,7 @@ export class Ad extends FeedItem {
     }
 }
 
-export class User {
-    username: string;
 
-    constructor(username: string) {
-        this.username = username;
-    }
-}
 
 class Account extends User {
   posts: Post[] = [];

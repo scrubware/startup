@@ -1,0 +1,22 @@
+const cookieParser = require('cookie-parser');
+const bcrypt = require('bcryptjs');
+const express = require('express');
+const uuid = require('uuid');
+const app = express();
+
+import { DAO } from "./DAO"
+import { MemoryDAO } from "./memoryDAO" 
+
+const port = process.argv.length > 2 ? process.argv[2] : 4000;
+
+app.use(express.static('public'));
+
+app.listen(port, () => {
+  console.log(`Listening on port ${port}`);
+});
+
+
+let api = express.Router();
+app.use(`/api`, api);
+
+api

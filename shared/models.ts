@@ -1,5 +1,5 @@
 
-class Draft {
+export class FeedItem {
     text: string;
     user: User;
 
@@ -9,7 +9,7 @@ class Draft {
     }
 }
 
-export class Post extends Draft {
+export class Post extends FeedItem {
   date: Date;
   constructor(text: string, user: User) {
     super(text,user)
@@ -17,7 +17,7 @@ export class Post extends Draft {
   }
 }
 
-class Ad extends Draft {
+export class Ad extends FeedItem {
     link_url: URL;
     constructor(text: string, user: Brand, link_url: URL) {
         super(text, user)
@@ -35,7 +35,7 @@ export class User {
 
 class Account extends User {
   posts: Post[] = [];
-  drafts: Draft[] = [];
+  drafts: FeedItem[] = [];
 
   constructor(username: string) {
     super(username)
@@ -52,7 +52,7 @@ class Brand extends User {
 
 
 function SaveDraft(text: string, user: Account) {
-    user.drafts.push(new Draft(text, user));
+    user.drafts.push(new FeedItem(text, user));
 }
 
 function SendPost(text: string, user: Account) {
@@ -86,7 +86,7 @@ function OwnedPostComponent(p: Post) {
 
 }
 
-function DraftComponent(d: Draft) {
+function DraftComponent(d: FeedItem) {
 
 }
 

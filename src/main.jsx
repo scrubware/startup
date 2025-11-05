@@ -21,8 +21,9 @@ export default function App() {
 
   const blurbs = [
     ["the worst app since twitter"],
-    ["at least we're not reddit"],
-    ["somehow more political than bluesky"]
+    ["like reddit for people with hygiene and social skills"],
+    //["incels WILL be shadowbanned"]
+    //[""]
   ]
 
   const feed = []

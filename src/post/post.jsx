@@ -1,7 +1,7 @@
 import React, { useState} from 'react';
 import '../main.css';
 
-import { Post, User } from "../objects"
+import { Post, User } from "../../shared/models"
 
 function PostFactory(text, account) {
   return {

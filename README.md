@@ -70,16 +70,17 @@ I am going to use the required technologies in the following ways.
 
 ## 🚀 React part 1: Routing deliverable
 
-- [x] **Bundled using Vite** - Used Vite to import critical components including React, React Router, and Tailwind CSS.
+- [x] **Bundled using Vite** - Used Vite to import critical components, including React, React Router, and Tailwind CSS.
 - [x] **Components** - Decomposed each main page into a React component, and additionally decomposed posts and advertisements into their own components as well.
 - [x] **Router** - Used the React Router to dynamically load main page content into a single index.html file.
 
 ## 🚀 React part 2: Reactivity deliverable
 
-For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
+This section is admittedly scrappy at the moment, since this app is more intertwined than Simon.
+Still, I managed to implement a minimum-case level of interactivity for now.
 
-- [ ] **All functionality implemented or mocked out** - I did not complete this part of the deliverable.
-- [ ] **Hooks** - I did not complete this part of the deliverable.
+- [x] **All functionality implemented or mocked out** - All code that needed to be used more than once was encapsulated into reusable React components, as well as large domains of the project like each page. Some concepts in the app were also abstracted into TypeScript classes for a purer data representation.
+- [x] **Hooks** - Hooks were used heavily in the implementation of all interactive components.
 
 ## 🚀 Service deliverable
 

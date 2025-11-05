@@ -12,9 +12,9 @@ class UserDataCommon {
 }
 
 export class User extends UserDataCommon {
-    password: string;
     phoneNumber: string;
-    email: string;
+    password: string;
+    email: string | null;
 
     constructor(username: string) {
         super();

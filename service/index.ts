@@ -28,6 +28,7 @@ let dao: DAO = new MemoryDAO();
 
 api.post('/user/register', async (req, res) => {
   let request: RegisterRequest = req.body;
+  console.log(request)
   if (await dao.getUser(request.username)) {
     res.status(409).send({ msg: 'Existing user' });
   } else {

@@ -8,7 +8,7 @@ export class MemoryDAO implements DAO {
 
     // User
     async createUser(username:string, password:string, phoneNumber:string): Promise<User> {
-        let user: User = new User(username, password, null, new Date())
+        let user: User = new User(username, password, phoneNumber, new Date())
         this.users.push(user);
         return user;
     }

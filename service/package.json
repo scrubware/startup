@@ -8,14 +8,16 @@
   },
   "keywords": [],
   "author": "scrubware",
-  "type": "commonjs",
+  "type": "module",
   "dependencies": {
-    "bcryptjs": "^3.0.3",
+    "bcrypt-ts": "^7.1.0",
     "cookie-parser": "^1.4.7",
     "express": "^5.1.0",
     "uuid": "^13.0.0"
   },
   "devDependencies": {
-    "@types/node": "^24.10.0"
+    "@types/node": "^24.10.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
   }
 }

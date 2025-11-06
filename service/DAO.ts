@@ -1,5 +1,5 @@
 
-import { User } from "../shared/models"
+import { User } from "../shared/models.ts"
 
 export type AuthToken = String;
 

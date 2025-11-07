@@ -1,9 +1,11 @@
 
-import type { DAO, AuthToken } from "./DAO.ts"
+import { v4 as uuid } from 'uuid';
+import type { DAO, AuthToken, AuthData } from "./DAO.ts"
 import { User, FeedItem  } from "../shared/models.ts"
 
 export class MemoryDAO implements DAO {
     users: User[] = []
+    auths: AuthData[] = []
     posts: FeedItem[] = []
 
     // User
@@ -24,13 +26,30 @@ export class MemoryDAO implements DAO {
 
 
     // Auth
-    async createAuth(username:string, password:string): Promise<AuthToken> {
-        throw new Error("Method not implemented.")
+    async createAuth(username:string, password:string): Promise<AuthData> {
+        let auth: AuthData = {username, authToken: uuid()}
+        this.auths.push(auth);
+        return auth;
     }
     async authIsValid(authToken: AuthToken): Promise<boolean> {
-        throw new Error("Method not implemented.")
+        this.auths.forEach((authData) => {
+            if (authData.authToken == authToken) {
+                return true;
+            }
+        })
+        return false;
     }
-    deleteAuth(authToken: AuthToken): void {
-        throw new Error("Method not implemented.")
+    async deleteAuth(authToken: AuthToken): Promise<void> {
+        for (let i = this.auths.length - 1; i >= 0; i--) {
+            if (this.auths[i].authToken == authToken) {
+                this.auths.splice(i, 1);
+                break;
+            }
+        }
     }
+
+    // Posts
+
+
+    // Feed
 }

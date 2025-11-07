@@ -1,12 +1,11 @@
 import cookieParser from 'cookie-parser';
 import { genSaltSync, hashSync } from 'bcrypt-ts';
 import express from 'express';
-import { v4 as uuid } from 'uuid';
 
 
 const app = express();
 
-import type { DAO, LoginRequest, RegisterRequest } from "./DAO.ts"
+import type { DAO, LoginRequest, RegisterRequest, AuthData, AuthToken } from "./DAO.ts"
 
 import { User } from "../shared/models.ts"
 import { MemoryDAO } from "./memoryDAO.ts" 
@@ -33,8 +32,8 @@ api.post('/user/register', async (req, res) => {
     res.status(409).send({ msg: 'Existing user' });
   } else {
     const user: User = await dao.createUser(request.username, request.password, request.phoneNumber);
-    console.log(user);
-    res.status(200).send(JSON.stringify(user));
+    const auth: AuthData = await dao.createAuth(request.username,request.password);
+    res.status(200).send(JSON.stringify(auth));
   }
 });
 

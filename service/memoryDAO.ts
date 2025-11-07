@@ -15,13 +15,8 @@ export class MemoryDAO implements DAO {
         return user;
     }
 
-    async getUser(username: string): Promise<User | null> {
-        this.users.forEach((user) => {
-            if (user.username == username) {
-                return user;
-            }
-        })
-        return null;
+    async getUser(username: string): Promise<User> {
+        return this.users.find(user => user.username == username) || null;
     }
 
 

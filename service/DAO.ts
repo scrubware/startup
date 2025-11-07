@@ -29,8 +29,7 @@ export interface LoginRequest {
 }
 
 export interface LogoutRequest {
-    readonly username: string;
-    readonly token;
+    readonly authToken: AuthToken;
 }
 
 export interface GetProfileRequest {

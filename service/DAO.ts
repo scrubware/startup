@@ -1,5 +1,5 @@
 
-import { User } from "../shared/models.ts"
+import { User } from "./models.js"
 
 export type AuthToken = String;
 
@@ -10,7 +10,8 @@ export interface AuthData {
 
 export interface DAO {
     createUser(username: string, password: string, phoneNumber: string): Promise<User>;
-    getUser(username: string): Promise<User | null>;
+    getUser(username: string): Promise<User>;
+    passwordIsCorrect(username: string, password: string) : Promise<boolean>;
 
     createAuth(username: string, password: string): Promise<AuthData>;
     authIsValid(authToken: AuthToken): Promise<boolean>;

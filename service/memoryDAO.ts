@@ -1,7 +1,10 @@
 
+
+import type { DAO, AuthToken, AuthData } from "./DAO.js"
+import { User, FeedItem  } from "./models.js"
+
 import { v4 as uuid } from 'uuid';
-import type { DAO, AuthToken, AuthData } from "./DAO.ts"
-import { User, FeedItem  } from "../shared/models.ts"
+import { hash, compare } from 'bcrypt-ts';
 
 export class MemoryDAO implements DAO {
     users: User[] = []
@@ -10,6 +13,7 @@ export class MemoryDAO implements DAO {
 
     // User
     async createUser(username:string, password:string, phoneNumber:string): Promise<User> {
+        const passwordHash = await hash(password, 10);
         let user: User = new User(username, password, phoneNumber, new Date())
         this.users.push(user);
         return user;
@@ -19,9 +23,13 @@ export class MemoryDAO implements DAO {
         return this.users.find(user => user.username == username) || null;
     }
 
+    async passwordIsCorrect(username: string, password: string): Promise<boolean> {
+        return await compare(password,(await this.getUser(username)).password)
+    }
+
 
     // Auth
-    async createAuth(username:string, password:string): Promise<AuthData> {
+    async createAuth(username:string): Promise<AuthData> {
         let auth: AuthData = {username, authToken: uuid()}
         this.auths.push(auth);
         return auth;

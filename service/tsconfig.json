@@ -3,7 +3,6 @@
     "types": ["node"],
     "module": "esnext",
     "moduleResolution": "node",
-    "allowImportingTsExtensions": true,
-    "noEmit": true
+    "outDir": "build",
   }
 }

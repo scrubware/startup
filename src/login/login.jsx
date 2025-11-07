@@ -7,7 +7,7 @@ import { Input, InputSecure, Button, Subtext, textColor, buttonColor, inputColor
 
 import { AuthState } from './auth'
 
-import { RegisterRequest } from '.../service/api.js'
+import { RegisterRequest } from '../../shared/api.js'
 
 
 export function LoginPage({registrationProgress, changeRegistrationProgress, username, changeUsername, displayName, changeDisplayName,authStateFunction}) {

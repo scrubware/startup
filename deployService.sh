@@ -26,8 +26,8 @@ cp -rf dist build/public # move the React front end to the target distribution
 cd service
 npx tsc
 cd ..
-cp service/build/*.js build
-cp service/build/*.json build
+cp -r service/build/service build
+cp -r service/build/shared build
 cp service/package.json build
 
 

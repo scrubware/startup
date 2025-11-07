@@ -4,17 +4,18 @@ import express from 'express';
 
 const app = express();
 
+import { join, dirname } from "path"
+import { fileURLToPath } from 'url'
 import { DAO } from "./DAO.js"
 import { LoginRequest, RegisterRequest, AuthData, AuthToken, LogoutRequest } from "../shared/api.js"
 
-import { User } from "../shared/models.js"
 import { MemoryDAO } from "./memoryDAO.js" 
 
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
 app.use(express.json());                // JSON parsing middleware (for converting requests)
 app.use(cookieParser());                // Cookie parsing middleware (for auth)
-app.use(express.static('./public'));    // Static page middleware
+app.use(express.static(join(dirname(fileURLToPath(import.meta.url)), '../public')));    // Static page middleware
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);

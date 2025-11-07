@@ -1,7 +1,8 @@
 
 
-import type { DAO, AuthToken, AuthData } from "./DAO.js"
-import { User, FeedItem  } from "./models.js"
+import type { DAO } from "./DAO.js"
+import { AuthData, AuthToken } from '../shared/api.js'
+import { User, FeedItem  } from "../shared/models.js"
 
 import { v4 as uuid } from 'uuid';
 import { hash, compare } from 'bcrypt-ts';

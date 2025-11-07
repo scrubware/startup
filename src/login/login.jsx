@@ -7,6 +7,8 @@ import { Input, InputSecure, Button, Subtext, textColor, buttonColor, inputColor
 
 import { AuthState } from './auth'
 
+import { RegisterRequest } from '.../service/api.js'
+
 
 export function LoginPage({registrationProgress, changeRegistrationProgress, username, changeUsername, displayName, changeDisplayName,authStateFunction}) {
 
@@ -27,6 +29,17 @@ export function LoginPage({registrationProgress, changeRegistrationProgress, use
 
   const validUsernameRegex = /^[a-zA-Z0-9-]+$/;
   const validPasswordLength = 8;
+
+  const register = async () => {
+    const result = await fetch('api/user/register', {
+      method: 'post',
+      body: JSON.stringify(new RegisterRequest()),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+    })
+    changeRegistrationProgress(3)
+  }
 
   function Login() {
     let quit_early = false
@@ -49,7 +62,7 @@ export function LoginPage({registrationProgress, changeRegistrationProgress, use
       quit_early = true
     }
 
-    // authStateFunction(AuthState.AUTHORIZED)
+    authStateFunction(AuthState.AUTHORIZED)
 
 
 
@@ -131,9 +144,6 @@ export function LoginPage({registrationProgress, changeRegistrationProgress, use
             <Button onClick={Register} color={buttonColor.lime}>create account</Button>
 
             <Subtext color={textColor.pink} text={loginErrorMessage}/>
-
-            <p className="w-1/3 text-gray-600 italic text-center mt-10">note: react p2 implementation uses global state instead of localstorage for the time being</p>
-            <p className="w-1/3 text-gray-600 italic text-center mt-10">this means state will reset upon refresh</p>
           </>}
 
           {registrationProgress == 1 && <>
@@ -161,7 +171,7 @@ export function LoginPage({registrationProgress, changeRegistrationProgress, use
 
             <Button 
               color={buttonColor.lime} 
-              onClick={() => {changeRegistrationProgress(3); authStateFunction(AuthState.AUTHORIZED)}}
+              onClick={register}
               disabled={!(agreementOne && agreementTwo && agreementThree)}
             >continue</Button>
           </>}

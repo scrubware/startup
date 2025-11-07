@@ -4,9 +4,10 @@ import express from 'express';
 
 const app = express();
 
-import type { DAO, LoginRequest, RegisterRequest, AuthData, AuthToken, LogoutRequest } from "./DAO.js"
+import { DAO } from "./DAO.js"
+import { LoginRequest, RegisterRequest, AuthData, AuthToken, LogoutRequest } from "../shared/api.js"
 
-import { User } from "./models.js"
+import { User } from "../shared/models.js"
 import { MemoryDAO } from "./memoryDAO.js" 
 
 const port = process.argv.length > 2 ? process.argv[2] : 4000;

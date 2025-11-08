@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import '../main.css';
 
-import { NavLink, useNavigate } from 'react-router-dom';
+// import { NavLink, useNavigate } from 'react-router-dom';
 import { RegistrationProgress } from './registrationProgress';
 import { Input, InputSecure, Button, Subtext, textColor, buttonColor, inputColor, LabelledBox } from './input'
 
 import { AuthState } from './auth'
 
-import { RegisterRequest } from '../../shared/api.js'
+import { RegisterRequest, RegisterResult } from '../../shared/api.js'
+import * as React from 'react';
 
 
 export function LoginPage({registrationProgress, changeRegistrationProgress, username, changeUsername, displayName, changeDisplayName,authStateFunction}) {
@@ -31,13 +32,16 @@ export function LoginPage({registrationProgress, changeRegistrationProgress, use
   const validPasswordLength = 8;
 
   const register = async () => {
-    const result = await fetch('api/user/register', {
+    const response = await fetch('api/user/register', {
       method: 'post',
-      body: JSON.stringify(new RegisterRequest()),
+      body: JSON.stringify(new RegisterRequest(username,password,displayName)),
       headers: {
         'Content-type': 'application/json; charset=UTF-8',
       },
     })
+    const status = response.status;
+    const result: RegisterResult = await response.json();
+    console.log(result)
     changeRegistrationProgress(3)
   }
 
@@ -156,7 +160,7 @@ export function LoginPage({registrationProgress, changeRegistrationProgress, use
             <Button color={buttonColor.lime} onClick={() => {
               if (!displayName) {
                 changeDisplayNameInputColor(inputColor.pink)
-                changeDisplayNameSubtext(<span className="text-pink-60">alright well it can't be blank</span>)
+                changeDisplayNameSubtext("alright well it can't be blank")
               } else {
                 changeRegistrationProgress(2)
               }

@@ -51,7 +51,8 @@ npm install
 pm2 restart ${service}
 ENDSSH
 
-# # Step 5
-# printf "\n----> Removing local copy of the distribution package\n"
-# rm -rf build
-# rm -rf dist
+# Step 5
+printf "\n----> Removing local copy of the distribution package\n"
+rm -rf build
+rm -rf dist
+rm -rf service/build

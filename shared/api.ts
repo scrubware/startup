@@ -11,18 +11,31 @@ export class AuthData {
     }
 }
 
+// POST api/user/register
 export class RegisterRequest {
     readonly username: string;
     readonly password: string;
-    readonly phoneNumber: string;
+    readonly displayName: string;
 
-    constructor (username: string, password: string, phoneNumber: string) {
+    // Full version
+    // - phone number
+    // - email (optional)
+
+    constructor (username: string, password: string, displayName: string) {
         this.username = username;
         this.password = password;
-        this.phoneNumber = phoneNumber;
+        this.displayName = displayName;
+    }
+}
+export class RegisterResult {
+    readonly authToken: AuthToken;
+
+    constructor (authToken: AuthToken) {
+        this.authToken = authToken;
     }
 }
 
+// POST api/user/login
 export class LoginRequest {
     readonly username: string;
     readonly password: string;
@@ -32,13 +45,24 @@ export class LoginRequest {
         this.password = password;
     }
 }
+export class LoginResult {
+    readonly authToken: AuthToken;
 
+    constructor (authToken: AuthToken) {
+        this.authToken = authToken;
+    }
+}
+
+// DELETE api/user/logout
 export class LogoutRequest {
     readonly authToken: AuthToken;
 
     constructor (authToken: AuthToken) {
         this.authToken = authToken;
     }
+}
+export class LogoutResult {
+
 }
 
 export class GetProfileRequest {

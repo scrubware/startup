@@ -32,7 +32,7 @@ api.post('/user/register', async (req, res) => {
     res.status(409).send({ msg: 'Existing user' });
     console.log("attempted re-registering: " + request.username)
   } else {
-    await dao.createUser(request.username, request.password, request.phoneNumber);
+    await dao.createUser(request.username, request.password, request.displayName);
     const auth: AuthData = await dao.createAuth(request.username,request.password);
     
     res.status(200).send(JSON.stringify(auth));

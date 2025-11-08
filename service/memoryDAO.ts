@@ -13,9 +13,9 @@ export class MemoryDAO implements DAO {
     posts: FeedItem[] = []
 
     // User
-    async createUser(username:string, password:string, phoneNumber:string): Promise<User> {
+    async createUser(username:string, password:string, displayName:string): Promise<User> {
         const passwordHash = await hash(password, 10);
-        let user: User = new User(username, password, phoneNumber, new Date())
+        let user: User = new User(username, password, displayName, new Date())
         this.users.push(user);
         return user;
     }

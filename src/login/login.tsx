@@ -7,7 +7,7 @@ import { Input, InputSecure, Button, Subtext, textColor, buttonColor, inputColor
 
 import { AuthState } from './auth'
 
-import { RegisterRequest, RegisterResult } from '../../shared/api.js'
+import { LoginRequest, LoginResult, RegisterRequest, RegisterResult } from '../../shared/api.js'
 import * as React from 'react';
 
 
@@ -40,12 +40,20 @@ export function LoginPage({registrationProgress, changeRegistrationProgress, use
       },
     })
     const status = response.status;
-    const result: RegisterResult = await response.json();
-    console.log(result)
-    changeRegistrationProgress(3)
+    if (status == 200) {
+      const result: RegisterResult = await response.json();
+      console.log(result)
+      changeRegistrationProgress(3)
+      authStateFunction(AuthState.AUTHORIZED)
+    }
   }
 
-  function Login() {
+
+  
+
+  async function Login() {
+    // We're using a flag here in case the user 
+    // has forgotten multiple credentials
     let quit_early = false
     if (!username) {
       changeUsernameInputColor(inputColor.pink)
@@ -60,20 +68,31 @@ export function LoginPage({registrationProgress, changeRegistrationProgress, use
 
     if (quit_early) return
 
-    if (true) {
+    // Fetch
+    const response = await fetch('api/user/login', {
+      method: 'post',
+      body: JSON.stringify(new LoginRequest(username,password)),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+    })
+
+    // Do stuff
+    const status = response.status;
+    if (status == 200) {
+      const result: LoginResult = await response.json();
+      console.log(result)
+      changeRegistrationProgress(3)
+      authStateFunction(AuthState.AUTHORIZED)
+    } else {
       changeUsernameInputColor(inputColor.pink)
       changeLoginErrorMessage('user not registerd!')
       quit_early = true
     }
-
-    authStateFunction(AuthState.AUTHORIZED)
-
-
-
-    // const navigate = useNavigate();
-
-    // navigate("/feed")
   }
+
+
+
 
   function Register() {
     let quit_early = false

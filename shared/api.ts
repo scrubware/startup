@@ -27,31 +27,19 @@ export class RegisterRequest {
         this.displayName = displayName;
     }
 }
-export class RegisterResult {
-    readonly authToken: AuthToken;
-
-    constructor (authToken: AuthToken) {
-        this.authToken = authToken;
-    }
-}
+export class RegisterResult extends AuthData {}
 
 // POST api/user/login
 export class LoginRequest {
     readonly username: string;
     readonly password: string;
 
-    constructor (username: string, password: string, phoneNumber: string) {
+    constructor (username: string, password: string) {
         this.username = username;
         this.password = password;
     }
 }
-export class LoginResult {
-    readonly authToken: AuthToken;
-
-    constructor (authToken: AuthToken) {
-        this.authToken = authToken;
-    }
-}
+export class LoginResult extends AuthData {}
 
 // DELETE api/user/logout
 export class LogoutRequest {

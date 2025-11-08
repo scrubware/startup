@@ -1,3 +1,4 @@
+import * as React from "react";
 
 type RegistrationProgressProps = { progress: 0 | 1 | 2 | 3 };
 

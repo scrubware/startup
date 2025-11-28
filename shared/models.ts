@@ -14,7 +14,14 @@ export class Profile {
         this.profileName = profileName;
         this.dateJoined = dateJoined;
     }
+}
 
+export function asProfile(x: Profile): Profile {
+    return {
+        username: x.username,
+        profileName: x.profileName,
+        dateJoined:x.dateJoined
+    };
 }
 
 export class User extends Profile {

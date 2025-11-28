@@ -10,7 +10,7 @@ function PostFactory(text, account) {
   }
 }
 
-export function PostPage({username, feed}) {
+export function MakePage({username, feed}) {
 
   const [postContent, changePostContent] = useState('')
 

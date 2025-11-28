@@ -4,8 +4,8 @@ import './main.css';
 
 import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 import { LoginPage } from './login/login';
-import { AccountPage } from './account/account';
-import { PostPage } from './post/post';
+import { ProfilePage } from './profile/profile';
+import { MakePage } from './make/make';
 import { FeedPage } from './feed/feed';
 
 import { AuthState } from './login/auth' 
@@ -77,8 +77,8 @@ export default function App() {
       <main className="grow mt-14 sm:mt-18 dark:text-yellow-60 flex justify-center items-center">
         <Routes>
           <Route path='/' element={<LoginPage registrationProgress={registrationProgress} changeRegistrationProgress={changeRegistrationProgress} username={username} changeUsername={changeUsername} displayName={displayName} changeDisplayName={changeDisplayName} authStateFunction={changeAuthState} />} />
-          <Route path='/account' element={<AccountPage feed={feed} username={username} displayName={displayName} changeDisplayName={changeDisplayName} />} />
-          <Route path='/post' element={<PostPage username={username} feed={feed} />} />
+          <Route path='/account' element={<ProfilePage feed={feed} username={username} displayName={displayName} changeDisplayName={changeDisplayName} />} />
+          <Route path='/post' element={<MakePage username={username} feed={feed} />} />
           <Route path='/feed' element={<FeedPage feed={feed} />} />
           <Route path='*' element={<NotFound />} />
         </Routes>

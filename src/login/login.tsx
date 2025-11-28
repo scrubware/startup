@@ -5,9 +5,7 @@ import '../main.css';
 import { RegistrationProgress } from './registrationProgress';
 import { Input, InputSecure, Button, Subtext, textColor, buttonColor, inputColor, LabelledBox } from './input'
 
-import { AuthState } from './auth'
-
-import { LoginRequest, LoginResult, RegisterRequest, RegisterResult } from '../../shared/api.js'
+import { LoginRequest, LoginResult, RegisterRequest, RegisterResult, AuthState } from '../../shared/api.js'
 import * as React from 'react';
 
 
@@ -49,7 +47,7 @@ export function LoginPage({registrationProgress, changeRegistrationProgress, use
   }
 
 
-  
+
 
   async function Login() {
     // We're using a flag here in case the user 

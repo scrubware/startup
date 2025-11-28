@@ -1,4 +1,6 @@
 
+import { FeedItem } from './models.js'
+
 export type AuthToken = String;
 
 export class AuthData {
@@ -10,6 +12,17 @@ export class AuthData {
         this.authToken = authToken;
     }
 }
+
+export const AuthState = {
+    AUTHORIZED: "authorized",
+    UNAUTHORIZED: "unauthorized",
+}
+
+
+
+
+
+// ########## api/user
 
 // POST api/user/register
 export class RegisterRequest {
@@ -53,10 +66,36 @@ export class LogoutResult {
 
 }
 
-export class GetProfileRequest {
-    readonly username: string;
 
-    constructor(username: string) {
-        this.username = username;
+
+
+
+
+// ########## api/content
+
+// GET api/content/profile
+export class GetProfileRequest {
+    readonly fetchUsername: string;
+    readonly authData: AuthData;
+
+    constructor(fetchUsername: string, authData: AuthData) {
+        this.fetchUsername = fetchUsername;
+        this.authData = authData;
     }
+}
+
+// GET api/content/feed
+export class GetFeedRequest extends AuthData {}
+export class GetFeedResult {
+    feedItems: FeedItem[];
+}
+
+// POST api/content/make
+export class SubmitMakeRequest {
+
+}
+
+// DELETE api/content/remove
+export class RemovePostRequest {
+
 }

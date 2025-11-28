@@ -13,11 +13,6 @@ export class AuthData {
     }
 }
 
-export const AuthState = {
-    AUTHORIZED: "authorized",
-    UNAUTHORIZED: "unauthorized",
-}
-
 
 
 

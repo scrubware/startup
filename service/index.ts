@@ -61,8 +61,9 @@ api.post('/user/register', async (req, res) => {
   } else {
     await dao.createUser(request.username, request.password, request.displayName);
     const auth: RegisterResult = await dao.createAuth(request.username,request.password);
-    res.status(200).send(JSON.stringify(auth));
     setAuthData(res,auth)
+    res.status(200).send(JSON.stringify(auth));
+    
     console.log("user registered: " + request.username)
   }
 });
@@ -72,8 +73,8 @@ api.post('/user/login', async (req, res) => {
   if (await dao.getUser(request.username) != null) {
     if (await dao.passwordIsCorrect(request.username,request.password)) {
       const auth: LoginResult = await dao.createAuth(request.username, request.password)
-      res.status(200).send(JSON.stringify(auth))
       setAuthData(res,auth)
+      res.status(200).send(JSON.stringify(auth))
       console.log("logged in: " + request.username)
     } else {
       res.status(400).send({ msg: 'incorrect password' })

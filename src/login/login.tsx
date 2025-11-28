@@ -5,11 +5,11 @@ import '../main.css';
 import { RegistrationProgress } from './registrationProgress';
 import { Input, InputSecure, Button, Subtext, textColor, buttonColor, inputColor, LabelledBox } from './input'
 
-import { LoginRequest, LoginResult, RegisterRequest, RegisterResult, AuthState } from '../../shared/api.js'
+import { LoginRequest, LoginResult, RegisterRequest, RegisterResult } from '../../shared/api.js'
 import * as React from 'react';
 
 
-export function LoginPage({registrationProgress, changeRegistrationProgress, username, changeUsername, displayName, changeDisplayName,authStateFunction}) {
+export function LoginPage({registrationProgress, changeRegistrationProgress, username, changeUsername, displayName, changeDisplayName, authStateFunction}) {
 
   // We use 'useState' so that components are automatically re-rendered on change.
   // Otherwise, components would stay static.
@@ -42,7 +42,7 @@ export function LoginPage({registrationProgress, changeRegistrationProgress, use
       const result: RegisterResult = await response.json();
       console.log(result)
       changeRegistrationProgress(3)
-      authStateFunction(AuthState.AUTHORIZED)
+      authStateFunction(true)
     }
   }
 
@@ -81,7 +81,7 @@ export function LoginPage({registrationProgress, changeRegistrationProgress, use
       const result: LoginResult = await response.json();
       console.log(result)
       changeRegistrationProgress(3)
-      authStateFunction(AuthState.AUTHORIZED)
+      authStateFunction(true)
     } else {
       changeUsernameInputColor(inputColor.pink)
       changeLoginErrorMessage('user not registerd!')

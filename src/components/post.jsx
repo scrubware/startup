@@ -86,11 +86,11 @@ export function OwnedPostFactory(post) {
         <div className="grow">
           <div className="flex">
               <img className="rounded-full w-[6mm] h-[6mm] mr-1" src="giamatti.jpg" alt="account icon"/>
-              <p>{post.username} <NavLink to="/account" className="dark:text-lime-60 dark:hover:text-white">(you)</NavLink> <span className="dark:text-gray-600">@ {new Date(Date.parse(post.date)).toLocaleTimeString(undefined, { timeStyle: "short" })}</span></p>
+              <p>{post.username} <span className="dark:text-gray-600">@ {new Date(Date.parse(post.date)).toLocaleTimeString(undefined, { timeStyle: "short" })}</span></p>
           </div>
           <p>{post.text}</p>
         </div>
-        <p className="text-yellow-95 m-3 text-2xl">0</p>
+        {/* <p className="text-yellow-95 m-3 text-2xl">0</p> */}
         {/* <div className="flex flex-col w-1/6 justify-center mr-2">
             <button className="text-xs bg-yellow-45/30 hover:bg-yellow-60 hover:border-yellow-60 hover:text-black rounded-full w-full h-[6mm] m-0.5 pl-2 pr-2 p-0 pb-0.5">private</button>
             <button className="text-xs bg-lime-45/30 text-lime-60 hover:bg-lime-60 hover:border-lime-60 hover:text-black rounded-full w-full h-[6mm] m-0.5 pl-2 pr-2 p-0 pb-0.5">delete</button>

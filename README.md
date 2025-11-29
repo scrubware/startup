@@ -84,14 +84,12 @@ Still, I managed to implement a minimum-case level of interactivity for now.
 
 ## 🚀 Service deliverable
 
-For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
-
-- [ ] **Node.js/Express HTTP service** - I did not complete this part of the deliverable.
-- [ ] **Static middleware for frontend** - I did not complete this part of the deliverable.
-- [ ] **Calls to third party endpoints** - I did not complete this part of the deliverable.
-- [ ] **Backend service endpoints** - I did not complete this part of the deliverable.
-- [ ] **Frontend calls service endpoints** - I did not complete this part of the deliverable.
-- [ ] **Supports registration, login, logout, and restricted endpoint** - I did not complete this part of the deliverable.
+- [x] **Node.js/Express HTTP service** - The service is implemented with Node.js and Express HTTP. 
+- [x] **Static middleware for frontend** - Static files are served from the public folder.
+- [x] **Calls to third party endpoints** - If there are no posts in the feed, an image of a random cat with a notification to the user will be placed in the feed. Third-party endpoint provided by cataas.com. Click "Zinger" in the top left to refresh the cat. Click "clear feed" in the bottom right to clear the feed if you have added posts.
+- [x] **Backend service endpoints** - Endpoints are implemented server-side for login, register, logout, making posts, and getting the feed.
+- [x] **Frontend calls service endpoints** - Server endpoints are called via HTTP requests for login, register, logout, making posts, and getting the feed.
+- [x] **Supports registration, login, logout, and restricted endpoint** - Login, Register, Logout, Posting to the Feed, and Viewing the Feed are all supported. Clearing the feed is supported for the purpose of testing the service, but will not be in the final application.
 
 
 ## 🚀 DB deliverable

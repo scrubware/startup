@@ -7,7 +7,7 @@ const app = express();
 import { join, dirname } from "path"
 import { fileURLToPath } from 'url'
 import { DAO } from "./DAO.js"
-import { LoginRequest, RegisterRequest, AuthData, AuthToken, LogoutRequest, RegisterResult, LoginResult, GetProfileRequest, LoginFailureWrongPassword, LoginFailureWrongUsername, AvailableRequest, AvailableResult } from "../shared/api.js"
+import { LoginRequest, RegisterRequest, AuthData, AuthToken, LogoutRequest, RegisterResult, LoginResult, GetProfileRequest, LoginFailureWrongPassword, LoginFailureWrongUsername, AvailableRequest, AvailableResult, GetFeedRequest, MakeFeedItemRequest } from "../shared/api.js"
 import { Profile, asProfile } from "../shared/models.js"
 
 import { MemoryDAO } from "./memoryDAO.js" 
@@ -128,14 +128,29 @@ const verifyAuth = async (req, res, next) => {
 
 // ########### api/content
 
-api.get('content/profile', verifyAuth, async (req, res) => {
+api.get('/content/profile', verifyAuth, async (req, res) => {
   
   let request: GetProfileRequest = req.body;
-  if (!await dao.authIsValid(getAuthData(req).authToken)) {
-    res.status(401);
-    return;
-  }
 
   let profile: Profile = asProfile(await dao.getUser(request.fetchUsername));
   res.status(200).send(JSON.stringify(profile));
 });
+
+api.get('/content/feed', verifyAuth, async (req, res) => {
+  let request: GetFeedRequest = req.body;
+
+})
+
+api.post('/content/make', verifyAuth, async (req, res) => {
+
+  console.log("posted make")
+
+  let request: MakeFeedItemRequest = req.body;
+  let success: boolean = await dao.createPost(request.feedItem);
+
+  if (success) {
+    res.status(200).send();
+  } else {
+    res.status(500).send();
+  }
+})

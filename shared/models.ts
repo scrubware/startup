@@ -38,18 +38,18 @@ export class User extends Profile {
 
 export class FeedItem {
     text: string;
-    profile: Profile;
+    username: string;
 
-    constructor(text: string, profile: Profile) {
+    constructor(text: string, username: string) {
         this.text = text;
-        this.profile = profile;
+        this.username = username;
     }
 }
 
 export class Post extends FeedItem {
   date: Date;
-  constructor(text: string, profile: Profile) {
-    super(text,profile)
+  constructor(text: string, username: string) {
+    super(text,username)
     this.date = new Date();
   }
 }

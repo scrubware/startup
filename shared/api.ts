@@ -93,15 +93,22 @@ export class GetProfileRequest {
 }
 
 // GET api/content/feed
-export class GetFeedRequest extends AuthData {}
+export class GetFeedRequest {}
 export class GetFeedResult {
     feedItems: FeedItem[];
 }
 
 // POST api/content/make
-export class SubmitMakeRequest {
+export class MakeFeedItemRequest {
+    readonly feedItem: FeedItem;
 
+    constructor(feedItem: FeedItem) {
+        this.feedItem = feedItem
+    }
 }
+export class MakeFeedItemResult {}
+
+
 
 // DELETE api/content/remove
 export class RemovePostRequest {

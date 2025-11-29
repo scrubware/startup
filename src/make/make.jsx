@@ -2,6 +2,8 @@ import React, { useState} from 'react';
 import '../main.css';
 
 import { Post, User } from "../../shared/models.js"
+import { MakeFeedItemRequest } from '../../shared/api.js';
+import { useNavigate } from "react-router-dom";
 
 function PostFactory(text, account) {
   return {
@@ -12,11 +14,32 @@ function PostFactory(text, account) {
 
 export function MakePage({username, feed}) {
 
+  const navigate = useNavigate();
+
   const [postContent, changePostContent] = useState('')
 
-  function CreatePost() {
-    feed.push(new Post(postContent, new User(username)))
-  }
+  async function CreatePost() {
+    //feed.push(new Post(postContent, new User(username)))
+
+    console.log("sending!")
+
+    const response = await fetch('api/content/make', {
+      method: 'post',
+      body: JSON.stringify(new MakeFeedItemRequest(new Post(postContent, username))),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+    })
+
+    console.log("post")
+
+    if (response.status == 200) {
+      console.log("trying")
+      navigate("/feed")
+    } else {
+      navigate("/feed")
+    }
+}
 
   function CreateDraft() {
     

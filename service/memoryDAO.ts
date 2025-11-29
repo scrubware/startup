@@ -12,6 +12,8 @@ export class MemoryDAO implements DAO {
     auths: AuthData[] = []
     posts: FeedItem[] = []
 
+
+
     // User
     async createUser(username:string, password:string, displayName:string): Promise<User> {
         const passwordHash = await hash(password, 10);
@@ -29,8 +31,9 @@ export class MemoryDAO implements DAO {
     }
 
 
+
     // Auth
-    async createAuth(username:string): Promise<AuthData> {
+    async createAuth(username: string): Promise<AuthData> {
         let auth: AuthData = {username, authToken: uuid()}
         this.auths.push(auth);
         return auth;
@@ -58,7 +61,13 @@ export class MemoryDAO implements DAO {
         return this.auths;
     }
 
+
+
     // Posts
+    async createPost(feedItem: FeedItem): Promise<boolean> {
+        this.posts.push(feedItem)
+        return true;
+    }
 
 
     // Feed

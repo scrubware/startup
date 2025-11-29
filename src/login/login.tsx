@@ -8,8 +8,12 @@ import { Input, InputSecure, Button, Subtext, textColor, buttonColor, inputColor
 import { LoginFailureWrongPassword, LoginRequest, LoginResult, RegisterRequest, RegisterResult, LoginFailure, LoginFailureWrongUsername, AvailableRequest, AvailableResult } from '../../shared/api.js'
 import * as React from 'react';
 
+import { useNavigate } from "react-router-dom";
+
 
 export function LoginPage({registrationProgress, changeRegistrationProgress, username, changeUsername, displayName, changeDisplayName, authStateFunction}) {
+
+  const navigate = useNavigate()
 
   // We use 'useState' so that components are automatically re-rendered on change.
   // Otherwise, components would stay static.
@@ -84,8 +88,9 @@ export function LoginPage({registrationProgress, changeRegistrationProgress, use
     if (status == 200) {
       const result: LoginResult = await response.json();
       console.log(result)
-      changeRegistrationProgress(3)
       authStateFunction(true)
+      navigate("/feed")
+    
     } else {
       const result: LoginFailure = await response.json();
 

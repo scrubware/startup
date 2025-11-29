@@ -18,6 +18,7 @@ export interface DAO {
     // Posts
     createPost(feedItem: FeedItem): Promise<boolean>;
 
-    // 
+    // Feed
+    getFeed(): Promise<Array<FeedItem>>
 }
 

@@ -8,7 +8,7 @@ import { join, dirname } from "path"
 import { fileURLToPath } from 'url'
 import { DAO } from "./DAO.js"
 import { LoginRequest, RegisterRequest, AuthData, AuthToken, LogoutRequest, RegisterResult, LoginResult, GetProfileRequest, LoginFailureWrongPassword, LoginFailureWrongUsername, AvailableRequest, AvailableResult, GetFeedRequest, MakeFeedItemRequest } from "../shared/api.js"
-import { Profile, asProfile } from "../shared/models.js"
+import { FeedItem, Profile, asProfile } from "../shared/models.js"
 
 import { MemoryDAO } from "./memoryDAO.js" 
 
@@ -138,7 +138,11 @@ api.get('/content/profile', verifyAuth, async (req, res) => {
 
 api.get('/content/feed', verifyAuth, async (req, res) => {
   let request: GetFeedRequest = req.body;
+  let feed: Array<FeedItem> = await dao.getFeed();
 
+  console.log(feed)
+
+  res.status(200).send(JSON.stringify(feed));
 })
 
 api.post('/content/make', verifyAuth, async (req, res) => {

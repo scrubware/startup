@@ -59,6 +59,7 @@ export function Post() {
 }
 
 export function OwnedPost() {
+
   return (
     <div className="flex border-1 rounded-lg p-2 items-center">
         <div>
@@ -78,13 +79,14 @@ export function OwnedPost() {
 }
 
 export function OwnedPostFactory(post) {
+
   return (<>
     <div className="flex border-1 rounded-lg p-2 items-center">
 
         <div className="grow">
           <div className="flex">
               <img className="rounded-full w-[6mm] h-[6mm] mr-1" src="giamatti.jpg" alt="account icon"/>
-              <p>{post.user.username} <NavLink to="/account" className="dark:text-lime-60 dark:hover:text-white">(you)</NavLink> <span className="dark:text-gray-600">@ {post.date.toLocaleTimeString(undefined, { timeStyle: "short" })}</span></p>
+              <p>{post.username} <NavLink to="/account" className="dark:text-lime-60 dark:hover:text-white">(you)</NavLink> <span className="dark:text-gray-600">@ {new Date(Date.parse(post.date)).toLocaleTimeString(undefined, { timeStyle: "short" })}</span></p>
           </div>
           <p>{post.text}</p>
         </div>

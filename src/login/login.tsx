@@ -5,7 +5,7 @@ import '../main.css';
 import { RegistrationProgress } from './registrationProgress';
 import { Input, InputSecure, Button, Subtext, textColor, buttonColor, inputColor, LabelledBox } from './input'
 
-import { LoginFailureWrongPassword, LoginRequest, LoginResult, RegisterRequest, RegisterResult, LoginFailure, LoginFailureWrongUsername } from '../../shared/api.js'
+import { LoginFailureWrongPassword, LoginRequest, LoginResult, RegisterRequest, RegisterResult, LoginFailure, LoginFailureWrongUsername, AvailableRequest, AvailableResult } from '../../shared/api.js'
 import * as React from 'react';
 
 
@@ -25,6 +25,8 @@ export function LoginPage({registrationProgress, changeRegistrationProgress, use
 
   const [displayNameInputColor, changeDisplayNameInputColor] = useState(inputColor.yellow)
   const [displayNameSubtext, changeDisplayNameSubtext] = useState('you can change this at any time')
+
+  const [createButtonDisabled, changeCreateButtonDisabled] = useState(true);
 
   const validUsernameRegex = /^[a-zA-Z0-9-]+$/;
   const validPasswordLength = 8;
@@ -126,23 +128,46 @@ export function LoginPage({registrationProgress, changeRegistrationProgress, use
     if (quit_early) return
 
     changeRegistrationProgress(1)
+    changeAgreeementOne(false);
   }
 
   
 
-  const ChangeUsername = (event) => {
+  async function ChangeUsername(event) {
     const name = event.target.value
+
     changeUsername(name)
 
     if (name && !validUsernameRegex.test(name)) {
       changeUsernameInputColor(inputColor.pink)
       changeUsernameErrorMessage('only a-z, 0-9, and dashes allowed')
     } else {
-      changeUsernameInputColor(inputColor.yellow)
-      changeUsernameErrorMessage('')
-      changeLoginErrorMessage('')
+
+      const params = new URLSearchParams({
+        username: name
+      })
+
+      const response = await fetch('api/user/available?' + params, {
+        method: 'get',
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      })
+
+      if (response.status == 200) {
+        const result: AvailableResult = await response.json();
+        
+        if (result.available) {
+          changeCreateButtonDisabled(false);
+
+          changeUsernameInputColor(inputColor.yellow)
+          changeUsernameErrorMessage('')
+          changeLoginErrorMessage('')
+        } else {
+          changeCreateButtonDisabled(true);
+        }
+      }
     }
-    
   }
 
   const ChangePassword = (event) => {
@@ -174,7 +199,8 @@ export function LoginPage({registrationProgress, changeRegistrationProgress, use
             <Subtext color={textColor.pink} text={passwordErrorMessage}/>
 
             <Button onClick={Login} color={buttonColor.yellow}>login</Button>
-            <Button onClick={Register} color={buttonColor.lime}>create account</Button>
+
+            <Button onClick={Register} color={buttonColor.lime} disabled={createButtonDisabled}>create account</Button>
 
             <Subtext color={textColor.pink} text={loginErrorMessage}/>
           </>}

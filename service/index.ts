@@ -54,9 +54,9 @@ function eraseAuthData(res) {
 // ########## api/user
 
 api.get('/user/available', async (req, res) => {
-  const request: AvailableRequest = req.body;
-  res.status(200).send(JSON.stringify(new AvailableResult(await dao.getUser(request.username) == null)))
-  console.log("availability checked: " + request.username)
+  let available: boolean = (await dao.getUser(req.query.username) == null)
+  res.status(200).send(JSON.stringify(new AvailableResult(available)))
+  console.log("availability checked: " + req.query.username + " | " + available)
 });
 
 api.post('/user/register', async (req, res) => {
@@ -92,9 +92,7 @@ api.post('/user/login', async (req, res) => {
 });
 
 api.delete('/user/logout', async (req, res) => {
-  let request: LogoutRequest = req.body;
   let auth: AuthData = getAuthData(req);
-  console.log(auth)
   if (await dao.authIsValid(auth.authToken) == true) {
     dao.deleteAuth(auth.authToken);
     eraseAuthData(res)

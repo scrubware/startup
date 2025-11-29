@@ -36,12 +36,14 @@ export class MemoryDAO implements DAO {
         return auth;
     }
     async authIsValid(authToken: AuthToken): Promise<boolean> {
+        let flag: boolean = false
         this.auths.forEach((authData) => {
             if (authData.authToken == authToken) {
-                return true;
+                flag = true;
+                return;
             }
         })
-        return false;
+        return flag;
     }
     async deleteAuth(authToken: AuthToken): Promise<void> {
         for (let i = this.auths.length - 1; i >= 0; i--) {
@@ -50,6 +52,10 @@ export class MemoryDAO implements DAO {
                 break;
             }
         }
+    }
+
+    async listAuths(): Promise<Array<AuthData>> {
+        return this.auths;
     }
 
     // Posts

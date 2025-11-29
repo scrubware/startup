@@ -10,5 +10,7 @@ export interface DAO {
     createAuth(username: string, password: string): Promise<AuthData>;
     authIsValid(authToken: AuthToken): Promise<boolean>;
     deleteAuth(authToken: AuthToken): Promise<void>;
+
+    listAuths(): Promise<Array<AuthData>>;
 }
 

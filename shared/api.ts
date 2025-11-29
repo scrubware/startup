@@ -1,7 +1,7 @@
 
 import { FeedItem } from './models.js'
 
-export type AuthToken = String;
+export type AuthToken = string;
 
 export class AuthData {
     readonly username: string;
@@ -18,6 +18,22 @@ export class AuthData {
 
 
 // ########## api/user
+
+// GET api/user/available
+export class AvailableRequest {
+    readonly username: string;
+
+    constructor (username: string) {
+        this.username = username;
+    } 
+}
+export class AvailableResult {
+    readonly available: boolean;
+
+    constructor (available: boolean) {
+        this.available = available;
+    }
+}
 
 // POST api/user/register
 export class RegisterRequest {
@@ -48,20 +64,19 @@ export class LoginRequest {
     }
 }
 export class LoginResult extends AuthData {}
+export class LoginFailure { 
+    readonly msg: string;
 
-// DELETE api/user/logout
-export class LogoutRequest {
-    readonly authToken: AuthToken;
-
-    constructor (authToken: AuthToken) {
-        this.authToken = authToken;
+    constructor (msg: string) {
+        this.msg = msg;
     }
 }
-export class LogoutResult {
+export const LoginFailureWrongPassword = new LoginFailure("Incorrect password!")
+export const LoginFailureWrongUsername = new LoginFailure("Username is not registered!")
 
-}
-
-
+// DELETE api/user/logout
+export class LogoutRequest {}
+export class LogoutResult {}
 
 
 
@@ -71,11 +86,9 @@ export class LogoutResult {
 // GET api/content/profile
 export class GetProfileRequest {
     readonly fetchUsername: string;
-    readonly authData: AuthData;
 
-    constructor(fetchUsername: string, authData: AuthData) {
+    constructor(fetchUsername: string) {
         this.fetchUsername = fetchUsername;
-        this.authData = authData;
     }
 }
 

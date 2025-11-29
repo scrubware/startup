@@ -7,6 +7,7 @@ import { LoginPage } from './login/login';
 import { ProfilePage } from './profile/profile';
 import { MakePage } from './make/make';
 import { FeedPage } from './feed/feed';
+import { LogoutRequest } from '../shared/api';
 
 export default function App() {
 
@@ -23,6 +24,22 @@ export default function App() {
     //["incels WILL be shadowbanned"]
     //[""]
   ]
+
+  async function Logout() {
+
+    const response = await fetch('api/user/logout', {
+      method: 'delete',
+      body: JSON.stringify(new LogoutRequest()),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+
+      },
+    })
+
+    changeAuthorization(false);
+    changeRegistrationProgress(0);
+    localStorage.removeItem("authToken");
+  }
 
   const feed = []
 
@@ -88,7 +105,7 @@ export default function App() {
         <div className="flex">
           <a href="https://github.com/scrubware/startup" className="hover:text-white">github</a>
 
-          <NavLink to="/" className="dark:text-lime-60 hover:text-white ml-3" onClick={() => {changeAuthorization(false); changeRegistrationProgress(0)}}>logout</NavLink>
+          <NavLink to="/" className="dark:text-lime-60 hover:text-white ml-3" onClick={Logout}>logout</NavLink>
         </div>
       </footer>
 

@@ -5,7 +5,7 @@ import '../main.css';
 import { RegistrationProgress } from './registrationProgress';
 import { Input, InputSecure, Button, Subtext, textColor, buttonColor, inputColor, LabelledBox } from './input'
 
-import { LoginRequest, LoginResult, RegisterRequest, RegisterResult } from '../../shared/api.js'
+import { LoginFailureWrongPassword, LoginRequest, LoginResult, RegisterRequest, RegisterResult, LoginFailure, LoginFailureWrongUsername } from '../../shared/api.js'
 import * as React from 'react';
 
 
@@ -43,6 +43,8 @@ export function LoginPage({registrationProgress, changeRegistrationProgress, use
       console.log(result)
       changeRegistrationProgress(3)
       authStateFunction(true)
+
+      localStorage.setItem("authToken",result.authToken);
     }
   }
 
@@ -83,8 +85,18 @@ export function LoginPage({registrationProgress, changeRegistrationProgress, use
       changeRegistrationProgress(3)
       authStateFunction(true)
     } else {
-      changeUsernameInputColor(inputColor.pink)
-      changeLoginErrorMessage('user not registerd!')
+      const result: LoginFailure = await response.json();
+
+      if (result.msg == LoginFailureWrongUsername.msg) {
+        changeUsernameInputColor(inputColor.pink);
+        changeUsernameErrorMessage(result.msg);
+      } else if (result.msg == LoginFailureWrongPassword.msg) {
+        changePasswordInputColor(inputColor.pink);
+        changePasswordErrorMessage(result.msg);
+      }
+
+      console.log(LoginFailureWrongUsername)
+      console.log(result)
       quit_early = true
     }
   }

@@ -1,13 +1,13 @@
 import cookieParser from 'cookie-parser';
 import express from 'express';
 
-const authCookieName = 'authToken';
+const authCookieName = 'authData';
 const app = express();
 
 import { join, dirname } from "path"
 import { fileURLToPath } from 'url'
 import { DAO } from "./DAO.js"
-import { LoginRequest, RegisterRequest, AuthData, AuthToken, LogoutRequest, RegisterResult, LoginResult, GetProfileRequest } from "../shared/api.js"
+import { LoginRequest, RegisterRequest, AuthData, AuthToken, LogoutRequest, RegisterResult, LoginResult, GetProfileRequest, LoginFailureWrongPassword, LoginFailureWrongUsername, AvailableRequest, AvailableResult } from "../shared/api.js"
 import { Profile, asProfile } from "../shared/models.js"
 
 import { MemoryDAO } from "./memoryDAO.js" 
@@ -37,7 +37,7 @@ function getAuthData(req): AuthData {
 }
 
 function setAuthData(res, authData: AuthData) {
-  res.cookie(authCookieName, JSON.stringify, {
+  res.cookie(authCookieName, JSON.stringify(authData), {
     secure: true,
     httpOnly: true,
     sameSite: 'strict',
@@ -53,6 +53,12 @@ function eraseAuthData(res) {
 
 // ########## api/user
 
+api.get('/user/available', async (req, res) => {
+  const request: AvailableRequest = req.body;
+  res.status(200).send(JSON.stringify(new AvailableResult(await dao.getUser(request.username) == null)))
+  console.log("availability checked: " + request.username)
+});
+
 api.post('/user/register', async (req, res) => {
   const request: RegisterRequest = req.body;
   if (await dao.getUser(request.username) != null) {
@@ -61,10 +67,9 @@ api.post('/user/register', async (req, res) => {
   } else {
     await dao.createUser(request.username, request.password, request.displayName);
     const auth: RegisterResult = await dao.createAuth(request.username,request.password);
+    console.log("created register auth: " + JSON.stringify(auth))
     setAuthData(res,auth)
     res.status(200).send(JSON.stringify(auth));
-    
-    console.log("user registered: " + request.username)
   }
 });
 
@@ -77,25 +82,29 @@ api.post('/user/login', async (req, res) => {
       res.status(200).send(JSON.stringify(auth))
       console.log("logged in: " + request.username)
     } else {
-      res.status(400).send({ msg: 'incorrect password' })
+      res.status(400).send(JSON.stringify(LoginFailureWrongPassword))
       console.log("wrong password: " + request.username)
     }
   } else {
-    console.log("failed login: " + request.username)
-    res.status(400).send({ msg: 'not registered' })
+    res.status(400).send(JSON.stringify(LoginFailureWrongUsername))
+    console.log("wrong username: " + request.username)
   }
 });
 
 api.delete('/user/logout', async (req, res) => {
   let request: LogoutRequest = req.body;
-  if (await dao.authIsValid(request.authToken)) {
-    dao.deleteAuth(request.authToken);
+  let auth: AuthData = getAuthData(req);
+  console.log(auth)
+  if (await dao.authIsValid(auth.authToken) == true) {
+    dao.deleteAuth(auth.authToken);
     eraseAuthData(res)
     res.status(200).send({ msg: 'Logout successful' });
-    console.log("logged out auth session: " + request.authToken)
+    console.log("logged out auth session: " + auth.authToken)
+    console.log(dao.listAuths())
   } else {
+    eraseAuthData(res)
     res.status(400).send({ msg: 'AuthToken not valid' });
-    console.log("failed to log out auth session: " + request.authToken)
+    console.log("failed to log out auth session: " + auth.authToken)
   }
 });
 

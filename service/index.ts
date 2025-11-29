@@ -27,9 +27,6 @@ app.use(`/api`, api);
 
 let dao: DAO = new MemoryDAO();
 
-
-
-
 // ########### helper functions
 
 function getAuthData(req): AuthData {

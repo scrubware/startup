@@ -20,5 +20,6 @@ export interface DAO {
 
     // Feed
     getFeed(): Promise<Array<FeedItem>>
+    clearFeed()
 }
 

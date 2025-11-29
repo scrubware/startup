@@ -158,3 +158,8 @@ api.post('/content/make', verifyAuth, async (req, res) => {
     res.status(500).send();
   }
 })
+
+api.delete('/content/feed', async(req, res) => {
+  await dao.clearFeed()
+  res.status(200).send();
+})

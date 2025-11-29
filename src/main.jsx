@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './main.css';
 
-import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, NavLink, Route, Routes, useNavigate } from 'react-router-dom';
 import { LoginPage } from './login/login';
 import { ProfilePage } from './profile/profile';
 import { MakePage } from './make/make';
@@ -106,6 +106,18 @@ export default function App() {
           <a href="https://github.com/scrubware/startup" className="hover:text-white">github</a>
 
           <NavLink to="/" className="dark:text-lime-60 hover:text-white ml-3" onClick={Logout}>logout</NavLink>
+
+          <p onClick={async () => {
+
+            console.log("trying clear")
+
+            await fetch('api/content/feed', {
+              method: 'delete',
+            })
+
+            console.log("cleared")
+
+          }} className="dark:text-pink-60 hover:text-white ml-3">clear feed</p>
         </div>
       </footer>
 

@@ -74,4 +74,8 @@ export class MemoryDAO implements DAO {
     async getFeed(): Promise<Array<FeedItem>> {
         return this.posts;
     }
+
+    async clearFeed() {
+        this.posts = []
+    }
 }

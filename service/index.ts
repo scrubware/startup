@@ -10,7 +10,7 @@ import { DAO } from "./DAO.js"
 import { LoginRequest, RegisterRequest, AuthData, AuthToken, LogoutRequest, RegisterResult, LoginResult, GetProfileRequest, LoginFailureWrongPassword, LoginFailureWrongUsername, AvailableRequest, AvailableResult, GetFeedRequest, MakeFeedItemRequest } from "../shared/api.js"
 import { FeedItem, Profile, asProfile } from "../shared/models.js"
 
-import { MemoryDAO } from "./memoryDAO.js" 
+import { DatabaseDAO } from './databaseDAO.js';
 
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
@@ -25,7 +25,7 @@ app.listen(port, () => {
 let api = express.Router();
 app.use(`/api`, api);
 
-let dao: DAO = new MemoryDAO();
+let dao: DAO = new DatabaseDAO();
 
 // ########### helper functions
 

@@ -4,5 +4,6 @@
     "module": "esnext",
     "moduleResolution": "node",
     "outDir": "build",
+    "resolveJsonModule": true
   }
 }

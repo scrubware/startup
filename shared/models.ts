@@ -16,7 +16,7 @@ export class Profile {
     }
 }
 
-export function asProfile(x: Profile): Profile {
+export function asProfile(x): Profile {
     return {
         username: x.username,
         profileName: x.profileName,
@@ -25,13 +25,22 @@ export function asProfile(x: Profile): Profile {
 }
 
 export class User extends Profile {
-    phoneNumber: string;
+    //phoneNumber: string;
     password: string;
-    email: string | null;
+    //email: string | null;
 
     constructor(username: string, password: string, profileName: string, dateJoined: Date) {
         super(username, profileName, dateJoined);
         this.password = password;
+    }
+}
+
+export function asUser(x): User {
+    return {
+        username: x.username,
+        profileName: x.profileName,
+        dateJoined: x.dateJoined,
+        password: x.password,
     }
 }
 

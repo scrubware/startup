@@ -4,6 +4,7 @@
     "module": "esnext",
     "moduleResolution": "node",
     "outDir": "build",
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true
   }
 }

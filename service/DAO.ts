@@ -1,12 +1,14 @@
 
-import { FeedItem, User } from "../shared/models.js"
+import { FeedItem, Profile } from "../shared/models.js"
 import { AuthData, AuthToken } from "../shared/api.js"
 
 export interface DAO {
+    
+    initialize();
 
     // User
-    createUser(username: string, password: string, displayName: string): Promise<User>;
-    getUser(username: string): Promise<User>;
+    createUser(username: string, password: string, displayName: string): Promise<Profile>;
+    getUser(username: string): Promise<Profile>;
     passwordIsCorrect(username: string, password: string) : Promise<boolean>;
 
     // Auths

@@ -13,6 +13,8 @@ export class MemoryDAO implements DAO {
     posts: FeedItem[] = []
 
 
+    initialize() {}
+
 
     // User
     async createUser(username:string, password:string, displayName:string): Promise<User> {

@@ -25,7 +25,12 @@ app.listen(port, () => {
 let api = express.Router();
 app.use(`/api`, api);
 
+
+
 let dao: DAO = new DatabaseDAO();
+dao.initialize();
+
+
 
 // ########### helper functions
 
@@ -129,7 +134,7 @@ api.get('/content/profile', verifyAuth, async (req, res) => {
   
   let request: GetProfileRequest = req.body;
 
-  let profile: Profile = asProfile(await dao.getUser(request.fetchUsername));
+  let profile: Profile = await dao.getUser(request.fetchUsername);
   res.status(200).send(JSON.stringify(profile));
 });
 

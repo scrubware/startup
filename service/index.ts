@@ -100,7 +100,7 @@ api.delete('/user/logout', async (req, res) => {
     eraseAuthData(res)
     res.status(200).send({ msg: 'Logout successful' });
     console.log("logged out auth session: " + auth.authToken)
-    console.log(dao.listAuths())
+    //console.log(dao.listAuths())
   } else {
     eraseAuthData(res)
     res.status(400).send({ msg: 'AuthToken not valid' });
@@ -149,9 +149,11 @@ api.get('/content/feed', verifyAuth, async (req, res) => {
 
 api.post('/content/make', verifyAuth, async (req, res) => {
 
-  console.log("posted make")
-
   let request: MakeFeedItemRequest = req.body;
+
+  console.log("posted make: " + request.feedItem)
+
+  
   let success: boolean = await dao.createPost(request.feedItem);
 
   if (success) {

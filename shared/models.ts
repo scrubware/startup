@@ -55,6 +55,19 @@ export class FeedItem {
     }
 }
 
+export function asFeedItem(x): FeedItem {
+    return {
+        text: x.text,
+        username: x.username
+    }
+}
+
+type Feed = Array<FeedItem>;
+
+export function asFeed(x): Feed {
+    return Array.from(x).map((y) => asFeedItem(y))
+}
+
 export class Post extends FeedItem {
   date: Date;
   constructor(text: string, username: string) {

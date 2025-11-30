@@ -1,22 +1,22 @@
-import { AuthData, AuthToken } from "../shared/api";
-import { Profile, User, FeedItem, asProfile, asUser } from "../shared/models.js";
+import { AuthData, AuthToken } from "../shared/api.js";
+import { Profile, User, FeedItem, asProfile, asUser, asFeed } from "../shared/models.js";
 import { DAO } from "./DAO";
 
 
 import { v4 as uuid } from 'uuid';
 import { hash, compare } from 'bcrypt-ts';
 
-import { MongoClient } from 'mongodb'
+import { MongoClient, Db, Collection, Document } from 'mongodb'
 import config from './dbConfig.json' with { type: 'json' };
 
 
 export class DatabaseDAO implements DAO {
 
     client: MongoClient;
-    db;
-    users;
-    auths;
-    content;
+    db: Db;
+    users: Collection<Document>;
+    auths: Collection<Document>;
+    posts: Collection<Document>;
 
 
     async initialize() {
@@ -30,7 +30,7 @@ export class DatabaseDAO implements DAO {
         
         this.users = this.db.collection('users');
         this.auths = this.db.collection('auths');
-        this.content = this.db.collection('content')
+        this.posts = this.db.collection('posts');
 
         try {
             await this.db.command({ ping: 1 });
@@ -64,29 +64,34 @@ export class DatabaseDAO implements DAO {
         return await compare(password, user.password);
     }
 
+
+
     // Auths
     async createAuth(username: string, password: string): Promise<AuthData> {
-        throw new Error("Method not implemented.");
+        let auth: AuthData = new AuthData(username,uuid())
+        this.auths.insertOne(auth);
+        return auth;
     }
     async authIsValid(authToken: AuthToken): Promise<boolean> {
-        throw new Error("Method not implemented.");
+        return (await this.auths.findOne({authToken}) != null);
     }
     async deleteAuth(authToken: AuthToken): Promise<void> {
-        throw new Error("Method not implemented.");
+        this.auths.deleteOne({authToken})
     }
-    async listAuths(): Promise<Array<AuthData>> {
-        throw new Error("Method not implemented.");
-    }
+
+
 
     // Content
     async createPost(feedItem: FeedItem): Promise<boolean> {
-        throw new Error("Method not implemented.");
+        this.posts.insertOne(feedItem)
+        console.log("creating post: " + feedItem)
+        return true;
     }
     async getFeed(): Promise<Array<FeedItem>> {
-        throw new Error("Method not implemented.");
+        return asFeed(await this.posts.find())
     }
     async clearFeed() {
-        throw new Error("Method not implemented.");
+        this.posts.drop()
     }
     
 }

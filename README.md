@@ -94,10 +94,8 @@ Still, I managed to implement a minimum-case level of interactivity for now.
 
 ## 🚀 DB deliverable
 
-For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
-
-- [ ] **Stores data in MongoDB** - I did not complete this part of the deliverable.
-- [ ] **Stores credentials in MongoDB** - I did not complete this part of the deliverable.
+- [x] **Stores data in MongoDB** - Data is stored in a persistent MongoDB cluster.
+- [x] **Stores credentials in MongoDB** - Account credentials are stored in a persistent MongoDB cluster, and passwords are hashed.
 
 ## 🚀 WebSocket deliverable
 

@@ -58,14 +58,8 @@ export class FeedItem {
 export function asFeedItem(x): FeedItem {
     return {
         text: x.text,
-        username: x.username
+        username: x.username,
     }
-}
-
-type Feed = Array<FeedItem>;
-
-export function asFeed(x): Feed {
-    return Array.from(x).map((y) => asFeedItem(y))
 }
 
 export class Post extends FeedItem {
@@ -74,6 +68,22 @@ export class Post extends FeedItem {
     super(text,username)
     this.date = new Date();
   }
+}
+
+export function asPost(x): Post {
+    return {
+        text: x.text,
+        username: x.username,
+        date: x.date
+    }
+}
+
+
+type Feed = Array<Post>;
+
+export function asFeed(x): Feed {
+    console.log("feeding: ",x)
+    return Array.from(x).map((y) => asPost(y))
 }
 
 // export class Ad extends FeedItem {

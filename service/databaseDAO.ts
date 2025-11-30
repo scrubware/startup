@@ -84,11 +84,11 @@ export class DatabaseDAO implements DAO {
     // Content
     async createPost(feedItem: FeedItem): Promise<boolean> {
         this.posts.insertOne(feedItem)
-        console.log("creating post: " + feedItem)
+        console.log("creating post: ", feedItem)
         return true;
     }
     async getFeed(): Promise<Array<FeedItem>> {
-        return asFeed(await this.posts.find())
+        return asFeed(await this.posts.find().toArray())
     }
     async clearFeed() {
         this.posts.drop()

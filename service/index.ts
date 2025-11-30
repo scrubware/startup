@@ -151,7 +151,7 @@ api.post('/content/make', verifyAuth, async (req, res) => {
 
   let request: MakeFeedItemRequest = req.body;
 
-  console.log("posted make: " + request.feedItem)
+  console.log("posted make: ", request.feedItem)
 
   
   let success: boolean = await dao.createPost(request.feedItem);

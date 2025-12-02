@@ -1,4 +1,4 @@
-import { AuthData, AuthToken } from "../shared/api.js";
+import { asAuthData, AuthData, AuthToken } from "../shared/api.js";
 import { Profile, User, FeedItem, asProfile, asUser, asFeed } from "../shared/models.js";
 import { DAO } from "./DAO";
 
@@ -56,12 +56,26 @@ export class DatabaseDAO implements DAO {
         if (found == null) return null;
         return asProfile(found);
     }
+    async getUserFromAuth(authToken: string): Promise<Profile> {
+        const query = {
+            authToken: authToken
+        }
+        const found = await this.auths.findOne(query);
+        if (found == null) return null;
+        return this.getUser(asAuthData(found).username);
+    }
     async passwordIsCorrect(username: string, password: string): Promise<boolean> {
         const query = {
             username: username
         };
         const user: User = asUser(await this.users.findOne(query));
         return await compare(password, user.password);
+    }
+    async updateProfile(profile: Profile) {
+        const query = {
+            username: profile.username
+        };
+        this.users.findOneAndReplace(query, profile)
     }
 
 

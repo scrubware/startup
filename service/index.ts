@@ -7,7 +7,7 @@ const app = express();
 import { join, dirname } from "path"
 import { fileURLToPath } from 'url'
 import { DAO } from "./DAO.js"
-import { LoginRequest, RegisterRequest, AuthData, AuthToken, LogoutRequest, RegisterResult, LoginResult, GetProfileRequest, LoginFailureWrongPassword, LoginFailureWrongUsername, AvailableRequest, AvailableResult, GetFeedRequest, MakeFeedItemRequest } from "../shared/api.js"
+import { LoginRequest, RegisterRequest, AuthData, AuthToken, LogoutRequest, RegisterResult, LoginResult, GetProfileRequest, LoginFailureWrongPassword, LoginFailureWrongUsername, AvailableRequest, AvailableResult, GetFeedRequest, MakeFeedItemRequest, UpdateNameRequest } from "../shared/api.js"
 import { FeedItem, Profile, asProfile } from "../shared/models.js"
 
 import { DatabaseDAO } from './databaseDAO.js';
@@ -128,15 +128,8 @@ const verifyAuth = async (req, res, next) => {
 
 
 
+
 // ########### api/content
-
-api.get('/content/profile', verifyAuth, async (req, res) => {
-  
-  let request: GetProfileRequest = req.body;
-
-  let profile: Profile = await dao.getUser(request.fetchUsername);
-  res.status(200).send(JSON.stringify(profile));
-});
 
 api.get('/content/feed', verifyAuth, async (req, res) => {
   let request: GetFeedRequest = req.body;
@@ -163,7 +156,23 @@ api.post('/content/make', verifyAuth, async (req, res) => {
   }
 })
 
-api.delete('/content/feed', async(req, res) => {
-  await dao.clearFeed()
-  res.status(200).send();
-})
+
+
+
+// ######## api/profile
+
+
+api.get('/profile', verifyAuth, async (req, res) => {
+  
+  let request: GetProfileRequest = req.body;
+
+  let profile: Profile = await dao.getUser(request.fetchUsername);
+  res.status(200).send(JSON.stringify(profile));
+});
+
+api.patch('/profile/name', verifyAuth, async (req, res) => {
+  let request: UpdateNameRequest = req.body;
+
+  let profile: Profile = await dao.getUser(getAuthData(req).username)
+});
+

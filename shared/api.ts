@@ -13,6 +13,12 @@ export class AuthData {
     }
 }
 
+export function asAuthData(x): AuthData {
+    return {
+        username: x.username,
+        authToken: x.authToken,
+    };
+}
 
 
 
@@ -113,4 +119,20 @@ export class MakeFeedItemResult {}
 // DELETE api/content/remove
 export class RemovePostRequest {
 
+}
+
+
+export class UpdateNameRequest {
+    readonly newDisplayName: string;
+
+    constructor(newDisplayName: string) {
+        this.newDisplayName = newDisplayName;
+    }
+}
+export class UpdateNameResult {
+    readonly updatedProfile: string;
+
+    constructor(updatedProfile: string) {
+        this.updatedProfile = updatedProfile;
+    }
 }

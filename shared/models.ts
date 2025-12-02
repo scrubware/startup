@@ -8,19 +8,23 @@ export class Profile {
     username: string;
     profileName: string;
     dateJoined: Date;
+    bioText: string;
+
 
     constructor(username: string, profileName: string, dateJoined: Date) {
         this.username = username;
         this.profileName = profileName;
         this.dateJoined = dateJoined;
+        this.bioText = "My bio!";
     }
 }
 
 export function asProfile(x): Profile {
     return {
-        username: x.username,
-        profileName: x.profileName,
-        dateJoined:x.dateJoined
+        username:           x.username,
+        profileName:        x.profileName,
+        dateJoined:         x.dateJoined,
+        bioText:            x.bioText,
     };
 }
 
@@ -37,10 +41,11 @@ export class User extends Profile {
 
 export function asUser(x): User {
     return {
-        username: x.username,
-        profileName: x.profileName,
-        dateJoined: x.dateJoined,
-        password: x.password,
+        username:           x.username,
+        profileName:        x.profileName,
+        dateJoined:         x.dateJoined,
+        password:           x.password,
+        bioText:            x.bioText,
     }
 }
 

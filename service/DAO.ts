@@ -1,6 +1,8 @@
 
-import { FeedItem, Profile } from "../shared/models.js"
-import { AuthData, AuthToken } from "../shared/api.js"
+import { FeedItem, Profile } from "../shared/contentModels.js"
+import { AuthData, AuthToken } from "../shared/dataModels.js"
+import { ObjectId } from "mongodb";
+import { WithId } from "./serverModels.js";
 
 export interface DAO {
     
@@ -9,7 +11,7 @@ export interface DAO {
     // User
     createUser(username: string, password: string, displayName: string): Promise<Profile>;
     getUser(username: string): Promise<Profile>;
-    getUserFromAuth(authToken: string): Promise<Profile>;
+    getUserFromAuth(authToken: string): Promise<WithId<Profile>>;
     passwordIsCorrect(username: string, password: string) : Promise<boolean>;
     updateProfile(profile: Profile);
 
@@ -19,7 +21,9 @@ export interface DAO {
     deleteAuth(authToken: AuthToken): Promise<void>;
 
     // Posts
-    createPost(feedItem: FeedItem): Promise<boolean>;
+    createFeedItem(feedItem: FeedItem);
+    deleteFeedItem(id: ObjectId);
+    getFeedItem(id: ObjectId): Promise<FeedItem> ;
 
     // Feed
     getFeed(): Promise<Array<FeedItem>>

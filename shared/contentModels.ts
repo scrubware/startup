@@ -14,7 +14,8 @@ export class Profile {
         public dateJoined: Date,
         public bioText?: string
     ) {}
-}; export const asProfile = (x: any): Profile => ({ ...x });
+};
+export const asProfile = (x: any): Profile => ({ ...x });
 
 
 
@@ -36,7 +37,8 @@ export class User extends Profile {
 export class FeedItem {
     constructor(
         public text: string,
-        public username: string
+        public username: string,
+        public profile_id: string,
     ) {}
 }; export const asFeedItem = (x: any): FeedItem => ({ ...x });
 
@@ -48,17 +50,18 @@ export class Post extends FeedItem {
     constructor(
         text: string, 
         username: string,
+        public profile_id: string,
         public date: Date,
-    ) { super(text,username); }
+    ) { super(text, username, profile_id); }
 }; export const asPost = (x: any): Post => ({ ...x });
 
 
 
 
 
-type Feed = Array<Post>;
+type Feed = Array<FeedItem>;
 
 export function asFeed(x): Feed {
     console.log("feeding: ",x)
-    return Array.from(x).map((y) => asPost(y))
+    return Array.from(x).map((y) => asFeedItem(y))
 }

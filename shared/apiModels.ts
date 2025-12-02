@@ -1,15 +1,6 @@
 
-import { FeedItem, Profile } from './models.js'
-
-export type AuthToken = string;
-
-export class AuthData {
-    constructor (
-        readonly username: string,
-        readonly authToken: AuthToken
-    ) {}
-}; export const asAuthData = (x: any): AuthData => ({ ...x });
-
+import { FeedItem, Profile } from './contentModels.js'
+import { AuthData } from './dataModels.js'
 
 
 // ########## api/user
@@ -107,6 +98,17 @@ export class MakeFeedItemRequest {
         public readonly feedItem: FeedItem
     ) {}
 }
+
+
+
+// DELETE api/content/delete
+// IDs are always kept as hex strings
+export class DeleteFeedItemRequest {
+    constructor(
+        public readonly _id: string
+    ) {}
+}
+
 
 
 

@@ -1,13 +1,14 @@
-import { asAuthData, AuthData, AuthToken } from "../shared/api.js";
-import { Profile, User, FeedItem, asProfile, asUser, asFeed } from "../shared/models.js";
+import { asAuthData, AuthData, AuthToken } from "../shared/dataModels.js";
+import { Profile, User, FeedItem, asProfile, asUser, asFeed, asFeedItem, Post } from "../shared/contentModels.js";
 import { DAO } from "./DAO";
 
 
 import { v4 as uuid } from 'uuid';
 import { hash, compare } from 'bcrypt-ts';
 
-import { MongoClient, Db, Collection, Document } from 'mongodb'
+import { MongoClient, Db, Collection, Document, ObjectId } from 'mongodb'
 import config from './dbConfig.json' with { type: 'json' };
+import { asProfileWithId, WithId } from "./serverModels.js";
 
 
 export class DatabaseDAO implements DAO {
@@ -48,15 +49,15 @@ export class DatabaseDAO implements DAO {
         this.users.insertOne(u);
         return asProfile(u);
     }
-    async getUser(username: string): Promise<Profile> {
+    async getUser(username: string): Promise<WithId<Profile>> {
         const query = {
             username: username
         };
         const found = await this.users.findOne(query);
         if (found == null) return null;
-        return asProfile(found);
+        return asProfileWithId(found);
     }
-    async getUserFromAuth(authToken: string): Promise<Profile> {
+    async getUserFromAuth(authToken: string): Promise<WithId<Profile>> {
         const query = {
             authToken: authToken
         }
@@ -96,11 +97,17 @@ export class DatabaseDAO implements DAO {
 
 
     // Content
-    async createPost(feedItem: FeedItem): Promise<boolean> {
+    async createFeedItem(feedItem: FeedItem) {
         this.posts.insertOne(feedItem)
-        console.log("creating post: ", feedItem)
-        return true;
+        console.log("creating feedItem: ", feedItem, " of type ", typeof feedItem)
     }
+    async deleteFeedItem(_id: ObjectId) {
+        this.posts.find({ _id })
+    }
+    async getFeedItem(_id: ObjectId): Promise<FeedItem> {
+        return asFeedItem(this.posts.findOne({ _id }))
+    }
+
     async getFeed(): Promise<Array<FeedItem>> {
         return asFeed(await this.posts.find().toArray())
     }

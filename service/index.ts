@@ -6,12 +6,13 @@ const app = express();
 
 import { join, dirname } from "path"
 import { fileURLToPath } from 'url'
-import { DAO } from "./DAO.js"
-import { LoginRequest, RegisterRequest, AuthData, AuthToken, LogoutRequest, RegisterResult, LoginResult, GetProfileRequest, LoginFailureWrongPassword, LoginFailureWrongUsername, AvailableRequest, AvailableResult, MakeFeedItemRequest, UpdateNameRequest } from "../shared/api.js"
-import { FeedItem, Profile, asProfile } from "../shared/models.js"
-import  { WebSocketServer } from 'ws';
+import { LoginRequest, RegisterRequest, RegisterResult, LoginResult, GetProfileRequest, LoginFailureWrongPassword, LoginFailureWrongUsername, AvailableResult, MakeFeedItemRequest, UpdateNameRequest, DeleteFeedItemRequest } from "../shared/apiModels.js"
+import { FeedItem, Profile } from "../shared/contentModels.js"
+import { WebSocketServer } from 'ws';
 
 import { DatabaseDAO } from './databaseDAO.js';
+import { WithId } from './serverModels.js';
+import { AuthData } from '../shared/dataModels.js';
 
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
@@ -30,7 +31,7 @@ app.use(`/api`, api);
 
 
 
-let dao: DAO = new DatabaseDAO();
+let dao: DatabaseDAO = new DatabaseDAO();
 dao.initialize();
 
 
@@ -148,16 +149,20 @@ api.post('/content/make', verifyAuth, async (req, res) => {
 
   console.log("posted make: ", request.feedItem)
 
-  
-  let success: boolean = await dao.createPost(request.feedItem);
+  await dao.createFeedItem(request.feedItem);
 
-  if (success) {
-    res.status(200).send();
-  } else {
-    res.status(500).send();
-  }
+  res.status(200).send();
 })
 
+
+
+api.delete('/content/delete', verifyAuth, async (req, res) => {
+  let request: DeleteFeedItemRequest = req.body;
+  let profile: WithId<Profile> = await dao.getUserFromAuth(getAuthData(req).authToken)
+  if (profile._id == JSON.parse((await dao.getFeedItem(JSON.parse(request._id))).profile_id))
+  await dao.deleteFeedItem(JSON.parse(request._id))
+  res.status(200).send();
+})
 
 
 

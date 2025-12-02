@@ -5,7 +5,7 @@ import '../main.css';
 import { RegistrationProgress } from './registrationProgress';
 import { Input, InputSecure, Button, Subtext, textColor, buttonColor, inputColor, LabelledBox } from './input'
 
-import { LoginFailureWrongPassword, LoginRequest, LoginResult, RegisterRequest, RegisterResult, LoginFailure, LoginFailureWrongUsername, AvailableRequest, AvailableResult } from '../../shared/api.js'
+import { LoginFailureWrongPassword, LoginRequest, LoginResult, RegisterRequest, RegisterResult, LoginFailure, LoginFailureWrongUsername, AvailableRequest, AvailableResult } from '../../shared/apiModels.js'
 import * as React from 'react';
 
 import { useNavigate } from "react-router-dom";

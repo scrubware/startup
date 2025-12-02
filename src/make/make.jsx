@@ -1,8 +1,8 @@
 import React, { useState} from 'react';
 import '../main.css';
 
-import { Post, User } from "../../shared/models.js"
-import { MakeFeedItemRequest } from '../../shared/api.js';
+import { Post, User } from "../../shared/contentModels.js"
+import { MakeFeedItemRequest } from '../../shared/apiModels.js';
 import { useNavigate } from "react-router-dom";
 
 function PostFactory(text, account) {
@@ -25,7 +25,7 @@ export function MakePage({username, feed}) {
 
     const response = await fetch('api/content/make', {
       method: 'post',
-      body: JSON.stringify(new MakeFeedItemRequest(new Post(postContent, username))),
+      body: JSON.stringify(new MakeFeedItemRequest(new Post(postContent, username, ))),
       headers: {
         'Content-type': 'application/json; charset=UTF-8',
       },

@@ -1,4 +1,8 @@
 
+enum NetworkEvent {
+    
+}
+
 class NetworkHandler {
 
     socket: WebSocket;
@@ -14,11 +18,11 @@ class NetworkHandler {
 
         };
 
-        this.socket.onmessage = () => {
+        this.socket.onmessage = (event) => {
 
         };
 
-        this.socket.onclose = () => {
+        this.socket.onclose = (event) => {
 
         };
     }

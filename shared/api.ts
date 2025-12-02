@@ -1,84 +1,74 @@
 
-import { FeedItem } from './models.js'
+import { FeedItem, Profile } from './models.js'
 
 export type AuthToken = string;
 
 export class AuthData {
-    readonly username: string;
-    readonly authToken: AuthToken;
-
-    constructor (username: string, authToken: AuthToken) {
-        this.username = username;
-        this.authToken = authToken;
-    }
-}
-
-export function asAuthData(x): AuthData {
-    return {
-        username: x.username,
-        authToken: x.authToken,
-    };
-}
-
+    constructor (
+        readonly username: string,
+        readonly authToken: AuthToken
+    ) {}
+}; export const asAuthData = (x: any): AuthData => ({ ...x });
 
 
 
 // ########## api/user
 
+
+
+
+
 // GET api/user/available
 export class AvailableRequest {
-    readonly username: string;
-
-    constructor (username: string) {
-        this.username = username;
-    } 
+    constructor (
+        public readonly username: string
+    ) {} 
 }
 export class AvailableResult {
-    readonly available: boolean;
-
-    constructor (available: boolean) {
-        this.available = available;
-    }
+    constructor (
+        public readonly available: boolean
+    ) {}
 }
+
+
+
+
+
 
 // POST api/user/register
 export class RegisterRequest {
-    readonly username: string;
-    readonly password: string;
-    readonly displayName: string;
-
-    // Full version
-    // - phone number
-    // - email (optional)
-
-    constructor (username: string, password: string, displayName: string) {
-        this.username = username;
-        this.password = password;
-        this.displayName = displayName;
-    }
+    constructor (
+        public readonly username: string,
+        public readonly password: string,
+        public readonly displayName: string
+    ) {}
 }
 export class RegisterResult extends AuthData {}
 
+
+
+
+
+
 // POST api/user/login
 export class LoginRequest {
-    readonly username: string;
-    readonly password: string;
-
-    constructor (username: string, password: string) {
-        this.username = username;
-        this.password = password;
-    }
+    constructor (
+        public readonly username: string,
+        public readonly password: string
+    ) {}
 }
 export class LoginResult extends AuthData {}
 export class LoginFailure { 
-    readonly msg: string;
-
-    constructor (msg: string) {
-        this.msg = msg;
-    }
+    constructor (
+        public readonly msg: string
+    ) {}
 }
 export const LoginFailureWrongPassword = new LoginFailure("Incorrect password!")
 export const LoginFailureWrongUsername = new LoginFailure("Username is not registered!")
+
+
+
+
 
 // DELETE api/user/logout
 export class LogoutRequest {}
@@ -91,48 +81,42 @@ export class LogoutResult {}
 
 // GET api/content/profile
 export class GetProfileRequest {
-    readonly fetchUsername: string;
-
-    constructor(fetchUsername: string) {
-        this.fetchUsername = fetchUsername;
-    }
+    constructor(
+        public readonly fetchUsername: string
+    ) {}
 }
+
+
+
+
 
 // GET api/content/feed
-export class GetFeedRequest {}
 export class GetFeedResult {
-    feedItems: FeedItem[];
+    constructor(
+        public readonly feedItems: FeedItem[]
+    ) {}
 }
+
+
+
+
 
 // POST api/content/make
 export class MakeFeedItemRequest {
-    readonly feedItem: FeedItem;
-
-    constructor(feedItem: FeedItem) {
-        this.feedItem = feedItem
-    }
+    constructor(
+        public readonly feedItem: FeedItem
+    ) {}
 }
-export class MakeFeedItemResult {}
 
-
-
-// DELETE api/content/remove
-export class RemovePostRequest {
-
-}
 
 
 export class UpdateNameRequest {
-    readonly newDisplayName: string;
-
-    constructor(newDisplayName: string) {
-        this.newDisplayName = newDisplayName;
-    }
+    constructor(
+        public readonly newDisplayName: string
+    ) {}
 }
 export class UpdateNameResult {
-    readonly updatedProfile: string;
-
-    constructor(updatedProfile: string) {
-        this.updatedProfile = updatedProfile;
-    }
+    constructor(
+        public readonly updatedProfile: Profile
+    ) {}
 }

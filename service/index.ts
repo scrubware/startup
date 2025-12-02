@@ -7,8 +7,9 @@ const app = express();
 import { join, dirname } from "path"
 import { fileURLToPath } from 'url'
 import { DAO } from "./DAO.js"
-import { LoginRequest, RegisterRequest, AuthData, AuthToken, LogoutRequest, RegisterResult, LoginResult, GetProfileRequest, LoginFailureWrongPassword, LoginFailureWrongUsername, AvailableRequest, AvailableResult, GetFeedRequest, MakeFeedItemRequest, UpdateNameRequest } from "../shared/api.js"
+import { LoginRequest, RegisterRequest, AuthData, AuthToken, LogoutRequest, RegisterResult, LoginResult, GetProfileRequest, LoginFailureWrongPassword, LoginFailureWrongUsername, AvailableRequest, AvailableResult, MakeFeedItemRequest, UpdateNameRequest } from "../shared/api.js"
 import { FeedItem, Profile, asProfile } from "../shared/models.js"
+import  { WebSocketServer } from 'ws';
 
 import { DatabaseDAO } from './databaseDAO.js';
 
@@ -18,9 +19,11 @@ app.use(express.json());                // JSON parsing middleware (for converti
 app.use(cookieParser());                // Cookie parsing middleware (for auth)
 app.use(express.static(join(dirname(fileURLToPath(import.meta.url)), '../public')));    // Static page middleware
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
+
+const socketServer = new WebSocketServer({ server });
 
 let api = express.Router();
 app.use(`/api`, api);
@@ -132,7 +135,6 @@ const verifyAuth = async (req, res, next) => {
 // ########### api/content
 
 api.get('/content/feed', verifyAuth, async (req, res) => {
-  let request: GetFeedRequest = req.body;
   let feed: Array<FeedItem> = await dao.getFeed();
 
   console.log(feed)
@@ -163,16 +165,13 @@ api.post('/content/make', verifyAuth, async (req, res) => {
 
 
 api.get('/profile', verifyAuth, async (req, res) => {
-  
   let request: GetProfileRequest = req.body;
-
   let profile: Profile = await dao.getUser(request.fetchUsername);
   res.status(200).send(JSON.stringify(profile));
 });
 
 api.patch('/profile/name', verifyAuth, async (req, res) => {
   let request: UpdateNameRequest = req.body;
-
   let profile: Profile = await dao.getUser(getAuthData(req).username)
 });
 

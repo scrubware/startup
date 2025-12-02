@@ -44,7 +44,7 @@ export class DatabaseDAO implements DAO {
     // Users
     async createUser(username: string, password: string, displayName: string): Promise<Profile> {
         const hashedPassword = await hash(password, 10);
-        const u = new User(username,hashedPassword,displayName,new Date());
+        const u = new User(username,displayName,new Date(),hashedPassword);
         this.users.insertOne(u);
         return asProfile(u);
     }

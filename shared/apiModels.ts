@@ -48,7 +48,12 @@ export class LoginRequest {
         public readonly password: string
     ) {}
 }
-export class LoginResult extends AuthData {}
+export class LoginResult{
+    constructor (
+        public readonly auth: AuthData,
+        public readonly user: Profile,
+    ) {}
+}
 export class LoginFailure { 
     constructor (
         public readonly msg: string

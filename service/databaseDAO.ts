@@ -1,7 +1,5 @@
 import { asAuthData, AuthData, AuthToken } from "../shared/dataModels.js";
 import { Profile, User, FeedItem, asProfile, asUser, asFeed, asFeedItem, Post } from "../shared/contentModels.js";
-import { DAO } from "./DAO";
-
 
 import { v4 as uuid } from 'uuid';
 import { hash, compare } from 'bcrypt-ts';
@@ -11,7 +9,7 @@ import config from './dbConfig.json' with { type: 'json' };
 import { asProfileWithId, WithId } from "./serverModels.js";
 
 
-export class DatabaseDAO implements DAO {
+export class DatabaseDAO {
 
     client: MongoClient;
     db: Db;

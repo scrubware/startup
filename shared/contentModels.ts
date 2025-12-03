@@ -38,7 +38,7 @@ export class FeedItem {
     constructor(
         public text: string,
         public username: string,
-        public profile_id: string,
+        public profileId: string,
     ) {}
 }; export const asFeedItem = (x: any): FeedItem => ({ ...x });
 
@@ -50,9 +50,9 @@ export class Post extends FeedItem {
     constructor(
         text: string, 
         username: string,
-        public profile_id: string,
+        public profileId: string,
         public date: Date,
-    ) { super(text, username, profile_id); }
+    ) { super(text, username, profileId); }
 }; export const asPost = (x: any): Post => ({ ...x });
 
 

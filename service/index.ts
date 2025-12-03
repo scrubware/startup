@@ -1,18 +1,43 @@
+
+
+
+// External Imports
 import cookieParser from 'cookie-parser';
 import express from 'express';
+import { join, dirname } from "path"
+import { fileURLToPath } from 'url'
+import { WebSocketServer } from 'ws';
+
+// Models
+import { WithId } from './serverModels.js';
+import { AuthData } from '../shared/dataModels.js';
+import { FeedItem, Profile } from "../shared/contentModels.js"
+import {  LoginRequest, 
+          RegisterRequest, 
+          RegisterResult, 
+          LoginResult, 
+          GetProfileRequest, 
+          LoginFailureWrongPassword, 
+          LoginFailureWrongUsername, 
+          AvailableResult, 
+          MakeFeedItemRequest, 
+          UpdateNameRequest, 
+          DeleteFeedItemRequest
+          } from "../shared/apiModels.js"
+
+// Scripts
+import { DatabaseDAO } from './databaseDAO.js';
+
+
+
+
+
+
+
+// ### Initialization
 
 const authCookieName = 'authData';
 const app = express();
-
-import { join, dirname } from "path"
-import { fileURLToPath } from 'url'
-import { LoginRequest, RegisterRequest, RegisterResult, LoginResult, GetProfileRequest, LoginFailureWrongPassword, LoginFailureWrongUsername, AvailableResult, MakeFeedItemRequest, UpdateNameRequest, DeleteFeedItemRequest } from "../shared/apiModels.js"
-import { FeedItem, Profile } from "../shared/contentModels.js"
-import { WebSocketServer } from 'ws';
-
-import { DatabaseDAO } from './databaseDAO.js';
-import { WithId } from './serverModels.js';
-import { AuthData } from '../shared/dataModels.js';
 
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
@@ -36,6 +61,13 @@ dao.initialize();
 
 
 
+
+
+
+
+
+
+
 // ########### helper functions
 
 function getAuthData(req): AuthData {
@@ -53,6 +85,10 @@ function setAuthData(res, authData: AuthData) {
 function eraseAuthData(res) {
   res.clearCookie(authCookieName);
 }
+
+
+
+
 
 
 
@@ -81,11 +117,12 @@ api.post('/user/register', async (req, res) => {
 
 api.post('/user/login', async (req, res) => {
   const request: LoginRequest = req.body;
-  if (await dao.getUser(request.username) != null) {
+  const user: WithId<Profile> = await dao.getUser(request.username);
+  if (user != null) {
     if (await dao.passwordIsCorrect(request.username,request.password)) {
-      const auth: LoginResult = await dao.createAuth(request.username, request.password)
+      const auth: AuthData = await dao.createAuth(request.username, request.password)
       setAuthData(res,auth)
-      res.status(200).send(JSON.stringify(auth))
+      res.status(200).send(JSON.stringify(new LoginResult(auth,user)))
       console.log("logged in: " + request.username)
     } else {
       res.status(400).send(JSON.stringify(LoginFailureWrongPassword))
@@ -111,6 +148,8 @@ api.delete('/user/logout', async (req, res) => {
     console.log("failed to log out auth session: " + auth.authToken)
   }
 });
+
+
 
 
 
@@ -154,15 +193,18 @@ api.post('/content/make', verifyAuth, async (req, res) => {
   res.status(200).send();
 })
 
-
-
 api.delete('/content/delete', verifyAuth, async (req, res) => {
   let request: DeleteFeedItemRequest = req.body;
   let profile: WithId<Profile> = await dao.getUserFromAuth(getAuthData(req).authToken)
-  if (profile._id == JSON.parse((await dao.getFeedItem(JSON.parse(request._id))).profile_id))
+  if (profile._id == JSON.parse((await dao.getFeedItem(JSON.parse(request._id))).profileId))
   await dao.deleteFeedItem(JSON.parse(request._id))
   res.status(200).send();
 })
+
+
+
+
+
 
 
 

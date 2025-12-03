@@ -9,12 +9,3 @@ export class AuthData {
         readonly authToken: AuthToken
     ) {}
 }; export const asAuthData = (x: any): AuthData => ({ ...x });
-
-
-export class UserData {
-    constructor (
-        readonly username: string,
-        readonly profile_id: string,
-        readonly profile: Profile,
-    ) {}
-}

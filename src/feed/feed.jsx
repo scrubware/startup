@@ -1,7 +1,7 @@
 import React from 'react';
 import '../main.css';
 
-import { OwnedPost, OwnedPostFactory, Post } from "../components/post"
+import { OwnedPostFactory } from "../components/post"
 import { Ad } from "../components/ad"
 
 import { useState, useEffect } from 'react';
@@ -53,15 +53,7 @@ export function FeedPage() {
 
     return (
         <div className="grow">
-            {/* <Post/>
-            <br/>
-            <Post/>
-            <br/>
-            <Ad/>
-            <br/>
-            <OwnedPost/> */}
             {feed.length > 0 ? feed.map(item => OwnedPostFactory(item)) : GetNoPostsCat() }
-            
         </div>
     );
 }

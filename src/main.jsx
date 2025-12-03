@@ -7,7 +7,7 @@ import { LoginPage } from './login/login';
 import { ProfilePage } from './profile/profile';
 import { MakePage } from './make/make';
 import { FeedPage } from './feed/feed';
-import { LogoutRequest } from '../shared/api';
+import { LogoutRequest } from '../shared/apiModels';
 
 export default function App() {
 

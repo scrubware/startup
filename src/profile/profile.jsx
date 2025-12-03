@@ -1,7 +1,7 @@
 import React from 'react';
 import '../main.css';
 
-import { OwnedPost, OwnedPostFactory, Post } from "../components/post"
+import { OwnedPostFactory } from "../components/post"
 
 export function ProfilePage({feed, username, displayName, changeDisplayName}) {
   return (

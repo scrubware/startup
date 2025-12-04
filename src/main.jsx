@@ -8,6 +8,7 @@ import { ProfilePage } from './profile/profile';
 import { MakePage } from './make/make';
 import { FeedPage } from './feed/feed';
 import { LogoutRequest } from '../shared/apiModels';
+import { WSNetworkHandler } from "./networkHandler";
 
 export default function App() {
 
@@ -24,9 +25,11 @@ export default function App() {
 
   const [cachedProfile, changeCachedProfile] = React.useState(null);
 
+  const networkHandler = new WSNetworkHandler();
+
   async function Logout() {
 
-    const response = await fetch('api/user/logout', {
+    await fetch('api/user/logout', {
       method: 'delete',
       body: JSON.stringify(new LogoutRequest()),
       headers: {

@@ -1,47 +1,48 @@
 
-enum NetworkEvent {
-    
-}
+import { NetworkMessage, NetworkObject } from "../shared/networkModels";
 
-class NetworkHandler {
+export class WSNetworkHandler {
 
     socket: WebSocket;
+    connected: boolean;
 
     wsListeners: Array<Function> = [];
     networkListeners: Array<Function> = [];
     
     constructor() {
         const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
-        this.socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+        const url = `${protocol}://${window.location.host}/ws`;
+        this.socket = new WebSocket(url);
 
-        this.socket.onopen = (event) => {
+        console.log("ws looking on ",url);
 
-        };
+        this.socket.addEventListener("open", (event) => {
+            this.connected = true;
+            console.log("connected!")
+        })
 
-        this.socket.onmessage = (event) => {
+        this.socket.addEventListener("message", (event) => {
+            this.networkListeners.forEach((listener) => {
+                listener()
+            })
+        })
 
-        };
-
-        this.socket.onclose = (event) => {
-
-        };
+        this.socket.addEventListener("close", (event) => {
+            this.connected = false;
+        })
     }
 
-    //registerSelfListener(listenerMethod: Function);
-
-    sendNetworkMessage(object: Object | string) {
-        if (typeof object === "string") {
-            this.socket.send(object);
-        } else {
-            this.socket.send(JSON.stringify(object));
-        }
-    }
-
-    registerWSListener(listenerMethod: Function) {
-        
+    async sendNetworkMessage(message: NetworkMessage) {
+        this.socket.send(JSON.stringify(new NetworkObject(
+            message.event(),
+            await message.serialize()
+        )))
     }
 
     registerNetworkListener(listenerMethod: Function) {
         this.networkListeners.push(listenerMethod);
     }
+
+    //registerConnectListener
+    //registerDisconnectListener
 }

@@ -29,6 +29,7 @@ import {  LoginRequest,
 import { DatabaseDAO } from './databaseDAO.js';
 import { ObjectId } from 'mongodb';
 
+import { AddToFeedCNM } from '../shared/networkModels.js'
 
 
 
@@ -61,6 +62,29 @@ let dao: DatabaseDAO = new DatabaseDAO();
 dao.initialize();
 
 
+
+socketServer.on('connection', (socket) => {
+  socket.isAlive = true;
+
+  console.log("socket connected")
+
+  socket.on('message', (data) => {
+    console.log("received ws message: ",data);
+  });
+
+  socket.on('pong', () => {
+    socket.isAlive = true;
+  });
+})
+
+setInterval(() => {
+  socketServer.clients.forEach(function each(client) {
+    if (client.isAlive === false) return client.terminate();
+
+    client.isAlive = false;
+    client.ping();
+  });
+}, 10000);
 
 
 
@@ -193,7 +217,15 @@ api.post('/content/make', verifyAuth, async (req, res) => {
     post.date = new Date();
     post.score = 0;
     await dao.createFeedItem(post);
+
+    socketServer.clients.forEach((client: WebSocket) => {
+      if (client.readyState != WebSocket.OPEN) {
+        socketServer.send(new AddToFeedCNM(post).serialize());
+      }
+    });
   }
+
+  
 
   res.status(200).send();
 })

@@ -1,5 +1,5 @@
 
-import { NetworkMessage, NetworkObject } from "../shared/networkModels";
+import { AddToFeedCNM, NetworkEvent, NetworkMessage, NetworkObject } from "../shared/networkModels";
 
 export class WSNetworkHandler {
 
@@ -7,7 +7,7 @@ export class WSNetworkHandler {
     connected: boolean;
 
     wsListeners: Array<Function> = [];
-    networkListeners: Array<Function> = [];
+    networkListeners: Map<NetworkEvent, Array<Function>> = new Map<NetworkEvent, Array<Function>>();
     
     constructor() {
         const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
@@ -21,14 +21,28 @@ export class WSNetworkHandler {
             console.log("connected!")
         })
 
-        this.socket.addEventListener("message", (event) => {
-            this.networkListeners.forEach((listener) => {
-                listener()
-            })
+        this.socket.addEventListener("message", async (event) => {
+
+            console.log("received this from the ws ",event.data)
+
+            let msg;
+            let nobj: NetworkObject = JSON.parse(event.data);
+            switch (nobj.event) {
+                case NetworkEvent.AddToFeed:
+                    msg = await AddToFeedCNM.deserialize(nobj.msg);
+                    break;
+            }
+            console.log("turned it into: ",msg)
+            if (this.networkListeners.has(nobj.event)) {
+                this.networkListeners.get(nobj.event).forEach((listener) => {
+                    listener(msg)
+                })
+            }  
         })
 
         this.socket.addEventListener("close", (event) => {
             this.connected = false;
+            console.log("DISCONNECTED!")
         })
     }
 
@@ -39,8 +53,16 @@ export class WSNetworkHandler {
         )))
     }
 
-    registerNetworkListener(listenerMethod: Function) {
-        this.networkListeners.push(listenerMethod);
+    registerEventListener(event: NetworkEvent, listenerMethod: Function) {
+        if (!this.networkListeners.has(event)) {
+            this.networkListeners.set(event, [])
+        }
+        this.networkListeners.get(event).push(listenerMethod);
+    }
+
+    unregisterEventListener(event: NetworkEvent, listenerMethod: Function) {
+        if (!this.networkListeners.has(event)) return;
+        this.networkListeners.set(event, this.networkListeners.get(event).filter(item => item !== listenerMethod))
     }
 
     //registerConnectListener

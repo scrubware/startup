@@ -53,6 +53,7 @@ export class DatabaseDAO {
         };
         const found = await this.users.findOne(query);
         if (found == null) return null;
+        delete found.password;
         return asProfileWithId(found);
     }
     async getUserFromAuth(authToken: string): Promise<WithId<Profile>> {

@@ -43,7 +43,18 @@ export class FeedItem {
         public text: string,
         public username: string,
     ) {}
-}; export const asFeedItem = (x: any): FeedItem => ({ ...x });
+};
+export const asFeedItem = (x: any): FeedItem => {
+    if (typeof x == "string") {
+        return JSON.parse(x).map((obj: any) => {
+            switch (obj.type) {
+                case FeedItemTypes.Post: return new Post(obj.text,obj.username,obj.date,obj.score,obj._id);
+            }   
+        })
+    } else {
+        return { ...x }
+    }
+};
 
 
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import '../main.css';
 
-import { OwnedPostFactory } from "../components/postComponents"
+import { OwnedPostComponent } from "../components/postComponents"
 
 export function ProfilePage({username, displayName, changeDisplayName}) {
   return (
@@ -32,7 +32,7 @@ export function ProfilePage({username, displayName, changeDisplayName}) {
           {feed.length > 0 && <>
             <h4 className="text-3xl italic mb-2 mt-10">posts:</h4>
 
-            {feed.map(item => OwnedPostFactory(item))}
+            {/* {feed.map(item => OwnedPostFactory(item))} */}
 
             <div className="flex justify-center mt-3">
               <p className="italic text-gray-600 text-xl">end of posts</p>

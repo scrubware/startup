@@ -94,7 +94,7 @@ export default function App() {
           <Route path='/' element={<LoginPage registrationProgress={registrationProgress} changeRegistrationProgress={changeRegistrationProgress} username={username} changeUsername={changeUsername} displayName={displayName} changeDisplayName={changeDisplayName} cachedProfile={cachedProfile} changeCachedProfile={changeCachedProfile} authStateFunction={changeAuthorization} />} />
           <Route path='/account' element={<ProfilePage username={username} displayName={displayName} changeDisplayName={changeDisplayName} />} />
           <Route path='/post' element={<MakePage username={username} />} />
-          <Route path='/feed' element={<FeedPage cachedProfile={cachedProfile}/>} />
+          <Route path='/feed' element={<FeedPage cachedProfile={cachedProfile} networkHandler={networkHandler}/>} />
           <Route path='*' element={<NotFound />} />
         </Routes>
       </main>

@@ -1,5 +1,5 @@
 
-import { FeedItem } from "./contentModels";
+import { asFeedItem, FeedItem } from "./contentModels";
 
 export enum NetworkEvent {
     AddToFeed,
@@ -46,7 +46,7 @@ export class AddToFeedCNM implements NetworkMessage {
     async serialize(): Promise<string> {
         return JSON.stringify(this.feedItem)
     }
-    static async deserialize(str: string): Promise<NetworkObject> {
+    static async deserialize(str: string): Promise<Object> {
         return JSON.parse(str);
     }
     event(): NetworkEvent { return this._event; }

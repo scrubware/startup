@@ -24,12 +24,11 @@ import {  LoginRequest,
           UpdateNameRequest, 
           DeleteFeedItemRequest
           } from "../shared/apiModels.js"
+import { AddToFeedCNM, NetworkEvent, NetworkObject } from '../shared/networkModels.js'
 
 // Scripts
 import { DatabaseDAO } from './databaseDAO.js';
 import { ObjectId } from 'mongodb';
-
-import { AddToFeedCNM } from '../shared/networkModels.js'
 
 
 
@@ -202,7 +201,7 @@ const verifyAuth = async (req, res, next) => {
 api.get('/content/feed', verifyAuth, async (req, res) => {
   let feed: Array<FeedItem> = await dao.getFeed();
 
-  console.log(feed)
+  //console.log(feed)
 
   res.status(200).send(JSON.stringify(feed));
 })
@@ -218,14 +217,23 @@ api.post('/content/make', verifyAuth, async (req, res) => {
     post.score = 0;
     await dao.createFeedItem(post);
 
+    let nobj = new NetworkObject(NetworkEvent.AddToFeed, await new AddToFeedCNM(post).serialize());
+
+    console.log("ok baka... trying ws send")
+
+    console.log("Total clients:", socketServer.clients.size);
+    console.log("Clients array:", Array.from(socketServer.clients));
+
     socketServer.clients.forEach((client: WebSocket) => {
-      if (client.readyState != WebSocket.OPEN) {
-        socketServer.send(new AddToFeedCNM(post).serialize());
+
+      console.log("client #")
+
+      if (client.readyState == WebSocket.OPEN) {
+        client.send(JSON.stringify(nobj));
+        console.log("sent the package to a client")
       }
     });
   }
-
-  
 
   res.status(200).send();
 })

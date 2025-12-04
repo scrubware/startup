@@ -1,14 +1,15 @@
 import React from 'react';
 import '../main.css';
 
-import { OwnedPostFactory, PostFactory } from "../components/postComponents"
-import { asFeed } from "../../shared/contentModels.js"
+import { OwnedPostComponent, PostComponent } from "../components/postComponents.js"
+import { asFeed, FeedItem } from "../../shared/contentModels.js"
 
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { DeleteFeedItemRequest } from '../../shared/apiModels.js';
+import { AddToFeedCNM, NetworkEvent } from '../../shared/networkModels.js';
 
-export function FeedPage({cachedProfile}) {
+export function FeedPage({cachedProfile, networkHandler}) {
 
     const [feed, changeFeed] = useState([])
 
@@ -34,6 +35,18 @@ export function FeedPage({cachedProfile}) {
             console.log(feed);
         }
     }
+
+    useEffect(() => {
+        function handleAddToFeed(obj: FeedItem) {
+            changeFeed(fd => [obj, ...fd]);
+        }
+
+        networkHandler.registerEventListener(NetworkEvent.AddToFeed, handleAddToFeed);
+
+        return () => {
+            networkHandler.unregisterEventListener(NetworkEvent.AddToFeed, handleAddToFeed);
+        };
+    }, [networkHandler]);
 
     useEffect(() => {
         setUrl(urlstr());
@@ -74,19 +87,28 @@ export function FeedPage({cachedProfile}) {
 
     }
 
-    function GetElementForItem(item) {
-        if (item.username == cachedProfile.username) {
-            console.log("built owned post")
-            return OwnedPostFactory(item, onPrivate, onDelete)
-        } else {
-            console.log("build NOT OWNED post")
-            return PostFactory(item, onUpvote, onDownvote)
-        } 
-    }
+    // function GetElementForItem(item) {
+    //     if (item.username == cachedProfile.username) {
+    //         console.log("built owned post")
+    //         return OwnedPostFactory(item, onPrivate, onDelete)
+    //     } else {
+    //         console.log("build NOT OWNED post")
+    //         return PostFactory(item, onUpvote, onDownvote)
+    //     } 
+    // }
 
     return (
         <div className="grow">
-            {feed.length > 0 ? feed.map(item => GetElementForItem(item)) : GetNoPostsCat() }
+            {feed.length > 0 ? 
+                feed.map((item, index) => (
+                    <React.Fragment key={item._id || index}>
+                    {item.username === cachedProfile.username ? 
+                        <OwnedPostComponent post={item} onPrivate={onPrivate} onDelete={onDelete} /> :
+                        <PostComponent post={item} onUpvote={onUpvote} onDownvote={onDownvote} />
+                    }
+                    </React.Fragment>
+                )) : GetNoPostsCat()
+            }
         </div>
     );
 }

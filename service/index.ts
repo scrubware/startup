@@ -11,7 +11,7 @@ import { WebSocketServer } from 'ws';
 // Models
 import { WithId } from './serverModels.js';
 import { AuthData } from '../shared/dataModels.js';
-import { FeedItem, Profile } from "../shared/contentModels.js"
+import { FeedItem, FeedItemTypes, Profile, asPost, Post } from "../shared/contentModels.js"
 import {  LoginRequest, 
           RegisterRequest, 
           RegisterResult, 
@@ -185,10 +185,14 @@ api.get('/content/feed', verifyAuth, async (req, res) => {
 api.post('/content/make', verifyAuth, async (req, res) => {
 
   let request: MakeFeedItemRequest = req.body;
+  let item: FeedItem = request.feedItem;
 
-  console.log("posted make: ", request.feedItem)
-
-  await dao.createFeedItem(request.feedItem);
+  if (item.type == FeedItemTypes.Post) {
+    let post: Post = asPost(item);
+    post.date = new Date();
+    post.score = 0;
+    await dao.createFeedItem(post);
+  }
 
   res.status(200).send();
 })
@@ -196,7 +200,7 @@ api.post('/content/make', verifyAuth, async (req, res) => {
 api.delete('/content/delete', verifyAuth, async (req, res) => {
   let request: DeleteFeedItemRequest = req.body;
   let profile: WithId<Profile> = await dao.getUserFromAuth(getAuthData(req).authToken)
-  if (profile._id == JSON.parse((await dao.getFeedItem(JSON.parse(request._id))).profileId))
+  if (profile.username == JSON.parse((await dao.getFeedItem(JSON.parse(request._id))).username))
   await dao.deleteFeedItem(JSON.parse(request._id))
   res.status(200).send();
 })

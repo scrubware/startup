@@ -25,7 +25,7 @@ export function MakePage({username, feed}) {
 
     const response = await fetch('api/content/make', {
       method: 'post',
-      body: JSON.stringify(new MakeFeedItemRequest(new Post(postContent, username, ))),
+      body: JSON.stringify(new MakeFeedItemRequest(new Post(postContent, username))),
       headers: {
         'Content-type': 'application/json; charset=UTF-8',
       },

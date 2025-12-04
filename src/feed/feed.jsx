@@ -1,8 +1,8 @@
 import React from 'react';
 import '../main.css';
 
-import { OwnedPostFactory } from "../components/post"
-import { Ad } from "../components/ad"
+import { OwnedPostFactory } from "../components/postComponents"
+import { asFeed } from "../../shared/contentModels.js"
 
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
@@ -34,12 +34,15 @@ export function FeedPage() {
             })
 
             if (response.status == 200) {
-                changeFeed(await response.json())
+                changeFeed(asFeed(await response.text()))
+                console.log("objectified output:")
+                console.log(feed);
             }
         }; f()
 
         console.log("known feed:")
         console.log(feed)
+        console.log(feed.length)
 
     }, [location]);
 

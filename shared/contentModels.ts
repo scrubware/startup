@@ -32,13 +32,16 @@ export class User extends Profile {
 
 
 
+export enum FeedItemTypes {
+    Post
+}
 
 
 export class FeedItem {
     constructor(
+        public type: FeedItemTypes,
         public text: string,
         public username: string,
-        public profileId: string,
     ) {}
 }; export const asFeedItem = (x: any): FeedItem => ({ ...x });
 
@@ -50,18 +53,37 @@ export class Post extends FeedItem {
     constructor(
         text: string, 
         username: string,
-        public profileId: string,
         public date: Date,
-    ) { super(text, username, profileId); }
+        public score: number,
+    ) {
+        super(FeedItemTypes.Post, text, username);
+
+        console.log("building post")
+
+        if (typeof date === "string" && /^\d{4}-\d{2}-\d{2}T/.test(date)) {
+            this.date = new Date(date);
+            console.log("transfigured date")
+        }
+    }
 }; export const asPost = (x: any): Post => ({ ...x });
-
-
 
 
 
 type Feed = Array<FeedItem>;
 
-export function asFeed(x): Feed {
+// asX functions serve as type reinforcers and deserializers where needed.
+export function asFeed(x: Array<any> | string): Feed {
     console.log("feeding: ",x)
-    return Array.from(x).map((y) => asFeedItem(y))
+    
+    if (typeof x == "string") {
+        console.log("parsing feed")
+        return JSON.parse(x).map((obj: any) => {
+            console.log("receiveing parse obj: ",obj)
+            switch (obj.type) {
+                case FeedItemTypes.Post: return new Post(obj.text,obj.username,obj.date,obj.score);
+            }   
+        })
+    } else {
+        return Array.from(x).map((y) => asFeedItem(y))
+    }
 }

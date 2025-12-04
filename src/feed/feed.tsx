@@ -2,7 +2,7 @@ import React from 'react';
 import '../main.css';
 
 import { OwnedPostComponent, PostComponent } from "../components/postComponents.js"
-import { asFeed, FeedItem } from "../../shared/contentModels.js"
+import { asFeed, Feed, FeedItem } from "../../shared/contentModels.js"
 
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
@@ -41,10 +41,16 @@ export function FeedPage({cachedProfile, networkHandler}) {
             changeFeed(fd => [obj, ...fd]);
         }
 
+        function handleRefreshFeed(obj: Feed) {
+            changeFeed(obj)
+        }
+
         networkHandler.registerEventListener(NetworkEvent.AddToFeed, handleAddToFeed);
+        networkHandler.registerEventListener(NetworkEvent.RefreshFeed, handleRefreshFeed);
 
         return () => {
             networkHandler.unregisterEventListener(NetworkEvent.AddToFeed, handleAddToFeed);
+            networkHandler.unregisterEventListener(NetworkEvent.RefreshFeed, handleRefreshFeed);
         };
     }, [networkHandler]);
 

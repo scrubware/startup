@@ -51,11 +51,11 @@ export default function App() {
           <div className="flex items-center">
           { authorized ? 
             <NavLink to="/feed">
-              <p className="dark:text-yellow-60 dark:hover:text-lime-60 text-4xl sm:text-5xl italic">zinger</p>
+              <p className="dark:text-yellow-60 dark:hover:text-lime-60 text-4xl sm:text-5xl italic">giamatti</p>
             </NavLink> :
-            <p className="dark:text-yellow-60 dark:hover:text-lime-60 text-4xl sm:text-5xl italic" onClick={() => {changeRegistrationProgress(0)}}>zinger</p>
+            <p className="dark:text-yellow-60 dark:hover:text-lime-60 text-4xl sm:text-5xl italic" onClick={() => {changeRegistrationProgress(0)}}>giamatti</p>
           }
-          <p className="italic text-lime-60 ml-2 mt-4">the worst app since twitter</p>
+          <p className="italic text-lime-60 ml-2 mt-4">paul giamatti's choice for social media</p>
           </div>
           <div className="flex">
             { authorized ? 
@@ -92,7 +92,7 @@ export default function App() {
       <main className="grow mt-14 sm:mt-18 dark:text-yellow-60 flex justify-center items-center">
         <Routes>
           <Route path='/' element={<LoginPage registrationProgress={registrationProgress} changeRegistrationProgress={changeRegistrationProgress} username={username} changeUsername={changeUsername} displayName={displayName} changeDisplayName={changeDisplayName} cachedProfile={cachedProfile} changeCachedProfile={changeCachedProfile} authStateFunction={changeAuthorization} />} />
-          <Route path='/account' element={<ProfilePage username={username} displayName={displayName} changeDisplayName={changeDisplayName} />} />
+          <Route path='/account' element={<ProfilePage profile={cachedProfile} />} />
           <Route path='/post' element={<MakePage username={username} />} />
           <Route path='/feed' element={<FeedPage cachedProfile={cachedProfile} networkHandler={networkHandler}/>} />
           <Route path='*' element={<NotFound />} />
@@ -106,18 +106,6 @@ export default function App() {
           <a href="https://github.com/scrubware/startup" className="hover:text-white">github</a>
 
           <NavLink to="/" className="dark:text-lime-60 hover:text-white ml-3" onClick={Logout}>logout</NavLink>
-
-          <p onClick={async () => {
-
-            console.log("trying clear")
-
-            await fetch('api/content/feed', {
-              method: 'delete',
-            })
-
-            console.log("cleared")
-
-          }} className="dark:text-pink-60 hover:text-white ml-3">clear feed</p>
         </div>
       </footer>
 

@@ -46,8 +46,8 @@ export class FeedItem {
 };
 export const asFeedItem = (x: any): FeedItem => {
     if (typeof x == "string") {
-        let obj = JSON.parse(x);
-        
+        let obj: any = JSON.parse(x);
+
         switch (obj.type) {
             case FeedItemTypes.Post: return new Post(obj.text,obj.username,obj.date,obj.score,obj._id);
         }
@@ -78,7 +78,7 @@ export class Post extends FeedItem {
 
 
 
-type Feed = Array<FeedItem>;
+export type Feed = Array<FeedItem>;
 
 
 // asX functions serve as type reinforcers and deserializers where needed.

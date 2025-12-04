@@ -24,7 +24,7 @@ import {  LoginRequest,
           UpdateNameRequest, 
           DeleteFeedItemRequest
           } from "../shared/apiModels.js"
-import { AddToFeedCNM, NetworkEvent, NetworkObject } from '../shared/networkModels.js'
+import { AddToFeedCNM, NetworkEvent, NetworkObject, RefreshFeedCNM } from '../shared/networkModels.js'
 
 // Scripts
 import { DatabaseDAO } from './databaseDAO.js';
@@ -219,18 +219,10 @@ api.post('/content/make', verifyAuth, async (req, res) => {
 
     let nobj = new NetworkObject(NetworkEvent.AddToFeed, await new AddToFeedCNM(post).serialize());
 
-    console.log("ok baka... trying ws send")
-
-    console.log("Total clients:", socketServer.clients.size);
-    console.log("Clients array:", Array.from(socketServer.clients));
-
     socketServer.clients.forEach((client: WebSocket) => {
-
-      console.log("client #")
-
       if (client.readyState == WebSocket.OPEN) {
         client.send(JSON.stringify(nobj));
-        console.log("sent the package to a client")
+        console.log("sent the add package to a client")
       }
     });
   }
@@ -246,6 +238,16 @@ api.delete('/content/delete', verifyAuth, async (req, res) => {
   let item: FeedItem = await dao.getFeedItem(id)
   if (profile.username == item.username) {
     await dao.deleteFeedItem(id)
+
+    let nobj = new NetworkObject(NetworkEvent.RefreshFeed, await new RefreshFeedCNM(await dao.getFeed()).serialize());
+
+    socketServer.clients.forEach((client: WebSocket) => {
+      if (client.readyState == WebSocket.OPEN) {
+        client.send(JSON.stringify(nobj));
+        console.log("sent the refresh package to a client")
+      }
+    });
+
     res.status(200).send();
   } else {
     console.log(profile.username," tried to delete a post by ",item.username)

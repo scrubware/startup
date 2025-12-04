@@ -1,8 +1,9 @@
 
-import { asFeedItem, FeedItem } from "./contentModels";
+import { asFeed, asFeedItem, Feed, FeedItem } from "./contentModels.js";
 
 export enum NetworkEvent {
     AddToFeed,
+    RefreshFeed,
     //Post
 }
 
@@ -48,6 +49,23 @@ export class AddToFeedCNM implements NetworkMessage {
     }
     static async deserialize(str: string): Promise<Object> {
         return asFeedItem(str);
+    }
+    event(): NetworkEvent { return this._event; }
+}
+
+export class RefreshFeedCNM implements NetworkMessage {
+
+    _event: NetworkEvent = NetworkEvent.RefreshFeed;
+
+    constructor(
+        public readonly feed: Feed
+    ) {}
+
+    async serialize(): Promise<string> {
+        return JSON.stringify(this.feed)
+    }
+    static async deserialize(str: string): Promise<Object> {
+        return asFeed(str);
     }
     event(): NetworkEvent { return this._event; }
 }

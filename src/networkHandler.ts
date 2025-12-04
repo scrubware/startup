@@ -1,5 +1,5 @@
 
-import { AddToFeedCNM, NetworkEvent, NetworkMessage, NetworkObject } from "../shared/networkModels";
+import { AddToFeedCNM, NetworkEvent, NetworkMessage, NetworkObject, RefreshFeedCNM } from "../shared/networkModels";
 
 export class WSNetworkHandler {
 
@@ -30,6 +30,9 @@ export class WSNetworkHandler {
             switch (nobj.event) {
                 case NetworkEvent.AddToFeed:
                     msg = await AddToFeedCNM.deserialize(nobj.msg);
+                    break;
+                case NetworkEvent.RefreshFeed:
+                    msg = await RefreshFeedCNM.deserialize(nobj.msg);
                     break;
             }
             console.log("turned it into: ",msg)

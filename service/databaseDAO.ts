@@ -100,12 +100,13 @@ export class DatabaseDAO {
         console.log("creating feedItem: ", feedItem, " of type ", typeof feedItem)
     }
     async deleteFeedItem(_id: ObjectId) {
-        this.posts.find({ _id })
+        console.log("trying delete...")
+        console.log("found same id!: ",this.posts.findOne({ _id }))
+        this.posts.deleteOne({ _id })
     }
     async getFeedItem(_id: ObjectId): Promise<FeedItem> {
-        return asFeedItem(this.posts.findOne({ _id }))
+        return asFeedItem(await this.posts.findOne({ _id }))
     }
-
     async getFeed(): Promise<Array<FeedItem>> {
         return asFeed(await this.posts.find().toArray())
     }

@@ -27,6 +27,7 @@ import {  LoginRequest,
 
 // Scripts
 import { DatabaseDAO } from './databaseDAO.js';
+import { ObjectId } from 'mongodb';
 
 
 
@@ -122,7 +123,7 @@ api.post('/user/login', async (req, res) => {
     if (await dao.passwordIsCorrect(request.username,request.password)) {
       const auth: AuthData = await dao.createAuth(request.username, request.password)
       setAuthData(res,auth)
-      res.status(200).send(JSON.stringify(new LoginResult(auth,user)))
+      res.status(200).send(JSON.stringify(new LoginResult(user)))
       console.log("logged in: " + request.username)
     } else {
       res.status(400).send(JSON.stringify(LoginFailureWrongPassword))
@@ -200,9 +201,17 @@ api.post('/content/make', verifyAuth, async (req, res) => {
 api.delete('/content/delete', verifyAuth, async (req, res) => {
   let request: DeleteFeedItemRequest = req.body;
   let profile: WithId<Profile> = await dao.getUserFromAuth(getAuthData(req).authToken)
-  if (profile.username == JSON.parse((await dao.getFeedItem(JSON.parse(request._id))).username))
-  await dao.deleteFeedItem(JSON.parse(request._id))
-  res.status(200).send();
+  let id: ObjectId = new ObjectId(request._id)
+  console.log(id);
+  let item: FeedItem = await dao.getFeedItem(id)
+  if (profile.username == item.username) {
+    await dao.deleteFeedItem(id)
+    res.status(200).send();
+  } else {
+    console.log(profile.username," tried to delete a post by ",item.username)
+    res.status(401).send();
+  }
+  
 })
 
 

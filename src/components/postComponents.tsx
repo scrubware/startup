@@ -30,7 +30,7 @@ export function PostFactory(post: Post, onUpvote: Function, onDownvote: Function
         <div className="flex flex-col justify-center mr-2">
             <button 
               onClick={() => {
-                onUpvote()
+                onUpvote(post._id)
                 if (voteOption == VoteOption.UP) {
                   changeVoteOption(VoteOption.NONE)
                   changeVoteScore(post.score)
@@ -43,7 +43,7 @@ export function PostFactory(post: Post, onUpvote: Function, onDownvote: Function
             >^</button>
             <button 
               onClick={() => {
-                onDownvote()
+                onDownvote(post._id)
                 if (voteOption == VoteOption.DOWN) {
                   changeVoteOption(VoteOption.NONE)
                   changeVoteScore(post.score)
@@ -75,8 +75,8 @@ export function OwnedPostFactory(post: Post, onPrivate: Function, onDelete: Func
         </div>
         <p className="text-yellow-95 m-3 text-2xl">0</p>
         <div className="flex flex-col w-1/6 justify-center mr-2">
-            {/* <button className="text-xs bg-yellow-45/30 hover:bg-yellow-60 hover:border-yellow-60 hover:text-black rounded-full w-full h-[6mm] m-0.5 pl-2 pr-2 p-0 pb-0.5" onClick={() => onPrivate()}>private</button> */}
-            <button className="text-xs bg-lime-45/30 text-lime-60 hover:bg-lime-60 hover:border-lime-60 hover:text-black rounded-full w-full h-[6mm] m-0.5 pl-2 pr-2 p-0 pb-0.5" onClick={() => onDelete()}>delete</button>
+            {/* <button className="text-xs bg-yellow-45/30 hover:bg-yellow-60 hover:border-yellow-60 hover:text-black rounded-full w-full h-[6mm] m-0.5 pl-2 pr-2 p-0 pb-0.5" onClick={() => onPrivate(post._id)}>private</button> */}
+            <button className="text-xs bg-lime-45/30 text-lime-60 hover:bg-lime-60 hover:border-lime-60 hover:text-black rounded-full w-full h-[6mm] m-0.5 pl-2 pr-2 p-0 pb-0.5" onClick={() => onDelete(post._id)}>delete</button>
         </div>
     </div>
     <br/>

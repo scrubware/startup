@@ -131,11 +131,11 @@ api.post('/user/register', async (req, res) => {
     res.status(409).send({ msg: 'Existing user' });
     console.log("attempted re-registering: " + request.username)
   } else {
-    await dao.createUser(request.username, request.password, request.displayName);
-    const auth: RegisterResult = await dao.createAuth(request.username,request.password);
+    let p: Profile = await dao.createUser(request.username, request.password, request.displayName);
+    const auth: AuthData = await dao.createAuth(request.username,request.password);
     console.log("created register auth: " + JSON.stringify(auth))
     setAuthData(res,auth)
-    res.status(200).send(JSON.stringify(auth));
+    res.status(200).send(JSON.stringify(new RegisterResult(p)));
   }
 });
 
@@ -146,6 +146,7 @@ api.post('/user/login', async (req, res) => {
     if (await dao.passwordIsCorrect(request.username,request.password)) {
       const auth: AuthData = await dao.createAuth(request.username, request.password)
       setAuthData(res,auth)
+      console.log(new LoginResult(user))
       res.status(200).send(JSON.stringify(new LoginResult(user)))
       console.log("logged in: " + request.username)
     } else {

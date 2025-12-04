@@ -36,6 +36,7 @@ export function LoginPage({registrationProgress, changeRegistrationProgress, use
   const validPasswordLength = 8;
 
   const register = async () => {
+    console.log(new RegisterRequest(username,password,displayName))
     const response = await fetch('api/user/register', {
       method: 'post',
       body: JSON.stringify(new RegisterRequest(username,password,displayName)),
@@ -49,6 +50,7 @@ export function LoginPage({registrationProgress, changeRegistrationProgress, use
       console.log(result)
       changeRegistrationProgress(3)
       authStateFunction(true)
+      changeCachedProfile(result.user)
     }
   }
 

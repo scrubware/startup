@@ -34,7 +34,11 @@ export class RegisterRequest {
         public readonly displayName: string
     ) {}
 }
-export class RegisterResult extends AuthData {}
+export class RegisterResult{
+    constructor (
+        public readonly user: Profile,
+    ) {}
+}
 
 
 

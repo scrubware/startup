@@ -43,6 +43,8 @@ export class DatabaseDAO {
     // Users
     async createUser(username: string, password: string, displayName: string): Promise<Profile> {
         const hashedPassword = await hash(password, 10);
+        console.log("DISPLAY NAME!!!!")
+        console.log(displayName)
         const u = new User(username,displayName,new Date(),hashedPassword);
         this.users.insertOne(u);
         return asProfile(u);

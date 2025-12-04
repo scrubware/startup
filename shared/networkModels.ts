@@ -47,7 +47,7 @@ export class AddToFeedCNM implements NetworkMessage {
         return JSON.stringify(this.feedItem)
     }
     static async deserialize(str: string): Promise<Object> {
-        return JSON.parse(str);
+        return asFeedItem(str);
     }
     event(): NetworkEvent { return this._event; }
 }

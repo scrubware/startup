@@ -104,3 +104,5 @@ Still, I managed to implement a minimum-case level of interactivity for now.
 - [x] **Data sent over WebSocket connection** - Newly created posts are sent over WebSocket to be immediately added to other users' feeds without needing to refresh the page.
 - [x] **WebSocket data displayed** - The data transmitted over WebSocket are newly created posts, which are added to the feed and displayed instantly.
 - [x] **Application is fully functional** - The application supports creating and deleting posts, along with user registration/login and viewing the feed of all posts. Due to the strict nature of the platform, everyone is required to have a Paul Giamatti profile picture and a Paul Giamatti bio. Therefore, to prevent users from breaking the unspoken Giamatti rule, the ability to change the bio or profile picture has been deprecated. Usernames and display names do still show up on your account page to prove it's you.
+
+Note that in order to test the functionality of the WebSocket, you will need to open two instances of the Zinger client.

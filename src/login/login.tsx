@@ -11,7 +11,7 @@ import * as React from 'react';
 import { useNavigate } from "react-router-dom";
 
 
-export function LoginPage({registrationProgress, changeRegistrationProgress, username, changeUsername, displayName, changeDisplayName, authStateFunction}) {
+export function LoginPage({registrationProgress, changeRegistrationProgress, username, changeUsername, displayName, changeDisplayName, cachedProfile, changeCachedProfile, authStateFunction}) {
 
   const navigate = useNavigate()
 
@@ -49,8 +49,6 @@ export function LoginPage({registrationProgress, changeRegistrationProgress, use
       console.log(result)
       changeRegistrationProgress(3)
       authStateFunction(true)
-
-      localStorage.setItem("authToken",result.authToken);
     }
   }
 
@@ -90,6 +88,8 @@ export function LoginPage({registrationProgress, changeRegistrationProgress, use
       console.log(result)
       authStateFunction(true)
       navigate("/feed")
+
+      changeCachedProfile(result.user)
     
     } else {
       const result: LoginFailure = await response.json();

@@ -20,10 +20,9 @@ export default function App() {
 
   const blurbs = [
     ["the worst app since twitter"],
-    ["like reddit for people with hygiene and social skills"],
-    //["incels WILL be shadowbanned"]
-    //[""]
   ]
+
+  const [cachedProfile, changeCachedProfile] = React.useState(null);
 
   async function Logout() {
 
@@ -38,10 +37,8 @@ export default function App() {
 
     changeAuthorization(false);
     changeRegistrationProgress(0);
-    localStorage.removeItem("authToken");
+    changeCachedProfile(null);
   }
-
-  const feed = []
 
   return (
     <BrowserRouter>
@@ -91,10 +88,10 @@ export default function App() {
       
       <main className="grow mt-14 sm:mt-18 dark:text-yellow-60 flex justify-center items-center">
         <Routes>
-          <Route path='/' element={<LoginPage registrationProgress={registrationProgress} changeRegistrationProgress={changeRegistrationProgress} username={username} changeUsername={changeUsername} displayName={displayName} changeDisplayName={changeDisplayName} authStateFunction={changeAuthorization} />} />
-          <Route path='/account' element={<ProfilePage feed={feed} username={username} displayName={displayName} changeDisplayName={changeDisplayName} />} />
-          <Route path='/post' element={<MakePage username={username} feed={feed} />} />
-          <Route path='/feed' element={<FeedPage feed={feed} />} />
+          <Route path='/' element={<LoginPage registrationProgress={registrationProgress} changeRegistrationProgress={changeRegistrationProgress} username={username} changeUsername={changeUsername} displayName={displayName} changeDisplayName={changeDisplayName} cachedProfile={cachedProfile} changeCachedProfile={changeCachedProfile} authStateFunction={changeAuthorization} />} />
+          <Route path='/account' element={<ProfilePage username={username} displayName={displayName} changeDisplayName={changeDisplayName} />} />
+          <Route path='/post' element={<MakePage username={username} />} />
+          <Route path='/feed' element={<FeedPage cachedProfile={cachedProfile}/>} />
           <Route path='*' element={<NotFound />} />
         </Routes>
       </main>

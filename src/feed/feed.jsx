@@ -1,13 +1,14 @@
 import React from 'react';
 import '../main.css';
 
-import { OwnedPostFactory } from "../components/postComponents"
+import { OwnedPostFactory, PostFactory } from "../components/postComponents"
 import { asFeed } from "../../shared/contentModels.js"
 
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { DeleteFeedItemRequest } from '../../shared/apiModels.js';
 
-export function FeedPage() {
+export function FeedPage({cachedProfile}) {
 
     const [feed, changeFeed] = useState([])
 
@@ -19,31 +20,24 @@ export function FeedPage() {
 
     const location = useLocation();
 
+    async function UpdateFeed() {
+        const response = await fetch('api/content/feed', {
+            method: 'get',
+            headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+            },
+        })
+
+        if (response.status == 200) {
+            changeFeed(asFeed(await response.text()))
+            console.log("objectified output:")
+            console.log(feed);
+        }
+    }
+
     useEffect(() => {
         setUrl(urlstr());
-
-        const f = async () => {
-
-            console.log("updating feed...")
-
-            const response = await fetch('api/content/feed', {
-                method: 'get',
-                headers: {
-                'Content-type': 'application/json; charset=UTF-8',
-                },
-            })
-
-            if (response.status == 200) {
-                changeFeed(asFeed(await response.text()))
-                console.log("objectified output:")
-                console.log(feed);
-            }
-        }; f()
-
-        console.log("known feed:")
-        console.log(feed)
-        console.log(feed.length)
-
+        UpdateFeed();
     }, [location]);
 
     function GetNoPostsCat() {
@@ -54,9 +48,45 @@ export function FeedPage() {
        )
     }
 
+    async function onPrivate(id) {
+
+    }
+
+    async function onDelete(id) {
+        const response = await fetch('api/content/delete', {
+            method: 'delete',
+            body: JSON.stringify(new DeleteFeedItemRequest(id)),
+            headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+            },
+        })
+
+        if (response.status == 200) {
+            UpdateFeed();
+        }
+    }
+
+    async function onUpvote(id) {
+
+    }
+
+    async function onDownvote(id) {
+
+    }
+
+    function GetElementForItem(item) {
+        if (item.username == cachedProfile.username) {
+            console.log("built owned post")
+            return OwnedPostFactory(item, onPrivate, onDelete)
+        } else {
+            console.log("build NOT OWNED post")
+            return PostFactory(item, onUpvote, onDownvote)
+        } 
+    }
+
     return (
         <div className="grow">
-            {feed.length > 0 ? feed.map(item => OwnedPostFactory(item)) : GetNoPostsCat() }
+            {feed.length > 0 ? feed.map(item => GetElementForItem(item)) : GetNoPostsCat() }
         </div>
     );
 }

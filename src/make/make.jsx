@@ -12,7 +12,7 @@ function PostFactory(text, account) {
   }
 }
 
-export function MakePage({username, feed}) {
+export function MakePage({username}) {
 
   const navigate = useNavigate();
 

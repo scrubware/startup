@@ -3,7 +3,7 @@ import '../main.css';
 
 import { OwnedPostFactory } from "../components/postComponents"
 
-export function ProfilePage({feed, username, displayName, changeDisplayName}) {
+export function ProfilePage({username, displayName, changeDisplayName}) {
   return (
     <div>
         <div className="flex flex-col items-center">

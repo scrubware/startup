@@ -55,14 +55,12 @@ export class Post extends FeedItem {
         username: string,
         public date: Date,
         public score: number,
+        public _id?: string,
     ) {
         super(FeedItemTypes.Post, text, username);
 
-        console.log("building post")
-
         if (typeof date === "string" && /^\d{4}-\d{2}-\d{2}T/.test(date)) {
             this.date = new Date(date);
-            console.log("transfigured date")
         }
     }
 }; export const asPost = (x: any): Post => ({ ...x });
@@ -71,19 +69,17 @@ export class Post extends FeedItem {
 
 type Feed = Array<FeedItem>;
 
+
 // asX functions serve as type reinforcers and deserializers where needed.
 export function asFeed(x: Array<any> | string): Feed {
-    console.log("feeding: ",x)
-    
     if (typeof x == "string") {
-        console.log("parsing feed")
         return JSON.parse(x).map((obj: any) => {
-            console.log("receiveing parse obj: ",obj)
             switch (obj.type) {
-                case FeedItemTypes.Post: return new Post(obj.text,obj.username,obj.date,obj.score);
+                case FeedItemTypes.Post: return new Post(obj.text,obj.username,obj.date,obj.score,obj._id);
             }   
         })
     } else {
         return Array.from(x).map((y) => asFeedItem(y))
     }
 }
+

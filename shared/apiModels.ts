@@ -50,7 +50,6 @@ export class LoginRequest {
 }
 export class LoginResult{
     constructor (
-        public readonly auth: AuthData,
         public readonly user: Profile,
     ) {}
 }
